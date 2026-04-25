@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earn — JayGames</title>
+  <meta name="description" content="Apply to earn money on JayGames by posting gaming videos. Hit the views milestone and get paid." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #08090d; --bg2: #0f1118; --bg3: #161a25; --bg4: #1d2235;
+      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+      --text: #eef0ff; --text2: rgba(180,190,255,0.55); --text3: rgba(180,190,255,0.3);
+      --jay: #ff6b35; --jay2: rgba(255,107,53,0.15); --jay3: #ff8c5a;
+      --neon: #00f5d4; --neon2: rgba(0,245,212,0.12);
+      --purple: #a855f7; --green: #22c55e; --nav-bg: rgba(8,9,13,0.9);
+      --mono: 'JetBrains Mono', monospace;
+    }
+    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E"); opacity: 0.5; }
+    body > * { position: relative; z-index: 1; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: var(--nav-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--jay), #ff3d00); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 20px rgba(255,107,53,0.4); }
+    .logo-text { font-weight: 900; font-size: 22px; letter-spacing: -0.5px; background: linear-gradient(135deg, var(--jay), var(--jay3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 500; padding: 7px 14px; border-radius: 8px; transition: all 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--bg3); }
+    .nav-links a.earn-link { color: var(--neon); background: var(--neon2); border: 1px solid rgba(0,245,212,0.2); }
+
+    /* HERO */
+    .earn-hero { padding: 80px 24px 60px; text-align: center; position: relative; overflow: hidden; }
+    .earn-hero::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 900px; height: 500px; background: radial-gradient(ellipse, rgba(0,245,212,0.08), transparent 60%); pointer-events: none; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--neon2); border: 1px solid rgba(0,245,212,0.3); border-radius: 999px; padding: 6px 16px; font-size: 12px; font-weight: 700; color: var(--neon); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; }
+    .earn-hero h1 { font-size: clamp(40px, 6vw, 70px); font-weight: 900; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.05; }
+    .earn-hero h1 span { background: linear-gradient(135deg, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .earn-hero p { font-size: 18px; color: var(--text2); max-width: 540px; margin: 0 auto; line-height: 1.6; }
+
+    /* CONTAINER */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* HOW IT WORKS */
+    .how-section { margin-bottom: 48px; }
+    .section-title { font-size: 28px; font-weight: 800; margin-bottom: 28px; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .step { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 28px; position: relative; }
+    .step-num { position: absolute; top: 20px; right: 20px; width: 28px; height: 28px; background: var(--bg4); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text3); font-family: var(--mono); }
+    .step-icon { font-size: 36px; margin-bottom: 14px; }
+    .step h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+
+    /* PAYOUTS TABLE */
+    .payouts-section { margin-bottom: 48px; }
+    .payout-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+    .payout-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-align: center; transition: all 0.2s; }
+    .payout-card:hover { border-color: var(--neon); transform: translateY(-4px); }
+    .payout-card.highlight { border-color: rgba(0,245,212,0.4); background: linear-gradient(160deg, rgba(0,245,212,0.05), var(--bg2)); }
+    .payout-card .views { font-size: 14px; color: var(--text3); margin-bottom: 8px; font-family: var(--mono); }
+    .payout-card .amount { font-size: 32px; font-weight: 900; color: var(--neon); margin-bottom: 4px; }
+    .payout-card .desc { font-size: 12px; color: var(--text3); }
+    .payout-card.highlight .amount { background: linear-gradient(135deg, var(--neon), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* RULES */
+    .rules-section { margin-bottom: 48px; }
+    .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 600px) { .rules-grid { grid-template-columns: 1fr; } }
+    .rules-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
+    .rules-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .rules-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .rules-card ul li { font-size: 14px; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+    .rules-card ul li .dot { flex-shrink: 0; margin-top: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--neon); }
+    .rules-card.bad ul li .dot { background: #ff4f6e; }
+
+    /* FORM */
+    .form-section { background: var(--bg2); border: 1px solid var(--border2); border-radius: 24px; padding: 48px; margin-bottom: 48px; }
+    .form-section h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+    .form-section .sub { color: var(--text2); font-size: 15px; margin-bottom: 32px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1/-1; }
+    .field label { font-size: 13px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.06em; }
+    .field input, .field select, .field textarea {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px;
+      color: var(--text); font-family: 'Outfit', sans-serif; font-size: 15px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--neon); }
+    .field input::placeholder, .field textarea::placeholder { color: var(--text3); }
+    .field select option { background: var(--bg3); }
+    .field textarea { resize: vertical; min-height: 100px; }
+    .submit-btn {
+      margin-top: 24px; width: 100%;
+      background: linear-gradient(135deg, var(--neon), #00c4a8);
+      color: #000; font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800;
+      padding: 16px; border-radius: 12px; border: none; cursor: pointer;
+      transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,245,212,0.25);
+    }
+    .submit-btn:hover { box-shadow: 0 8px 32px rgba(0,245,212,0.4); transform: translateY(-2px); }
+    .submit-btn:active { transform: translateY(0); }
+    .success-msg { display: none; background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 16px 20px; margin-top: 16px; color: var(--green); font-weight: 600; text-align: center; }
+
+    /* PLATFORMS */
+    .platforms-section { text-align: center; margin-bottom: 48px; }
+    .platforms-section h2 { font-size: 22px; font-weight: 800; margin-bottom: 20px; }
+    .platform-chips { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .platform-chip { background: var(--bg2); border: 1px solid var(--border); border-radius: 999px; padding: 10px 20px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; }
+    .footer-logo { font-weight: 900; font-size: 20px; margin-bottom: 8px; background: linear-gradient(135deg, var(--jay), var(--jay3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+    .footer-links a { color: var(--text2); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--jay); }
+    .footer-copy { font-size: 12px; color: var(--text3); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-icon">🎮</div>
+    <span class="logo-text">JayGames</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="earn.html" class="earn-link active">💰 Earn</a>
+  </div>
+</nav>
+
+<section class="earn-hero">
+  <div class="eyebrow">💰 Creator Programme</div>
+  <h1>Post Videos.<br><span>Get Paid.</span></h1>
+  <p>Apply to become a JayGames creator. Post gaming content, reach the milestone, and we'll pay you. Simple as that.</p>
+</section>
+
+<div class="container">
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section">
+    <div class="section-title">⚡ How It Works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">📝</div>
+        <h3>Apply Below</h3>
+        <p>Fill out the creator application form with your channel details and what kind of content you make.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">✅</div>
+        <h3>Get Approved</h3>
+        <p>We review your application within 48 hours. If you're a good fit, you'll get an approval email with content guidelines.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">🎬</div>
+        <h3>Post Your Video</h3>
+        <p>Create a video featuring games from JayGames. Include our link in the description and the #JayGames tag.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-icon">💸</div>
+        <h3>Hit the Milestone</h3>
+        <p>Once your video reaches the required view count, submit the link to us and we'll process your payment within 7 days.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYOUTS -->
+  <div class="payouts-section">
+    <div class="section-title">💵 Payout Tiers</div>
+    <div class="payout-cards">
+      <div class="payout-card">
+        <div class="views">1,000 views</div>
+        <div class="amount">£5</div>
+        <div class="desc">Starter payout</div>
+      </div>
+      <div class="payout-card">
+        <div class="views">5,000 views</div>
+        <div class="amount">£20</div>
+        <div class="desc">Growing creator</div>
+      </div>
+      <div class="payout-card highlight">
+        <div class="views">10,000 views</div>
+        <div class="amount">£50</div>
+        <div class="desc">🔥 Most popular tier</div>
+      </div>
+      <div class="payout-card">
+        <div class="views">50,000 views</div>
+        <div class="amount">£200</div>
+        <div class="desc">Top creator</div>
+      </div>
+      <div class="payout-card">
+        <div class="views">100,000 views</div>
+        <div class="amount">£500</div>
+        <div class="desc">Elite status</div>
+      </div>
+    </div>
+    <p style="margin-top:16px; font-size:13px; color:var(--text3); text-align:center;">Payments via PayPal, bank transfer, or gift cards. One payout per video per tier.</p>
+  </div>
+
+  <!-- PLATFORMS -->
+  <div class="platforms-section">
+    <h2>📱 Accepted Platforms</h2>
+    <div class="platform-chips">
+      <div class="platform-chip">📺 YouTube</div>
+      <div class="platform-chip">🎵 TikTok</div>
+      <div class="platform-chip">📸 Instagram Reels</div>
+      <div class="platform-chip">🎮 Twitch VODs</div>
+      <div class="platform-chip">✈️ Telegram</div>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="rules-section">
+    <div class="section-title">📋 Content Rules</div>
+    <div class="rules-grid">
+      <div class="rules-card">
+        <h3>✅ Required</h3>
+        <ul>
+          <li><span class="dot"></span>Must feature at least one JayGames game prominently</li>
+          <li><span class="dot"></span>Link to JayGames in description or bio</li>
+          <li><span class="dot"></span>Include #JayGames in the caption/tags</li>
+          <li><span class="dot"></span>Video must be at least 60 seconds long</li>
+          <li><span class="dot"></span>Content must be your own original footage</li>
+          <li><span class="dot"></span>Views must be organic (no purchased views)</li>
+          <li><span class="dot"></span>Submit proof (screenshot + link) to claim payout</li>
+        </ul>
+      </div>
+      <div class="rules-card bad">
+        <h3>❌ Not Allowed</h3>
+        <ul>
+          <li><span class="dot"></span>Paid/bought views or engagement</li>
+          <li><span class="dot"></span>Re-uploads of other people's content</li>
+          <li><span class="dot"></span>Misleading thumbnails or clickbait lies</li>
+          <li><span class="dot"></span>Inappropriate, harmful or adult content</li>
+          <li><span class="dot"></span>Multiple channels claiming the same video</li>
+          <li><span class="dot"></span>Content that promotes illegal activity</li>
+          <li><span class="dot"></span>Using automated bots to inflate stats</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION FORM -->
+  <div class="form-section" id="applyForm">
+    <h2>🚀 Apply to the Creator Programme</h2>
+    <div class="sub">Fill in all fields below. We'll review your application and get back to you within 48 hours.</div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Your Name</label>
+        <input type="text" id="f_name" placeholder="Jay Smith" />
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="f_email" placeholder="you@email.com" />
+      </div>
+      <div class="field">
+        <label>Platform</label>
+        <select id="f_platform">
+          <option value="">Select platform...</option>
+          <option>YouTube</option>
+          <option>TikTok</option>
+          <option>Instagram Reels</option>
+          <option>Twitch</option>
+          <option>Telegram</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Channel / Profile Name</label>
+        <input type="text" id="f_channel" placeholder="@yourchannel" />
+      </div>
+      <div class="field">
+        <label>Channel / Profile URL</label>
+        <input type="url" id="f_url" placeholder="https://youtube.com/@..." />
+      </div>
+      <div class="field">
+        <label>Approximate Subscriber / Follower Count</label>
+        <select id="f_subs">
+          <option value="">Select range...</option>
+          <option>Under 100</option>
+          <option>100 – 500</option>
+          <option>500 – 1,000</option>
+          <option>1,000 – 5,000</option>
+          <option>5,000 – 20,000</option>
+          <option>20,000 – 100,000</option>
+          <option>100,000+</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Content Type</label>
+        <select id="f_type">
+          <option value="">What do you create?</option>
+          <option>Gameplay videos / Let's Plays</option>
+          <option>Gaming shorts / clips</option>
+          <option>Game reviews / commentary</option>
+          <option>Funny moments / highlights</option>
+          <option>Tutorials / guides</option>
+          <option>Streams / VODs</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Tell Us About Yourself</label>
+        <textarea id="f_about" placeholder="What kind of content do you make? Why do you want to work with JayGames? What games do you like to feature?"></textarea>
+      </div>
+      <div class="field full">
+        <label>Previous Gaming Content Link (optional)</label>
+        <input type="url" id="f_prev" placeholder="https://... (link to an example video or post)" />
+      </div>
+      <div class="field full">
+        <label>Preferred Payment Method</label>
+        <select id="f_pay">
+          <option value="">Select...</option>
+          <option>PayPal</option>
+          <option>Bank Transfer (UK)</option>
+          <option>Amazon Gift Card</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <button class="submit-btn" onclick="submitForm()">🚀 Submit Application</button>
+    <div class="success-msg" id="successMsg">✅ Application submitted! We'll review it and get back to you within 48 hours. Check your email inbox (and spam folder).</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">🎮 JayGames</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="earn.html">Earn</a>
+  </div>
+  <div class="footer-copy">© 2025 JayGames. Creator programme subject to availability and approval.</div>
+</footer>
+
+<script>
+  function submitForm() {
+    const name = document.getElementById('f_name').value.trim();
+    const email = document.getElementById('f_email').value.trim();
+    const platform = document.getElementById('f_platform').value;
+    const channel = document.getElementById('f_channel').value.trim();
+    const url = document.getElementById('f_url').value.trim();
+    const subs = document.getElementById('f_subs').value;
+    const type = document.getElementById('f_type').value;
+    const about = document.getElementById('f_about').value.trim();
+
+    if (!name || !email || !platform || !channel || !url || !subs || !type || !about) {
+      alert('Please fill in all required fields before submitting.');
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    // Build submission data
+    const submission = {
+      name,
+      email,
+      platform,
+      channel,
+      url,
+      subs,
+      type,
+      about,
+      prev: document.getElementById('f_prev').value.trim(),
+      pay: document.getElementById('f_pay').value,
+      timestamp: new Date().toISOString()
+    };
+
+    // Save to localStorage for admin panel to pick up
+    let applications = JSON.parse(localStorage.getItem('jaygames_applications') || '[]');
+    applications.unshift(submission);
+    localStorage.setItem('jaygames_applications', JSON.stringify(applications));
+
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.submit-btn').disabled = true;
+    document.querySelector('.submit-btn').textContent = '✅ Application Sent';
+    document.querySelector('.submit-btn').style.opacity = '0.6';
+    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>

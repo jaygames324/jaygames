@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JayGames Admin</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #060710; --bg2: #0c0f1c; --bg3: #121626; --bg4: #181e30;
+      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
+      --text: #e8eeff; --text2: rgba(180,195,255,0.55); --text3: rgba(180,195,255,0.28);
+      --jay: #ff6b35; --jay2: rgba(255,107,53,0.15); --jay3: #ff8c5a;
+      --neon: #00f5d4; --neon2: rgba(0,245,212,0.1);
+      --purple: #a855f7; --purple2: rgba(168,85,247,0.15);
+      --green: #22c55e; --green2: rgba(34,197,94,0.12);
+      --red: #ef4444; --red2: rgba(239,68,68,0.12);
+      --yellow: #f59e0b; --yellow2: rgba(245,158,11,0.12);
+      --mono: 'JetBrains Mono', monospace;
+    }
+    body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #loginScreen { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.06), transparent 60%); }
+    .login-box { width: 380px; margin: 16px; background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 44px 40px; }
+    .login-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .login-logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--jay), #ff3d00); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; box-shadow: 0 0 24px rgba(255,107,53,0.4); }
+    .login-logo-text { font-weight: 900; font-size: 22px; background: linear-gradient(135deg, var(--jay), var(--jay3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .login-box h2 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .login-box .sub { font-size: 13px; color: var(--text3); margin-bottom: 28px; font-family: var(--mono); letter-spacing: 0.05em; text-transform: uppercase; }
+    .login-box input { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--text); font-size: 15px; outline: none; margin-bottom: 12px; font-family: 'Outfit', sans-serif; transition: border-color 0.2s; }
+    .login-box input:focus { border-color: var(--jay); }
+    .login-btn { width: 100%; background: var(--jay); color: #fff; border: none; border-radius: 10px; padding: 13px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(255,107,53,0.3); }
+    .login-btn:hover { background: var(--jay3); box-shadow: 0 8px 24px rgba(255,107,53,0.4); }
+    .login-err { margin-top: 10px; color: var(--red); font-size: 13px; text-align: center; min-height: 18px; }
+
+    /* ── DASHBOARD ── */
+    #dashboard { display: none; flex-direction: column; min-height: 100vh; }
+
+    /* TOPBAR */
+    .topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 50; }
+    .topbar-logo { display: flex; align-items: center; gap: 10px; }
+    .topbar-logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--jay), #ff3d00); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .topbar-logo-text { font-weight: 900; font-size: 18px; background: linear-gradient(135deg, var(--jay), var(--jay3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .topbar-badge { font-family: var(--mono); font-size: 11px; color: var(--text3); background: var(--bg4); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .topbar-time { font-family: var(--mono); font-size: 12px; color: var(--text3); }
+    .logout-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px 14px; color: var(--text2); font-size: 13px; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.2s; }
+    .logout-btn:hover { border-color: var(--red); color: var(--red); }
+
+    /* LAYOUT */
+    .layout { display: flex; flex: 1; }
+
+    /* SIDEBAR */
+    .sidebar { width: 220px; background: var(--bg2); border-right: 1px solid var(--border); padding: 20px 0; flex-shrink: 0; }
+    .sidebar-section { margin-bottom: 20px; }
+    .sidebar-label { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; padding: 0 16px 8px; font-family: var(--mono); }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 16px; cursor: pointer; transition: all 0.15s; font-size: 14px; font-weight: 500; color: var(--text2); border-left: 3px solid transparent; }
+    .nav-item:hover { background: var(--bg3); color: var(--text); }
+    .nav-item.active { background: var(--bg3); color: var(--text); border-left-color: var(--jay); }
+    .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
+    .nav-item .badge { margin-left: auto; background: var(--red); color: #fff; border-radius: 999px; font-size: 10px; font-weight: 700; padding: 1px 7px; font-family: var(--mono); }
+    .nav-item .badge.green { background: var(--green); }
+    .nav-item .badge.yellow { background: var(--yellow); color: #000; }
+
+    /* MAIN */
+    main { flex: 1; padding: 28px; overflow-y: auto; background: var(--bg); }
+
+    /* CARDS */
+    .page { display: none; }
+    .page.active { display: block; }
+    .page-title { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
+    .page-sub { font-size: 14px; color: var(--text2); margin-bottom: 28px; }
+
+    /* STAT CARDS */
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 28px; }
+    .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .stat-card .s-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-family: var(--mono); }
+    .stat-card .s-num { font-size: 28px; font-weight: 900; }
+    .stat-card .s-num.orange { color: var(--jay); }
+    .stat-card .s-num.green { color: var(--green); }
+    .stat-card .s-num.neon { color: var(--neon); }
+    .stat-card .s-num.purple { color: var(--purple); }
+
+    /* TABLE */
+    .table-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+    .table-head { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .table-head h3 { font-size: 15px; font-weight: 700; }
+    .table-actions { display: flex; gap: 8px; }
+    .tbl-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--text2); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; }
+    .tbl-btn:hover { border-color: var(--border2); color: var(--text); }
+    table { width: 100%; border-collapse: collapse; }
+    th { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--mono); padding: 10px 20px; text-align: left; border-bottom: 1px solid var(--border); background: var(--bg3); }
+    td { padding: 12px 20px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .status-badge { display: inline-flex; align-items: center; gap: 5px; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 700; font-family: var(--mono); }
+    .status-badge.pending { background: var(--yellow2); color: var(--yellow); }
+    .status-badge.approved { background: var(--green2); color: var(--green); }
+    .status-badge.rejected { background: var(--red2); color: var(--red); }
+    .status-badge.paid { background: var(--neon2); color: var(--neon); }
+
+    .action-btn { background: none; border: 1px solid var(--border); border-radius: 7px; padding: 5px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; color: var(--text2); margin-right: 4px; }
+    .action-btn.approve { border-color: rgba(34,197,94,0.3); color: var(--green); }
+    .action-btn.approve:hover { background: var(--green2); }
+    .action-btn.reject { border-color: rgba(239,68,68,0.3); color: var(--red); }
+    .action-btn.reject:hover { background: var(--red2); }
+    .action-btn.view { border-color: rgba(0,245,212,0.3); color: var(--neon); }
+    .action-btn.view:hover { background: var(--neon2); }
+
+    /* MODAL */
+    #appModal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
+    #appModal.open { display: flex; }
+    .app-modal-box { background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 36px; width: min(94vw, 560px); max-height: 85vh; overflow-y: auto; }
+    .app-modal-box h3 { font-size: 20px; font-weight: 800; margin-bottom: 20px; }
+    .app-field { margin-bottom: 14px; }
+    .app-field .lbl { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--mono); margin-bottom: 4px; }
+    .app-field .val { font-size: 14px; color: var(--text); line-height: 1.6; word-break: break-word; }
+    .modal-close { margin-top: 20px; width: 100%; background: var(--bg4); border: 1px solid var(--border); border-radius: 10px; padding: 12px; color: var(--text2); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .modal-close:hover { border-color: var(--border2); color: var(--text); }
+
+    /* EMPTY */
+    .empty { text-align: center; padding: 48px; color: var(--text3); }
+    .empty .icon { font-size: 40px; margin-bottom: 12px; }
+    .empty p { font-size: 14px; }
+
+    /* SETTINGS */
+    .settings-grid { display: grid; gap: 16px; }
+    .setting-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .setting-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .setting-info p { font-size: 13px; color: var(--text2); }
+    .setting-input { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; min-width: 200px; transition: border-color 0.2s; }
+    .setting-input:focus { border-color: var(--jay); }
+    .save-btn { background: var(--jay); color: #fff; border: none; border-radius: 9px; padding: 8px 18px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .save-btn:hover { background: var(--jay3); }
+
+    /* OVERVIEW QUICK TABLE */
+    .ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .ov-grid { grid-template-columns: 1fr; } .sidebar { display: none; } }
+    .ov-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .ov-card-head { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 700; }
+    .ov-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .ov-row:last-child { border-bottom: none; }
+    .ov-row .ov-label { color: var(--text2); }
+    .ov-row .ov-val { font-weight: 600; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg2); border: 1px solid var(--border2); border-radius: 12px; padding: 14px 20px; font-size: 14px; font-weight: 600; z-index: 999; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { border-color: rgba(34,197,94,0.4); color: var(--green); }
+    .toast.error { border-color: rgba(239,68,68,0.4); color: var(--red); }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-icon">🎮</div>
+      <div class="login-logo-text">JayGames</div>
+    </div>
+    <h2>Admin Dashboard</h2>
+    <div class="sub">Restricted Access</div>
+    <input type="password" id="pwInput" placeholder="Enter password..." />
+    <button class="login-btn" id="loginBtn">Access Dashboard</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <div class="topbar-logo-icon">🎮</div>
+      <div class="topbar-logo-text">JayGames</div>
+      <div class="topbar-badge">ADMIN</div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-time" id="clock"></span>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Main</div>
+        <div class="nav-item active" onclick="showPage('overview', this)">
+          <span class="icon">🏠</span> Overview
+        </div>
+        <div class="nav-item" onclick="showPage('applications', this)">
+          <span class="icon">📝</span> Applications
+          <span class="badge yellow" id="appBadge">0</span>
+        </div>
+        <div class="nav-item" onclick="showPage('payouts', this)">
+          <span class="icon">💰</span> Payouts
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Site</div>
+        <div class="nav-item" onclick="showPage('games', this)">
+          <span class="icon">🎮</span> Games
+        </div>
+        <div class="nav-item" onclick="showPage('settings', this)">
+          <span class="icon">⚙️</span> Settings
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Links</div>
+        <div class="nav-item" onclick="window.open('index.html','_blank')">
+          <span class="icon">🌐</span> View Site
+        </div>
+        <div class="nav-item" onclick="window.open('earn.html','_blank')">
+          <span class="icon">💸</span> Earn Page
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <main>
+
+      <!-- OVERVIEW -->
+      <div class="page active" id="p-overview">
+        <div class="page-title">Overview</div>
+        <div class="page-sub">Welcome back. Here's what's happening on JayGames.</div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="s-label">Applications</div><div class="s-num orange" id="ov-apps">0</div></div>
+          <div class="stat-card"><div class="s-label">Pending Review</div><div class="s-num yellow" id="ov-pending">0</div></div>
+          <div class="stat-card"><div class="s-label">Approved</div><div class="s-num green" id="ov-approved">0</div></div>
+          <div class="stat-card"><div class="s-label">Payouts Made</div><div class="s-num neon" id="ov-paid">0</div></div>
+        </div>
+        <div class="ov-grid">
+          <div class="ov-card">
+            <div class="ov-card-head">🕐 Recent Applications</div>
+            <div id="ov-recent-apps"></div>
+          </div>
+          <div class="ov-card">
+            <div class="ov-card-head">ℹ️ Quick Info</div>
+            <div class="ov-row"><span class="ov-label">Total Games</span><span class="ov-val" id="ov-game-count">—</span></div>
+            <div class="ov-row"><span class="ov-label">Admin Version</span><span class="ov-val">v2.0</span></div>
+            <div class="ov-row"><span class="ov-label">Site</span><span class="ov-val">JayGames</span></div>
+            <div class="ov-row"><span class="ov-label">Status</span><span class="ov-val" style="color:var(--green)">● Live</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPLICATIONS -->
+      <div class="page" id="p-applications">
+        <div class="page-title">Creator Applications</div>
+        <div class="page-sub">Review and manage creator programme applications from the Earn page.</div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="s-label">Total</div><div class="s-num orange" id="ap-total">0</div></div>
+          <div class="stat-card"><div class="s-label">Pending</div><div class="s-num yellow" id="ap-pending">0</div></div>
+          <div class="stat-card"><div class="s-label">Approved</div><div class="s-num green" id="ap-approved">0</div></div>
+          <div class="stat-card"><div class="s-label">Rejected</div><div class="s-num purple" id="ap-rejected">0</div></div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-head">
+            <h3>📝 All Applications</h3>
+            <div class="table-actions">
+              <button class="tbl-btn" onclick="clearApplications()">🗑️ Clear All</button>
+              <button class="tbl-btn" onclick="loadApplications()">🔄 Refresh</button>
+            </div>
+          </div>
+          <div id="applicationsTable"></div>
+        </div>
+      </div>
+
+      <!-- PAYOUTS -->
+      <div class="page" id="p-payouts">
+        <div class="page-title">Payouts</div>
+        <div class="page-sub">Track and manage creator payouts.</div>
+        <div class="table-wrap">
+          <div class="table-head"><h3>💰 Payout Log</h3></div>
+          <div id="payoutsTable"></div>
+        </div>
+      </div>
+
+      <!-- GAMES -->
+      <div class="page" id="p-games">
+        <div class="page-title">Games Library</div>
+        <div class="page-sub">Overview of all games on JayGames.</div>
+        <div class="table-wrap">
+          <div class="table-head"><h3>🎮 All Games</h3><div class="table-actions"><span style="font-size:13px;color:var(--text3)" id="gameCountLabel"></span></div></div>
+          <div id="gamesTable"></div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="page" id="p-settings">
+        <div class="page-title">Settings</div>
+        <div class="page-sub">Configure your JayGames admin settings.</div>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Change Admin Password</h4>
+              <p>Update the password used to access this admin panel.</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <input type="password" class="setting-input" id="newPwInput" placeholder="New password..." style="min-width:160px" />
+              <button class="save-btn" onclick="changePassword()">Save</button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Payout Tiers</h4>
+              <p>Edit payout amounts per view milestone on the Earn page (edit earn.html directly).</p>
+            </div>
+            <button class="save-btn" onclick="window.open('earn.html','_blank')">Open Earn Page</button>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>View Live Site</h4>
+              <p>Open JayGames in a new tab to check the live website.</p>
+            </div>
+            <button class="save-btn" onclick="window.open('index.html','_blank')">Open Site</button>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Clear Application Data</h4>
+              <p>Delete all stored creator applications from local storage. Cannot be undone.</p>
+            </div>
+            <button class="save-btn" style="background:var(--red)" onclick="clearApplications()">Clear Data</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- APP DETAIL MODAL -->
+<div id="appModal">
+  <div class="app-modal-box">
+    <h3>📝 Application Details</h3>
+    <div id="appModalContent"></div>
+    <button class="modal-close" onclick="document.getElementById('appModal').classList.remove('open')">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const ADMIN_PASSWORD_KEY = 'jaygames_admin_pw';
+  let ADMIN_PASSWORD = localStorage.getItem(ADMIN_PASSWORD_KEY) || 'JayAdmin2025';
+
+  // LOGIN
+  document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+
+  function doLogin() {
+    const v = document.getElementById('pwInput').value;
+    if (v === ADMIN_PASSWORD) {
+      sessionStorage.setItem('jayadmin', 'yes');
+      showDashboard();
+    } else {
+      document.getElementById('loginErr').textContent = '✕ Incorrect password.';
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('jayadmin');
+    location.reload();
+  }
+
+  function showDashboard() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'flex';
+    initDashboard();
+  }
+
+  if (sessionStorage.getItem('jayadmin') === 'yes') showDashboard();
+
+  // CLOCK
+  function updateClock() {
+    const el = document.getElementById('clock');
+    if (el) el.textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+  setInterval(updateClock, 1000); updateClock();
+
+  // PAGE NAV
+  function showPage(id, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('p-' + id).classList.add('active');
+    el.classList.add('active');
+    if (id === 'applications') loadApplications();
+    if (id === 'games') loadGamesTable();
+    if (id === 'payouts') loadPayouts();
+  }
+
+  // INIT
+  function initDashboard() {
+    loadOverview();
+    loadApplications();
+    loadGamesTable();
+  }
+
+  // APPLICATIONS
+  function getApplications() {
+    return JSON.parse(localStorage.getItem('jaygames_applications') || '[]');
+  }
+
+  function saveApplications(apps) {
+    localStorage.setItem('jaygames_applications', JSON.stringify(apps));
+  }
+
+  function loadApplications() {
+    const apps = getApplications();
+    const pending = apps.filter(a => !a.status || a.status === 'pending').length;
+    const approved = apps.filter(a => a.status === 'approved').length;
+    const rejected = apps.filter(a => a.status === 'rejected').length;
+
+    document.getElementById('ap-total').textContent = apps.length;
+    document.getElementById('ap-pending').textContent = pending;
+    document.getElementById('ap-approved').textContent = approved;
+    document.getElementById('ap-rejected').textContent = rejected;
+    document.getElementById('appBadge').textContent = pending;
+
+    const container = document.getElementById('applicationsTable');
+    if (apps.length === 0) {
+      container.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No applications yet. They'll appear here when creators apply via the Earn page.</p></div>`;
+      return;
+    }
+
+    container.innerHTML = `<table>
+      <thead><tr>
+        <th>Name</th><th>Email</th><th>Platform</th><th>Channel</th><th>Followers</th><th>Status</th><th>Date</th><th>Actions</th>
+      </tr></thead>
+      <tbody>
+        ${apps.map((a, i) => {
+          const status = a.status || 'pending';
+          const date = a.timestamp ? new Date(a.timestamp).toLocaleDateString('en-GB') : '—';
+          return `<tr>
+            <td><strong>${esc(a.name)}</strong></td>
+            <td style="color:var(--text2)">${esc(a.email)}</td>
+            <td>${esc(a.platform)}</td>
+            <td style="font-family:var(--mono);font-size:12px">${esc(a.channel)}</td>
+            <td style="color:var(--text2);font-size:12px">${esc(a.subs)}</td>
+            <td><span class="status-badge ${status}">${status}</span></td>
+            <td style="color:var(--text3);font-size:12px;font-family:var(--mono)">${date}</td>
+            <td>
+              <button class="action-btn view" onclick="viewApplication(${i})">View</button>
+              ${status !== 'approved' ? `<button class="action-btn approve" onclick="setStatus(${i},'approved')">Approve</button>` : ''}
+              ${status !== 'rejected' ? `<button class="action-btn reject" onclick="setStatus(${i},'rejected')">Reject</button>` : ''}
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+  }
+
+  function setStatus(index, status) {
+    const apps = getApplications();
+    apps[index].status = status;
+    saveApplications(apps);
+    loadApplications();
+    loadOverview();
+    showToast(`Application ${status}!`, status === 'approved' ? 'success' : 'error');
+  }
+
+  function viewApplication(index) {
+    const apps = getApplications();
+    const a = apps[index];
+    const fields = [
+      ['Name', a.name], ['Email', a.email], ['Platform', a.platform],
+      ['Channel', a.channel], ['Profile URL', a.url ? `<a href="${esc(a.url)}" target="_blank" style="color:var(--neon)">${esc(a.url)}</a>` : '—'],
+      ['Followers', a.subs], ['Content Type', a.type], ['About', a.about],
+      ['Previous Content', a.prev ? `<a href="${esc(a.prev)}" target="_blank" style="color:var(--neon)">${esc(a.prev)}</a>` : '—'],
+      ['Payment Method', a.pay || '—'], ['Status', a.status || 'pending'],
+      ['Submitted', a.timestamp ? new Date(a.timestamp).toLocaleString('en-GB') : '—']
+    ];
+    document.getElementById('appModalContent').innerHTML = fields.map(([l, v]) =>
+      `<div class="app-field"><div class="lbl">${l}</div><div class="val">${v}</div></div>`
+    ).join('');
+    document.getElementById('appModal').classList.add('open');
+  }
+
+  function clearApplications() {
+    if (!confirm('Clear ALL application data? This cannot be undone.')) return;
+    localStorage.removeItem('jaygames_applications');
+    loadApplications();
+    loadOverview();
+    showToast('Applications cleared.', 'error');
+  }
+
+  // PAYOUTS
+  function loadPayouts() {
+    const apps = getApplications().filter(a => a.status === 'paid');
+    const container = document.getElementById('payoutsTable');
+    if (apps.length === 0) {
+      container.innerHTML = `<div class="empty"><div class="icon">💰</div><p>No payouts recorded yet. Approve applications and mark them as paid when processed.</p></div>`;
+      return;
+    }
+    container.innerHTML = `<table><thead><tr><th>Creator</th><th>Email</th><th>Platform</th><th>Amount</th><th>Date</th></tr></thead><tbody>
+      ${apps.map(a => `<tr><td>${esc(a.name)}</td><td>${esc(a.email)}</td><td>${esc(a.platform)}</td><td style="color:var(--neon);font-weight:700">—</td><td>${a.timestamp ? new Date(a.timestamp).toLocaleDateString('en-GB') : '—'}</td></tr>`).join('')}
+    </tbody></table>`;
+  }
+
+  // GAMES TABLE
+  function loadGamesTable() {
+    if (typeof games === 'undefined') return;
+    const seen = new Set();
+    const unique = games.filter(g => { if (seen.has(g.id)) return false; seen.add(g.id); return true; });
+    document.getElementById('gameCountLabel').textContent = `${unique.length} games`;
+    document.getElementById('ov-game-count').textContent = unique.length;
+    const container = document.getElementById('gamesTable');
+    container.innerHTML = `<table>
+      <thead><tr><th>Title</th><th>ID</th><th>Tags</th></tr></thead>
+      <tbody>
+        ${unique.map(g => `<tr>
+          <td><strong>${esc(g.title)}</strong></td>
+          <td style="font-family:var(--mono);font-size:12px;color:var(--text3)">${esc(g.id)}</td>
+          <td style="font-size:12px;color:var(--text2)">${(g.tags||[]).join(', ')}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+  }
+
+  // OVERVIEW
+  function loadOverview() {
+    const apps = getApplications();
+    const pending = apps.filter(a => !a.status || a.status === 'pending').length;
+    const approved = apps.filter(a => a.status === 'approved').length;
+    const paid = apps.filter(a => a.status === 'paid').length;
+
+    document.getElementById('ov-apps').textContent = apps.length;
+    document.getElementById('ov-pending').textContent = pending;
+    document.getElementById('ov-approved').textContent = approved;
+    document.getElementById('ov-paid').textContent = paid;
+    document.getElementById('appBadge').textContent = pending;
+
+    const recentEl = document.getElementById('ov-recent-apps');
+    const recent = apps.slice(0, 5);
+    if (recent.length === 0) {
+      recentEl.innerHTML = `<div class="ov-row"><span class="ov-label" style="color:var(--text3)">No applications yet</span></div>`;
+    } else {
+      recentEl.innerHTML = recent.map(a => `<div class="ov-row">
+        <span class="ov-label">${esc(a.name)} <span style="color:var(--text3);font-size:12px">(${esc(a.platform)})</span></span>
+        <span class="status-badge ${a.status || 'pending'}">${a.status || 'pending'}</span>
+      </div>`).join('');
+    }
+
+    if (typeof games !== 'undefined') {
+      const seen = new Set();
+      const unique = games.filter(g => { if (seen.has(g.id)) return false; seen.add(g.id); return true; });
+      document.getElementById('ov-game-count').textContent = unique.length;
+    }
+  }
+
+  // SETTINGS
+  function changePassword() {
+    const v = document.getElementById('newPwInput').value.trim();
+    if (!v || v.length < 6) { showToast('Password must be at least 6 characters.', 'error'); return; }
+    ADMIN_PASSWORD = v;
+    localStorage.setItem(ADMIN_PASSWORD_KEY, v);
+    document.getElementById('newPwInput').value = '';
+    showToast('Password updated!', 'success');
+  }
+
+  // TOAST
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = type === 'success' ? '✅ ' + msg : '✕ ' + msg;
+    t.className = 'toast ' + type;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Close app modal on bg click
+  document.getElementById('appModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('appModal')) document.getElementById('appModal').classList.remove('open');
+  });
+</script>
+<script src="games.js"></script>
+</body>
+</html>
