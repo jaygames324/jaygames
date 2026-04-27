@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apps - Lumousa</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #0f0f0f;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .header {
+        background: #1a1a1a;
+        padding: 15px 20px;
+        text-align: center;
+        font-size: 20px;
+        border-bottom: 2px solid #333;
+      }
+      .container {
+        padding: 20px;
+        text-align: center;
+      }
+      .app-card {
+        display: inline-block;
+        background: #1f1f1f;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px;
+        width: 280px;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .app-card:hover {
+        transform: scale(1.05);
+        background: #2a2a2a;
+      }
+      .app-card h2 {
+        margin: 15px 0 8px;
+        font-size: 22px;
+      }
+      .app-card p {
+        color: #aaa;
+        font-size: 14px;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
+        display: none;
+      }
+      .back-btn {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: #333;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 1000;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">Lumousa Apps - Unblocked</div>
+
+    <div class="container" id="appsPage">
+      <h1 style="margin: 30px 0 10px">Popular Apps</h1>
+      <p style="color: #888; margin-bottom: 30px">
+        Click on any app to open it through proxy
+      </p>
+
+      <!-- GeForce Now Card -->
+      <div
+        class="app-card"
+        onclick="openApp('https://www.nvidia.com/en-us/geforce-now/')"
+      >
+        <h2>🎮 GeForce Now</h2>
+        <p>Cloud Gaming - Play hundreds of games</p>
+      </div>
+
+      <!-- You can add more apps here easily -->
+      <!-- Example:
+    <div class="app-card" onclick="openApp('https://discord.com/app')">
+      <h2>💬 Discord</h2>
+      <p>Chat & Voice</p>
+    </div>
+    --></div>
+
+    <!-- Back button -->
+    <div class="back-btn" id="backBtn" onclick="goBack()">← Back to Apps</div>
+
+    <!-- The iframe that loads the proxy -->
+    <iframe
+      id="proxyFrame"
+      allowfullscreen
+      allow="fullscreen; clipboard-write; encrypted-media"
+    ></iframe>
+
+    <script>
+      function openApp(targetUrl) {
+        const encodedUrl =
+          "https://scramjet.mercurywork.shop/" + encodeURIComponent(targetUrl);
+
+        document.getElementById("appsPage").style.display = "none";
+        document.getElementById("backBtn").style.display = "block";
+        const frame = document.getElementById("proxyFrame");
+        frame.src = encodedUrl;
+        frame.style.display = "block";
+      }
+
+      function goBack() {
+        const frame = document.getElementById("proxyFrame");
+        frame.style.display = "none";
+        frame.src = ""; // clear it
+        document.getElementById("backBtn").style.display = "none";
+        document.getElementById("appsPage").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
