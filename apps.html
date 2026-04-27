@@ -3,87 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quick Links - Lumousa</title>
+  <title>Lumousa Quick Links</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #0f0f0f;
+      background: #0a0a0a;
       color: #fff;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       min-height: 100vh;
       overflow: auto;
     }
     .header {
-      background: #1a1a1a;
-      padding: 15px;
+      background: #111;
+      padding: 16px;
       text-align: center;
-      font-size: 22px;
-      border-bottom: 3px solid #333;
+      font-size: 23px;
+      border-bottom: 3px solid #222;
       position: sticky;
       top: 0;
       z-index: 100;
     }
     .container {
-      padding: 30px 20px;
-      max-width: 850px;
+      padding: 25px 20px;
+      max-width: 820px;
       margin: 0 auto;
     }
+
+    /* Full Proxy Button */
     .proxy-btn {
-      background: #0066ff;
+      background: linear-gradient(135deg, #0066ff, #3388ff);
       color: white;
       border: none;
-      padding: 14px 24px;
+      padding: 16px;
       font-size: 18px;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      margin-bottom: 30px;
       width: 100%;
-      transition: 0.3s;
+      margin-bottom: 35px;
+      transition: all 0.3s ease;
+      font-weight: bold;
     }
     .proxy-btn:hover {
-      background: #3388ff;
-      transform: scale(1.03);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 102, 255, 0.4);
     }
+
     h1 {
       text-align: center;
-      margin: 20px 0 10px;
+      margin-bottom: 8px;
       font-size: 26px;
     }
-    p.intro {
+    .intro {
       text-align: center;
-      color: #aaa;
+      color: #999;
       margin-bottom: 30px;
       font-size: 15px;
     }
+
+    /* Smaller Quick Links */
     .link-card {
-      background: #1f1f1f;
+      background: #1a1a1a;
       border-radius: 10px;
-      padding: 16px 18px;
-      margin: 10px 0;
+      padding: 14px 18px;
+      margin: 9px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    .link-card:hover {
+      background: #252525;
+      transform: translateX(5px);
     }
     .link-info h3 {
-      margin: 0 0 4px 0;
-      font-size: 18px;
+      font-size: 17.5px;
+      margin-bottom: 3px;
     }
     .link-info p {
-      color: #999;
-      font-size: 13.5px;
+      color: #888;
+      font-size: 13px;
     }
     .copy-btn {
       background: #333;
-      color: white;
+      color: #ddd;
       border: none;
-      padding: 9px 16px;
+      padding: 8px 14px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 14px;
-      min-width: 70px;
+      font-size: 13px;
+      transition: all 0.2s;
     }
-    .copy-btn:hover { background: #555; }
+    .copy-btn:hover {
+      background: #4CAF50;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -92,20 +105,21 @@
 
   <div class="container">
 
-    <!-- Proxy Button -->
+    <!-- Full Proxy Button -->
     <button class="proxy-btn" onclick="openProxy()">
-      🔗 Open Full Proxy (Type any website here)
+      🔗 Open Full Proxy - Type Any Website Here
     </button>
 
     <h1>Best Quick Links</h1>
     <p class="intro">
-      Click <strong>Copy</strong> → Go to Proxy → Paste in the top bar → Press Enter
+      Click "Copy" → Go to Proxy → Paste the link in the top bar and press Enter
     </p>
 
+    <!-- Quick Links -->
     <div class="link-card">
       <div class="link-info">
         <h3>🎮 GeForce Now</h3>
-        <p>Cloud gaming - Play high-end PC games in browser</p>
+        <p>Play high-end PC games in your browser</p>
       </div>
       <button class="copy-btn" onclick="copyLink('https://www.nvidia.com/en-us/geforce-now/')">Copy</button>
     </div>
@@ -113,7 +127,7 @@
     <div class="link-card">
       <div class="link-info">
         <h3>📱 TikTok</h3>
-        <p>Short videos and trends</p>
+        <p>Short videos and trending content</p>
       </div>
       <button class="copy-btn" onclick="copyLink('https://www.tiktok.com')">Copy</button>
     </div>
@@ -121,7 +135,7 @@
     <div class="link-card">
       <div class="link-info">
         <h3>▶️ YouTube</h3>
-        <p>Videos, music, and livestreams</p>
+        <p>Videos, music, and live streams</p>
       </div>
       <button class="copy-btn" onclick="copyLink('https://www.youtube.com')">Copy</button>
     </div>
@@ -129,7 +143,7 @@
     <div class="link-card">
       <div class="link-info">
         <h3>🎮 Easyfun.gg Roblox</h3>
-        <p>Best way to play Roblox in browser (2026)</p>
+        <p>Best cloud Roblox experience (2026)</p>
       </div>
       <button class="copy-btn" onclick="copyLink('https://www.easyfun.gg')">Copy</button>
     </div>
@@ -137,7 +151,7 @@
     <div class="link-card">
       <div class="link-info">
         <h3>🎮 now.gg Roblox</h3>
-        <p>Another good Roblox cloud gaming site</p>
+        <p>Another popular Roblox cloud site</p>
       </div>
       <button class="copy-btn" onclick="copyLink('https://now.gg/apps/roblox-corporation/5349/roblox.html')">Copy</button>
     </div>
@@ -145,7 +159,7 @@
     <div class="link-card">
       <div class="link-info">
         <h3>💬 Discord</h3>
-        <p>Chat with friends (web version)</p>
+        <p>Voice & text chat with friends</p>
       </div>
       <button class="copy-btn" onclick="copyLink('https://discord.com/app')">Copy</button>
     </div>
@@ -153,24 +167,30 @@
   </div>
 
   <script>
+    // Open Proxy in same browser window
+    function openProxy() {
+      document.getElementById('proxyFrame').src = "https://scramjet.mercurywork.shop/";
+      document.getElementById('proxyFrame').style.display = "block";
+    }
+
+    // Copy link with nice feedback
     function copyLink(url) {
       navigator.clipboard.writeText(url).then(() => {
         const btn = event.currentTarget;
-        const original = btn.textContent;
-        btn.textContent = "✅ Copied!";
+        const originalText = btn.innerHTML;
+        btn.innerHTML = "✅ Copied!";
         btn.style.background = "#4CAF50";
 
         setTimeout(() => {
-          btn.textContent = original;
+          btn.innerHTML = originalText;
           btn.style.background = "#333";
-        }, 2000);
+        }, 1800);
       });
     }
-
-    function openProxy() {
-      window.open("https://scramjet.mercurywork.shop/", "_blank");
-    }
   </script>
+
+  <!-- Hidden iframe for loading proxy in same page -->
+  <iframe id="proxyFrame" style="display:none; width:100%; height:100vh; border:none; position:fixed; top:0; left:0; z-index:999;" allowfullscreen></iframe>
 
 </body>
 </html>
