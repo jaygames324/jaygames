@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apps - Lumousa</title>
+  <title>Best Links - Lumousa</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -11,145 +11,150 @@
       color: #fff;
       font-family: Arial, sans-serif;
       height: 100vh;
-      overflow: hidden;
+      overflow: auto;
     }
     .header {
       background: #1a1a1a;
       padding: 15px;
       text-align: center;
-      font-size: 22px;
+      font-size: 24px;
       border-bottom: 3px solid #333;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .container {
-      padding: 40px 20px;
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
       text-align: center;
+      margin-bottom: 10px;
     }
-    .section-title {
-      margin: 40px 0 20px;
-      font-size: 24px;
-      color: #ccc;
+    p.intro {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 40px;
+      font-size: 16px;
     }
-    .app-card {
-      display: inline-block;
+    .link-card {
       background: #1f1f1f;
       border-radius: 12px;
-      padding: 25px 20px;
-      margin: 12px;
-      width: 300px;
-      cursor: pointer;
-      transition: all 0.3s;
+      padding: 18px 20px;
+      margin: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
     }
-    .app-card:hover {
-      transform: scale(1.08);
+    .link-card:hover {
       background: #2a2a2a;
     }
-    .app-card h2 {
-      font-size: 23px;
-      margin: 10px 0 6px;
+    .link-info h3 {
+      margin: 0 0 5px 0;
+      font-size: 20px;
     }
-    .app-card p {
+    .link-info p {
       color: #aaa;
       font-size: 14px;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 999;
-      display: none;
-    }
-    .back-btn {
-      position: fixed;
-      top: 15px;
-      left: 15px;
+    .copy-btn {
       background: #333;
       color: white;
-      padding: 12px 20px;
+      border: none;
+      padding: 10px 16px;
       border-radius: 8px;
       cursor: pointer;
-      z-index: 1001;
-      font-size: 16px;
-      display: none;
+      font-size: 14px;
+    }
+    .copy-btn:hover {
+      background: #555;
     }
   </style>
 </head>
 <body>
 
-  <div class="header">Lumousa Quick Apps</div>
+  <div class="header">Best Website Links</div>
 
-  <div class="container" id="appsPage">
-
-    <h1 style="margin-bottom: 10px;">Best Website Links</h1>
-    <p style="color: #aaa; max-width: 600px; margin: 0 auto 40px;">
-      One-click access to popular unblocked sites. 
-      Click any card below to open directly through proxy.
+  <div class="container">
+    <h1>Quick Copy Links</h1>
+    <p class="intro">
+      Click the <strong>Copy</strong> button next to any link.<br>
+      Then go to the Proxy and paste it in the top address bar.
     </p>
 
-    <!-- Best Websites Cards -->
-    <div class="app-card" onclick="loadSite('https://www.tiktok.com')">
-      <h2>📱 TikTok</h2>
-      <p>Short Videos</p>
+    <div class="link-card">
+      <div class="link-info">
+        <h3>🎮 GeForce Now</h3>
+        <p>https://www.nvidia.com/en-us/geforce-now/</p>
+      </div>
+      <button class="copy-btn" onclick="copyLink('https://www.nvidia.com/en-us/geforce-now/')">Copy</button>
     </div>
 
-    <div class="app-card" onclick="loadSite('https://www.youtube.com')">
-      <h2>▶️ YouTube</h2>
-      <p>Videos & Music</p>
+    <div class="link-card">
+      <div class="link-info">
+        <h3>📱 TikTok</h3>
+        <p>https://www.tiktok.com</p>
+      </div>
+      <button class="copy-btn" onclick="copyLink('https://www.tiktok.com')">Copy</button>
     </div>
 
-    <div class="app-card" onclick="loadSite('https://www.nvidia.com/en-us/geforce-now/')">
-      <h2>🎮 GeForce Now</h2>
-      <p>Cloud Gaming</p>
+    <div class="link-card">
+      <div class="link-info">
+        <h3>▶️ YouTube</h3>
+        <p>https://www.youtube.com</p>
+      </div>
+      <button class="copy-btn" onclick="copyLink('https://www.youtube.com')">Copy</button>
     </div>
 
-    <div class="app-card" onclick="loadSite('https://www.easyfun.gg')">
-      <h2>🎮 Easyfun.gg Roblox</h2>
-      <p>Best Cloud Roblox 2026</p>
+    <div class="link-card">
+      <div class="link-info">
+        <h3>🎮 Easyfun.gg Roblox</h3>
+        <p>https://www.easyfun.gg</p>
+      </div>
+      <button class="copy-btn" onclick="copyLink('https://www.easyfun.gg')">Copy</button>
     </div>
 
-    <div class="app-card" onclick="loadSite('https://now.gg/apps/roblox-corporation/5349/roblox.html')">
-      <h2>🎮 now.gg Roblox</h2>
-      <p>Roblox Cloud Gaming</p>
+    <div class="link-card">
+      <div class="link-info">
+        <h3>🎮 now.gg Roblox</h3>
+        <p>https://now.gg/apps/roblox-corporation/5349/roblox.html</p>
+      </div>
+      <button class="copy-btn" onclick="copyLink('https://now.gg/apps/roblox-corporation/5349/roblox.html')">Copy</button>
     </div>
 
-    <div class="app-card" onclick="loadProxy()">
-      <h2>🔗 Full Proxy</h2>
-      <p>Browse Any Website</p>
+    <div class="link-card">
+      <div class="link-info">
+        <h3>💬 Discord</h3>
+        <p>https://discord.com/app</p>
+      </div>
+      <button class="copy-btn" onclick="copyLink('https://discord.com/app')">Copy</button>
+    </div>
+
+    <div class="link-card">
+      <div class="link-info">
+        <h3>🔍 Google</h3>
+        <p>https://www.google.com</p>
+      </div>
+      <button class="copy-btn" onclick="copyLink('https://www.google.com')">Copy</button>
     </div>
 
   </div>
 
-  <div class="back-btn" id="backBtn" onclick="goBack()">← Back to Apps</div>
-
-  <iframe id="proxyFrame" allowfullscreen allow="fullscreen; clipboard-write; encrypted-media"></iframe>
-
   <script>
-    const proxyBase = "https://scramjet.mercurywork.shop/";
-
-    function loadSite(url) {
-      document.getElementById('appsPage').style.display = 'none';
-      document.getElementById('backBtn').style.display = 'block';
-      const frame = document.getElementById('proxyFrame');
-      frame.src = proxyBase + encodeURIComponent(url);
-      frame.style.display = 'block';
-    }
-
-    function loadProxy() {
-      document.getElementById('appsPage').style.display = 'none';
-      document.getElementById('backBtn').style.display = 'block';
-      const frame = document.getElementById('proxyFrame');
-      frame.src = proxyBase;
-      frame.style.display = 'block';
-    }
-
-    function goBack() {
-      const frame = document.getElementById('proxyFrame');
-      frame.style.display = 'none';
-      frame.src = '';
-      document.getElementById('backBtn').style.display = 'none';
-      document.getElementById('appsPage').style.display = 'block';
+    function copyLink(url) {
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = "Copied!";
+        btn.style.background = "#4CAF50";
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = "#333";
+        }, 2000);
+      });
     }
   </script>
 
