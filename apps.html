@@ -57,11 +57,7 @@
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0, 102, 255, 0.4);
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 8px;
-      font-size: 26px;
-    }
+    h1 { text-align: center; margin-bottom: 8px; font-size: 26px; }
     .intro {
       text-align: center;
       color: #999;
@@ -82,14 +78,8 @@
       background: #252525;
       transform: translateX(5px);
     }
-    .link-info h3 {
-      font-size: 17.5px;
-      margin-bottom: 3px;
-    }
-    .link-info p {
-      color: #888;
-      font-size: 13px;
-    }
+    .link-info h3 { font-size: 17.5px; margin-bottom: 3px; }
+    .link-info p { color: #888; font-size: 13px; }
     .copy-btn {
       background: #333;
       color: #ddd;
@@ -100,10 +90,7 @@
       font-size: 13px;
       transition: all 0.2s;
     }
-    .copy-btn:hover {
-      background: #4CAF50;
-      color: white;
-    }
+    .copy-btn:hover { background: #4CAF50; color: white; }
     .back-btn {
       position: fixed;
       top: 20px;
@@ -118,9 +105,7 @@
       font-size: 16px;
       transition: 0.3s;
     }
-    .back-btn:hover {
-      background: #555;
-    }
+    .back-btn:hover { background: #555; }
   </style>
 </head>
 <body>
@@ -136,7 +121,7 @@
 
     <h1>Best Quick Links</h1>
     <p class="intro">
-      Click "Copy" → Go to Proxy → Paste the link in the top bar and press Enter
+      Click "Copy" → Go to Proxy → Paste in the top bar and press Enter
     </p>
 
     <div class="link-card">
@@ -144,7 +129,7 @@
         <h3>🎮 GeForce Now</h3>
         <p>Play high-end PC games in your browser</p>
       </div>
-      <button class="copy-btn" onclick="copyLink('https://www.nvidia.com/en-us/geforce-now/')">Copy</button>
+      <button class="copy-btn" onclick="copyLink(this, 'https://www.nvidia.com/en-us/geforce-now/')">Copy</button>
     </div>
 
     <div class="link-card">
@@ -152,7 +137,7 @@
         <h3>📱 TikTok</h3>
         <p>Short videos and trending content</p>
       </div>
-      <button class="copy-btn" onclick="copyLink('https://www.tiktok.com')">Copy</button>
+      <button class="copy-btn" onclick="copyLink(this, 'https://www.tiktok.com')">Copy</button>
     </div>
 
     <div class="link-card">
@@ -160,7 +145,7 @@
         <h3>▶️ YouTube</h3>
         <p>Videos, music, and live streams</p>
       </div>
-      <button class="copy-btn" onclick="copyLink('https://www.youtube.com')">Copy</button>
+      <button class="copy-btn" onclick="copyLink(this, 'https://www.youtube.com')">Copy</button>
     </div>
 
     <div class="link-card">
@@ -168,7 +153,7 @@
         <h3>🎮 Easyfun.gg Roblox</h3>
         <p>Best cloud Roblox experience (2026)</p>
       </div>
-      <button class="copy-btn" onclick="copyLink('https://www.easyfun.gg')">Copy</button>
+      <button class="copy-btn" onclick="copyLink(this, 'https://www.easyfun.gg')">Copy</button>
     </div>
 
     <div class="link-card">
@@ -176,7 +161,7 @@
         <h3>🎮 now.gg Roblox</h3>
         <p>Another popular Roblox cloud site</p>
       </div>
-      <button class="copy-btn" onclick="copyLink('https://now.gg/apps/roblox-corporation/5349/roblox.html')">Copy</button>
+      <button class="copy-btn" onclick="copyLink(this, 'https://now.gg/apps/roblox-corporation/5349/roblox.html')">Copy</button>
     </div>
 
     <div class="link-card">
@@ -184,21 +169,20 @@
         <h3>💬 Discord</h3>
         <p>Voice & text chat with friends</p>
       </div>
-      <button class="copy-btn" onclick="copyLink('https://discord.com/app')">Copy</button>
+      <button class="copy-btn" onclick="copyLink(this, 'https://discord.com/app')">Copy</button>
     </div>
   </div>
 
   <button class="back-btn" id="backBtn" onclick="goBack()">← Back to Links</button>
 
-  <!-- Proxy iframe -->
   <iframe id="proxyFrame" style="display:none; width:100%; height:100vh; border:none; position:fixed; top:0; left:0; z-index:999;" allowfullscreen></iframe>
 
   <script>
-    // Interactive Floating Particles
+    // === INTERACTIVE PARTICLES (Repel effect) ===
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    let mouse = { x: 0, y: 0 };
+    let mouse = { x: 0, y: 0, radius: 140 };
 
     function resize() {
       canvas.width = window.innerWidth;
@@ -211,29 +195,37 @@
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 4 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
+        this.size = Math.random() * 3.5 + 1;
+        this.speedX = Math.random() * 0.6 - 0.3;
+        this.speedY = Math.random() * 0.6 - 0.3;
       }
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        // Gentle mouse interaction
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
+        // Strong repel from mouse
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
         const distance = Math.sqrt(dx*dx + dy*dy);
-        if (distance < 120) {
-          this.speedX += dx / 800;
-          this.speedY += dy / 800;
+
+        if (distance < mouse.radius && distance > 0) {
+          const force = (mouse.radius - distance) / mouse.radius;
+          this.speedX += (dx / distance) * force * 2.5;
+          this.speedY += (dy / distance) * force * 2.5;
         }
 
-        // Wrap around edges
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        // Gentle random movement
+        this.speedX *= 0.98;
+        this.speedY *= 0.98;
+
+        // Wrap around screen
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
       }
       draw() {
-        ctx.fillStyle = 'rgba(100, 180, 255, 0.7)';
+        ctx.fillStyle = 'rgba(80, 160, 255, 0.75)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -242,18 +234,16 @@
 
     function initParticles() {
       particles = [];
-      for (let i = 0; i < 80; i++) {
-        particles.push(new Particle());
-      }
+      for (let i = 0; i < 90; i++) particles.push(new Particle());
     }
 
-    function animate() {
+    function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
+      for (let p of particles) {
+        p.update();
+        p.draw();
       }
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animateParticles);
     }
 
     window.addEventListener('mousemove', (e) => {
@@ -262,9 +252,9 @@
     });
 
     initParticles();
-    animate();
+    animateParticles();
 
-    // Proxy Functions
+    // === Proxy & Back Button ===
     function openProxy() {
       document.getElementById('proxyFrame').src = "https://scramjet.mercurywork.shop/";
       document.getElementById('proxyFrame').style.display = "block";
@@ -278,17 +268,20 @@
       document.getElementById('backBtn').style.display = 'none';
     }
 
-    // Copy function
-    function copyLink(url) {
+    // === Fixed Copy Function ===
+    function copyLink(btn, url) {
       navigator.clipboard.writeText(url).then(() => {
-        const btn = event.currentTarget;
-        const original = btn.innerHTML;
+        const originalText = btn.innerHTML;
         btn.innerHTML = "✅ Copied!";
         btn.style.background = "#4CAF50";
+
         setTimeout(() => {
-          btn.innerHTML = original;
+          btn.innerHTML = originalText;
           btn.style.background = "#333";
         }, 1800);
+      }).catch(() => {
+        btn.innerHTML = "Failed";
+        setTimeout(() => btn.innerHTML = "Copy", 1500);
       });
     }
   </script>
