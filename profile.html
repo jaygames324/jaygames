@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JeyGames — Profile</title>
+    <link rel="icon" href="Jeygameslogo.png" sizes="any" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #08090d;
+        --bg2: #0f1118;
+        --bg3: #161a25;
+        --bg4: #1d2235;
+        --border: rgba(255, 255, 255, 0.07);
+        --border2: rgba(255, 255, 255, 0.13);
+        --text: #eef0ff;
+        --text2: rgba(180, 190, 255, 0.55);
+        --text3: rgba(180, 190, 255, 0.3);
+        --jay: #ff6b35;
+        --jay2: rgba(255, 107, 53, 0.15);
+        --jay3: #ff8c5a;
+        --neon: #00f5d4;
+        --neon2: rgba(0, 245, 212, 0.12);
+        --purple: #a855f7;
+        --card-bg: #111520;
+        --nav-bg: rgba(8, 9, 13, 0.95);
+        --sidebar-w: 220px;
+        --mono: "JetBrains Mono", monospace;
+      }
+      body {
+        font-family: "Outfit", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        background: var(--nav-bg);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        gap: 12px;
+      }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        text-decoration: none;
+      }
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--jay), #ff3d00);
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 0 18px rgba(255, 107, 53, 0.4);
+        overflow: hidden;
+      }
+      .logo-jey {
+        width: 36px;
+        border-radius: 4px;
+      }
+      .logo-text {
+        font-weight: 900;
+        font-size: 20px;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, var(--jay), var(--jay3));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-icon-btn {
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        color: var(--text2);
+        cursor: pointer;
+        padding: 7px 10px;
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+      }
+      .nav-icon-btn:hover {
+        border-color: var(--jay);
+        color: var(--jay);
+      }
+      .login-btn {
+        background: var(--jay);
+        border: none;
+        border-radius: 9px;
+        color: #fff;
+        cursor: pointer;
+        padding: 7px 16px;
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        transition: all 0.2s;
+      }
+      .login-btn:hover {
+        background: var(--jay3);
+        box-shadow: 0 0 16px rgba(255, 107, 53, 0.4);
+      }
+
+      /* USER DROPDOWN */
+      .user-menu-wrap {
+        position: relative;
+      }
+      .user-avatar-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 5px 12px 5px 5px;
+        transition: border-color 0.2s;
+      }
+      .user-avatar-btn:hover {
+        border-color: var(--border2);
+      }
+      .avatar-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--jay), var(--purple));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 800;
+        color: #fff;
+      }
+      .avatar-name {
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .user-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        width: 260px;
+        background: var(--bg2);
+        border: 1px solid var(--border2);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        z-index: 500;
+        display: none;
+      }
+      .user-dropdown.open {
+        display: block;
+        animation: fadeDown 0.15s ease;
+      }
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .dropdown-header {
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .dropdown-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--jay), var(--purple));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 800;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .dropdown-username {
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .dropdown-email {
+        font-size: 11px;
+        color: var(--text3);
+        margin-top: 2px;
+      }
+      .dropdown-profile-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 12px;
+        padding: 10px;
+        background: var(--jay);
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        transition: 0.2s;
+      }
+      .dropdown-profile-btn:hover {
+        background: var(--jay3);
+      }
+      .dropdown-links {
+        padding: 4px 0 8px;
+      }
+      .dropdown-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        color: var(--text2);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        transition: 0.15s;
+      }
+      .dropdown-link:hover {
+        color: var(--text);
+        background: var(--bg3);
+      }
+      .dropdown-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 4px 0;
+      }
+      .dropdown-link.logout {
+        color: #ef4444;
+      }
+      .dropdown-link.logout:hover {
+        background: rgba(239, 68, 68, 0.1);
+      }
+
+      /* PROFILE PAGE */
+      .profile-wrap {
+        padding-top: 60px;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .profile-banner {
+        width: 100%;
+        height: 200px;
+        border-radius: 0 0 20px 20px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #0d1117, #1a1f2e, #0d1117);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        margin-top: 0;
+      }
+      .banner-inner {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(
+          135deg,
+          #0d1535 0%,
+          #1a0533 30%,
+          #001a33 60%,
+          #0a1a0a 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .banner-inner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='80' r='40' fill='rgba(168,85,247,0.08)'/%3E%3Ccircle cx='350' cy='120' r='60' fill='rgba(255,107,53,0.06)'/%3E%3Ccircle cx='200' cy='40' r='30' fill='rgba(0,245,212,0.05)'/%3E%3C/svg%3E")
+          center/cover;
+      }
+      .edit-banner-btn {
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid var(--border2);
+        border-radius: 8px;
+        color: var(--text2);
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: "Outfit", sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.2s;
+        backdrop-filter: blur(4px);
+      }
+      .edit-banner-btn:hover {
+        color: var(--text);
+        border-color: var(--border2);
+      }
+
+      .profile-main {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 24px;
+        padding: 24px 0 48px;
+        align-items: start;
+      }
+      .profile-left {
+      }
+      .profile-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .profile-avatar-section {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .profile-avatar-big {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--jay), var(--purple));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: 900;
+        color: #fff;
+        margin: 0 auto 12px;
+        border: 3px solid var(--border2);
+      }
+      .profile-username {
+        font-size: 20px;
+        font-weight: 900;
+        margin-bottom: 4px;
+      }
+      .profile-location {
+        font-size: 12px;
+        color: var(--text3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .profile-actions {
+        padding: 12px 16px;
+        display: flex;
+        gap: 8px;
+      }
+      .profile-edit-btn {
+        flex: 1;
+        padding: 9px;
+        background: var(--jay);
+        border: none;
+        border-radius: 9px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: "Outfit", sans-serif;
+        transition: 0.2s;
+      }
+      .profile-edit-btn:hover {
+        background: var(--jay3);
+      }
+      .profile-share-btn {
+        padding: 9px 14px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        color: var(--text2);
+        font-size: 13px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .profile-share-btn:hover {
+        border-color: var(--jay);
+        color: var(--jay);
+      }
+
+      .stats-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        margin-top: 16px;
+      }
+      .stats-title {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text3);
+        margin-bottom: 16px;
+      }
+      .stat-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .stat-row:last-child {
+        border-bottom: none;
+      }
+      .stat-icon {
+        font-size: 18px;
+        width: 24px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: var(--text2);
+        flex: 1;
+      }
+      .stat-value {
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .friends-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        margin-top: 16px;
+      }
+      .friends-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .friends-title-sm {
+        font-size: 14px;
+        font-weight: 800;
+      }
+      .friends-count {
+        font-size: 11px;
+        color: var(--text3);
+        font-family: var(--mono);
+      }
+      .friends-empty {
+        text-align: center;
+        padding: 20px 0;
+        color: var(--text3);
+        font-size: 12px;
+      }
+
+      .profile-right {
+      }
+      .tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .tab-btn {
+        padding: 9px 20px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--bg3);
+        color: var(--text2);
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .tab-btn.active {
+        background: var(--jay);
+        border-color: var(--jay);
+        color: #fff;
+      }
+      .tab-btn:hover:not(.active) {
+        border-color: var(--border2);
+        color: var(--text);
+      }
+
+      .leaderboards-empty {
+        text-align: center;
+        padding: 60px 20px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+      }
+      .leaderboards-empty .trophy {
+        font-size: 64px;
+        margin-bottom: 16px;
+      }
+      .leaderboards-empty h3 {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+      .leaderboards-empty p {
+        font-size: 13px;
+        color: var(--text2);
+        margin-bottom: 20px;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .compete-btn {
+        background: var(--jay);
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        font-family: "Outfit", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        padding: 11px 24px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .compete-btn:hover {
+        background: var(--jay3);
+        box-shadow: 0 0 16px rgba(255, 107, 53, 0.3);
+      }
+
+      .activity-card {
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+        margin-top: 0;
+      }
+      .activity-title {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text3);
+        margin-bottom: 16px;
+      }
+      .activity-empty {
+        text-align: center;
+        padding: 24px 0;
+        color: var(--text3);
+        font-size: 12px;
+      }
+
+      @media (max-width: 768px) {
+        .profile-main {
+          grid-template-columns: 1fr;
+        }
+        .profile-wrap {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-left">
+        <a class="nav-logo" href="index.html">
+          <div class="logo-icon">
+            <img
+              class="logo-jey"
+              src="Jeygameslogo.png"
+              alt=""
+              onerror="this.outerHTML = '🎮'"
+            />
+          </div>
+          <span class="logo-text">JeyGames</span>
+        </a>
+      </div>
+      <div class="nav-right">
+        <a class="nav-icon-btn" href="index.html">🏠 Home</a>
+        <div class="user-menu-wrap" id="userMenuWrap" style="display: none">
+          <div class="user-avatar-btn" onclick="toggleDropdown()">
+            <div class="avatar-circle" id="navAvatarCircle">J</div>
+            <span class="avatar-name" id="navAvatarName">User</span>
+          </div>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="dropdown-header">
+              <div class="dropdown-avatar" id="dropdownAvatar">J</div>
+              <div>
+                <div class="dropdown-username" id="dropdownUsername">
+                  Username
+                </div>
+                <div class="dropdown-email" id="dropdownEmail">
+                  user@email.com
+                </div>
+              </div>
+            </div>
+            <a class="dropdown-profile-btn" href="profile.html">👤 Profile</a>
+            <div class="dropdown-links">
+              <a class="dropdown-link" href="#">🔔 Notification preferences</a>
+              <a class="dropdown-link" href="#">🔒 Privacy preferences</a>
+              <a class="dropdown-link" href="#">⚙️ Account settings</a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-link logout" onclick="doLogout()">
+                🚪 Log out
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          class="login-btn"
+          id="loginBtn"
+          onclick="window.location.href = 'index.html'"
+        >
+          Log In
+        </button>
+      </div>
+    </nav>
+
+    <div class="profile-wrap">
+      <!-- BANNER -->
+      <div style="position: relative; margin: 0 -24px">
+        <div class="banner-inner"></div>
+        <button class="edit-banner-btn">📷 Edit</button>
+      </div>
+
+      <div class="profile-main">
+        <!-- LEFT -->
+        <div class="profile-left">
+          <div class="profile-card">
+            <div class="profile-avatar-section">
+              <div class="profile-avatar-big" id="profileAvatarBig">J</div>
+              <div class="profile-username" id="profileUsername">Username</div>
+              <div class="profile-location">📍 United Kingdom</div>
+            </div>
+            <div class="profile-actions">
+              <button class="profile-edit-btn">✏️ Edit profile</button>
+              <button class="profile-share-btn">🔗</button>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <div class="stats-title">Stats</div>
+            <div class="stat-row">
+              <span class="stat-icon">📅</span>
+              <span class="stat-label">Member for</span>
+              <span class="stat-value" id="memberDays">0 days</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-icon">👍</span>
+              <span class="stat-label">Games liked</span>
+              <span class="stat-value">0</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-icon">🔥</span>
+              <span class="stat-label">Playstreak</span>
+              <span class="stat-value">1 day</span>
+            </div>
+          </div>
+
+          <div class="friends-card">
+            <div class="friends-header">
+              <div class="friends-title-sm">Friends</div>
+              <span class="friends-count">0</span>
+            </div>
+            <div class="friends-empty">No friends yet — go add some!</div>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="profile-right">
+          <div class="tabs">
+            <button
+              class="tab-btn active"
+              onclick="switchTab('leaderboards', this)"
+            >
+              🏆 Leaderboards
+            </button>
+            <button class="tab-btn" onclick="switchTab('liked', this)">
+              ❤️ Liked games
+            </button>
+          </div>
+
+          <div id="tab-leaderboards">
+            <div class="leaderboards-empty">
+              <div class="trophy">🏅</div>
+              <h3>Compete on JeyGames Leaderboards</h3>
+              <p>Play games with leaderboards and earn trophies each season.</p>
+              <button
+                class="compete-btn"
+                onclick="window.location.href = 'index.html'"
+              >
+                Start Competing
+              </button>
+            </div>
+          </div>
+
+          <div id="tab-liked" style="display: none">
+            <div class="leaderboards-empty">
+              <div class="trophy">❤️</div>
+              <h3>No liked games yet</h3>
+              <p>Click the heart on any game to add it to your liked games.</p>
+              <button
+                class="compete-btn"
+                onclick="window.location.href = 'index.html'"
+              >
+                Browse Games
+              </button>
+            </div>
+          </div>
+
+          <div class="activity-card" style="margin-top: 16px">
+            <div class="activity-title">Activity</div>
+            <div class="activity-empty">No activity yet. Start playing!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function switchTab(tab, btn) {
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("tab-leaderboards").style.display =
+          tab === "leaderboards" ? "block" : "none";
+        document.getElementById("tab-liked").style.display =
+          tab === "liked" ? "block" : "none";
+      }
+      function toggleDropdown() {
+        document.getElementById("userDropdown").classList.toggle("open");
+      }
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".user-menu-wrap")) {
+          document.getElementById("userDropdown")?.classList.remove("open");
+        }
+      });
+      function doLogout() {
+        localStorage.removeItem("jg_user");
+        window.location.href = "index.html";
+      }
+
+      // Load user from localStorage/Firebase
+      const user = localStorage.getItem("jg_user");
+      if (user) {
+        try {
+          const u = JSON.parse(user);
+          const name = u.username || "User";
+          const initial = name[0].toUpperCase();
+          document.getElementById("navAvatarCircle").textContent = initial;
+          document.getElementById("navAvatarName").textContent = name;
+          document.getElementById("dropdownAvatar").textContent = initial;
+          document.getElementById("dropdownUsername").textContent = name;
+          document.getElementById("dropdownEmail").textContent = u.email || "";
+          document.getElementById("profileAvatarBig").textContent = initial;
+          document.getElementById("profileUsername").textContent = name;
+          document.getElementById("userMenuWrap").style.display = "block";
+          document.getElementById("loginBtn").style.display = "none";
+        } catch (e) {}
+      }
+    </script>
+
+    <!-- FIREBASE for profile -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        get,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+      const app = initializeApp({
+        apiKey: "AIzaSyBC-Enomoc8YXxe9VV5oz8cAYbaTXFdcCc",
+        authDomain: "unblocked-games-chat.firebaseapp.com",
+        databaseURL: "https://unblocked-games-chat-default-rtdb.firebaseio.com",
+        projectId: "unblocked-games-chat",
+        storageBucket: "unblocked-games-chat.firebasestorage.app",
+        messagingSenderId: "575285025084",
+        appId: "1:575285025084:web:ecaa60e7b4c0a04a386639",
+      });
+      const auth = getAuth(app);
+      const db = getDatabase(app);
+
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const snap = await get(ref(db, "users/" + user.uid));
+          const profile = snap.val() || {};
+          const name = profile.username || user.email;
+          const initial = name[0].toUpperCase();
+
+          document.getElementById("navAvatarCircle").textContent = initial;
+          document.getElementById("navAvatarName").textContent = name;
+          document.getElementById("dropdownAvatar").textContent = initial;
+          document.getElementById("dropdownUsername").textContent = name;
+          document.getElementById("dropdownEmail").textContent = user.email;
+          document.getElementById("profileAvatarBig").textContent = initial;
+          document.getElementById("profileUsername").textContent = name;
+          document.getElementById("userMenuWrap").style.display = "block";
+          document.getElementById("loginBtn").style.display = "none";
+
+          // Member days
+          const days = profile.createdAt
+            ? Math.floor((Date.now() - profile.createdAt) / 86400000)
+            : 0;
+          document.getElementById("memberDays").textContent =
+            days + (days === 1 ? " day" : " days");
+
+          window.doLogout = async () => {
+            await signOut(auth);
+            window.location.href = "index.html";
+          };
+        } else {
+          window.location.href = "index.html";
+        }
+      });
+    </script>
+  </body>
+</html>
