@@ -1609,7 +1609,7 @@
         font-size: 13px;
         font-weight: 600;
         color: var(--text);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         z-index: 9999;
         opacity: 0;
         transition: all 0.3s ease;
@@ -2206,7 +2206,10 @@
         <button
           class="auth-submit"
           style="margin-top: 12px; width: 100%"
-          onclick="toggleFriends(); openAuth();"
+          onclick="
+            toggleFriends();
+            openAuth();
+          "
         >
           Log In / Sign Up
         </button>
@@ -2393,7 +2396,10 @@
             </svg>
             Continue with Google
           </button>
-          <button class="social-btn facebook" onclick="showToast('Facebook sign-in coming soon!')">
+          <button
+            class="social-btn facebook"
+            onclick="showToast('Facebook sign-in coming soon!')"
+          >
             <svg class="si" viewBox="0 0 24 24" fill="#fff">
               <path
                 d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
@@ -2401,7 +2407,10 @@
             </svg>
             Continue with Facebook
           </button>
-          <button class="social-btn apple" onclick="showToast('Apple sign-in coming soon!')">
+          <button
+            class="social-btn apple"
+            onclick="showToast('Apple sign-in coming soon!')"
+          >
             <svg class="si" viewBox="0 0 24 24" fill="#fff">
               <path
                 d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
@@ -2611,36 +2620,87 @@
               <div class="select-wrap">
                 <select class="select-field" id="bdMonth">
                   <option value="">Month</option>
-                  <option>January</option><option>February</option>
-                  <option>March</option><option>April</option>
-                  <option>May</option><option>June</option>
-                  <option>July</option><option>August</option>
-                  <option>September</option><option>October</option>
-                  <option>November</option><option>December</option>
+                  <option>January</option>
+                  <option>February</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
                 </select>
               </div>
               <div class="select-wrap">
                 <select class="select-field" id="bdDay">
                   <option value="">Day</option>
-                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-                  <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-                  <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-                  <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-                  <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
-                  <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                  <option>13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option>16</option>
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                  <option>20</option>
+                  <option>21</option>
+                  <option>22</option>
+                  <option>23</option>
+                  <option>24</option>
+                  <option>25</option>
+                  <option>26</option>
+                  <option>27</option>
+                  <option>28</option>
+                  <option>29</option>
+                  <option>30</option>
                   <option>31</option>
                 </select>
               </div>
               <div class="select-wrap">
                 <select class="select-field" id="bdYear">
                   <option value="">Year</option>
-                  <option>2010</option><option>2009</option><option>2008</option><option>2007</option>
-                  <option>2006</option><option>2005</option><option>2004</option><option>2003</option>
-                  <option>2002</option><option>2001</option><option>2000</option><option>1999</option>
-                  <option>1998</option><option>1997</option><option>1996</option><option>1995</option>
-                  <option>1994</option><option>1993</option><option>1992</option><option>1991</option>
-                  <option>1990</option><option>1985</option><option>1980</option><option>1975</option>
-                  <option>1970</option><option>1965</option><option>1960</option><option>1955</option>
+                  <option>2010</option>
+                  <option>2009</option>
+                  <option>2008</option>
+                  <option>2007</option>
+                  <option>2006</option>
+                  <option>2005</option>
+                  <option>2004</option>
+                  <option>2003</option>
+                  <option>2002</option>
+                  <option>2001</option>
+                  <option>2000</option>
+                  <option>1999</option>
+                  <option>1998</option>
+                  <option>1997</option>
+                  <option>1996</option>
+                  <option>1995</option>
+                  <option>1994</option>
+                  <option>1993</option>
+                  <option>1992</option>
+                  <option>1991</option>
+                  <option>1990</option>
+                  <option>1985</option>
+                  <option>1980</option>
+                  <option>1975</option>
+                  <option>1970</option>
+                  <option>1965</option>
+                  <option>1960</option>
+                  <option>1955</option>
                   <option>1950</option>
                 </select>
               </div>
@@ -2852,7 +2912,7 @@
         const tagHTML = topTag
           ? `<span class="game-tag ${topTag}">${topTag}</span>`
           : "";
-        return `<a class="game-card" href="#" onclick="openGame('${g.id}','${g.title.replace(/'/g, "\\'")}','${g.src}');return false;" style="animation-delay:${index * 0.04}s"
+        return `<a class="game-card" href="game.html?id=${g.id}" style="animation-delay:${index * 0.04}s"
           data-game-id="${g.id}" data-game-src="${g.src}"
           data-game-title="${g.title.replace(/"/g, "&quot;")}"
           data-game-tags='${JSON.stringify(g.tags || [])}'>
@@ -3331,15 +3391,19 @@
           if (!snap.exists()) {
             // New Google user — create profile automatically
             const displayName = user.displayName || "Player";
-            let baseUsername = displayName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+            let baseUsername = displayName
+              .replace(/[^a-zA-Z0-9]/g, "")
+              .toLowerCase();
             if (baseUsername.length < 6) baseUsername = baseUsername + "player";
-            if (baseUsername.length > 20) baseUsername = baseUsername.slice(0, 20);
+            if (baseUsername.length > 20)
+              baseUsername = baseUsername.slice(0, 20);
             let username = baseUsername;
             let attempts = 0;
             while (attempts < 5) {
               const uSnap = await get(ref(db, "usernames/" + username));
               if (!uSnap.exists()) break;
-              username = baseUsername.slice(0, 16) + Math.floor(Math.random() * 9999);
+              username =
+                baseUsername.slice(0, 16) + Math.floor(Math.random() * 9999);
               attempts++;
             }
             await set(ref(db, "users/" + user.uid), {
@@ -3359,7 +3423,10 @@
           showToast("Signed in with Google!");
         } catch (e) {
           if (e.code !== "auth/popup-closed-by-user") {
-            showToast("Google sign-in failed: " + (e.message || "Unknown error"), true);
+            showToast(
+              "Google sign-in failed: " + (e.message || "Unknown error"),
+              true,
+            );
           }
         }
       };
@@ -3386,10 +3453,19 @@
           btn.disabled = false;
           btn.textContent = "Continue";
           let msg = e.message || "Sign up failed.";
-          if (e.code === "auth/email-already-in-use") msg = "This email is already registered. Try logging in.";
-          if (e.code === "auth/invalid-email") msg = "Please enter a valid email address.";
-          if (e.code === "auth/weak-password") msg = "Password is too weak. Use 6+ characters.";
-          showErrEl("signupError", msg.replace("Firebase:", "").replace(/\(.*\)/, "").trim());
+          if (e.code === "auth/email-already-in-use")
+            msg = "This email is already registered. Try logging in.";
+          if (e.code === "auth/invalid-email")
+            msg = "Please enter a valid email address.";
+          if (e.code === "auth/weak-password")
+            msg = "Password is too weak. Use 6+ characters.";
+          showErrEl(
+            "signupError",
+            msg
+              .replace("Firebase:", "")
+              .replace(/\(.*\)/, "")
+              .trim(),
+          );
         }
       };
 
@@ -3398,9 +3474,15 @@
         const username = document.getElementById("usernameInput").value.trim();
         showErrEl("usernameError", "");
         if (username.length < 6 || username.length > 20)
-          return showErrEl("usernameError", "Username must be 6-20 characters.");
+          return showErrEl(
+            "usernameError",
+            "Username must be 6-20 characters.",
+          );
         if (!/^[a-zA-Z0-9\-\.]+$/.test(username))
-          return showErrEl("usernameError", "Only letters, numbers, - and . allowed.");
+          return showErrEl(
+            "usernameError",
+            "Only letters, numbers, - and . allowed.",
+          );
         const btn = document.getElementById("usernameSubmitBtn");
         btn.disabled = true;
         btn.textContent = "Checking…";
@@ -3408,7 +3490,10 @@
         if (snap.exists()) {
           btn.disabled = false;
           btn.textContent = "Continue";
-          return showErrEl("usernameError", "Username already taken, try another.");
+          return showErrEl(
+            "usernameError",
+            "Username already taken, try another.",
+          );
         }
         window._pendingUsername = username;
         btn.disabled = false;
@@ -3422,7 +3507,10 @@
         const username = window._pendingUsername;
         const email = window._pendingEmail;
         if (!uid || !username) {
-          return showToast("Session expired. Please try signing up again.", true);
+          return showToast(
+            "Session expired. Please try signing up again.",
+            true,
+          );
         }
         const btn = document.querySelector("#authStep3 .auth-submit");
         btn.disabled = true;
@@ -3449,8 +3537,12 @@
           btn.textContent = "Save";
           console.error("Profile save error:", e);
           let msg = "Couldn't save profile.";
-          if (e.code === "PERMISSION_DENIED" || (e.message && e.message.includes("PERMISSION_DENIED"))) {
-            msg = "Database permission denied. Please update your Firebase Realtime Database rules to allow authenticated users to write.";
+          if (
+            e.code === "PERMISSION_DENIED" ||
+            (e.message && e.message.includes("PERMISSION_DENIED"))
+          ) {
+            msg =
+              "Database permission denied. Please update your Firebase Realtime Database rules to allow authenticated users to write.";
           } else {
             msg = e.message || msg;
           }
@@ -3478,7 +3570,8 @@
           btn.disabled = false;
           btn.textContent = "Log In";
           let msg = "Invalid email or password.";
-          if (e.code === "auth/too-many-requests") msg = "Too many attempts. Please try again later.";
+          if (e.code === "auth/too-many-requests")
+            msg = "Too many attempts. Please try again later.";
           showErrEl("loginError", msg);
         }
       };
@@ -3515,13 +3608,17 @@
           setLoggedInUI(username, user.email);
 
           const localFavs = JSON.parse(localStorage.getItem("jg_favs") || "[]");
-          const fbFavs = profile.favourites ? Object.keys(profile.favourites) : [];
+          const fbFavs = profile.favourites
+            ? Object.keys(profile.favourites)
+            : [];
           const merged = [...new Set([...localFavs, ...fbFavs])];
           window.favourites = merged;
           if (merged.length) {
             const favObj = {};
             merged.forEach((id) => (favObj[id] = true));
-            update(ref(db, "users/" + user.uid + "/favourites"), favObj).catch(() => {});
+            update(ref(db, "users/" + user.uid + "/favourites"), favObj).catch(
+              () => {},
+            );
             localStorage.setItem("jg_favs", JSON.stringify(merged));
           }
 
@@ -3553,9 +3650,14 @@
           const favs = window.favourites || [];
           const isFav = favs.includes(id);
           if (isFav)
-            set(ref(db, "users/" + currentUser.uid + "/favourites/" + id), true).catch(() => {});
+            set(
+              ref(db, "users/" + currentUser.uid + "/favourites/" + id),
+              true,
+            ).catch(() => {});
           else
-            remove(ref(db, "users/" + currentUser.uid + "/favourites/" + id)).catch(() => {});
+            remove(
+              ref(db, "users/" + currentUser.uid + "/favourites/" + id),
+            ).catch(() => {});
         }
       };
 
@@ -3568,7 +3670,9 @@
         msgEl.textContent = "";
         if (!currentUser) return (msgEl.textContent = "Log in first!");
         if (!targetUsername) return;
-        const snap = await get(ref(db, "usernames/" + targetUsername.toLowerCase()));
+        const snap = await get(
+          ref(db, "usernames/" + targetUsername.toLowerCase()),
+        );
         if (!snap.exists()) {
           msgEl.style.color = "#ef4444";
           return (msgEl.textContent = "User not found.");
@@ -3578,18 +3682,23 @@
           msgEl.style.color = "#ef4444";
           return (msgEl.textContent = "That's you! 😅");
         }
-        const alreadySnap = await get(ref(db, "users/" + currentUser.uid + "/friends/" + targetUid));
+        const alreadySnap = await get(
+          ref(db, "users/" + currentUser.uid + "/friends/" + targetUid),
+        );
         if (alreadySnap.exists()) {
           msgEl.style.color = "#ef4444";
           return (msgEl.textContent = "Already friends!");
         }
         const mySnap = await get(ref(db, "users/" + currentUser.uid));
         const myProfile = mySnap.val() || {};
-        await set(ref(db, "friendRequests/" + targetUid + "/" + currentUser.uid), {
-          from: currentUser.uid,
-          username: myProfile.username || "Unknown",
-          sentAt: Date.now(),
-        });
+        await set(
+          ref(db, "friendRequests/" + targetUid + "/" + currentUser.uid),
+          {
+            from: currentUser.uid,
+            username: myProfile.username || "Unknown",
+            sentAt: Date.now(),
+          },
+        );
         input.value = "";
         msgEl.textContent = "Friend request sent to " + targetUsername + "!";
         setTimeout(() => (msgEl.textContent = ""), 3000);
@@ -3633,11 +3742,15 @@
           username: myProfile.username || "Unknown",
           addedAt: Date.now(),
         });
-        await remove(ref(db, "friendRequests/" + currentUser.uid + "/" + fromUid));
+        await remove(
+          ref(db, "friendRequests/" + currentUser.uid + "/" + fromUid),
+        );
       };
       window.declineRequest = async function (fromUid) {
         if (!currentUser) return;
-        await remove(ref(db, "friendRequests/" + currentUser.uid + "/" + fromUid));
+        await remove(
+          ref(db, "friendRequests/" + currentUser.uid + "/" + fromUid),
+        );
       };
 
       let friendsRef = null;
@@ -3655,8 +3768,10 @@
           const presSnap = await get(ref(db, "presence"));
           const presence = presSnap.val() || {};
           friendIds.sort((a, b) => {
-            const ao = presence[a]?.online && Date.now() - presence[a]?.lastSeen < 90000;
-            const bo = presence[b]?.online && Date.now() - presence[b]?.lastSeen < 90000;
+            const ao =
+              presence[a]?.online && Date.now() - presence[a]?.lastSeen < 90000;
+            const bo =
+              presence[b]?.online && Date.now() - presence[b]?.lastSeen < 90000;
             return (bo ? 1 : 0) - (ao ? 1 : 0);
           });
           listEl.innerHTML = friendIds
@@ -3674,7 +3789,7 @@
                 <div class="friend-name">${esc(f.username)}</div>
                 ${isOnline ? `<div class="friend-status friend-online">${currentG ? "🟢 Playing " + esc(currentG.title) : "🟢 Online"}</div>` : `<div class="friend-status">⚫ Offline</div>`}
               </div>
-              ${isOnline && currentG ? `<button onclick="openGame('${currentG.id}','${currentG.title}','${currentG.src}')" class="invite-btn">Join</button>` : ""}
+              ${isOnline && currentG ? `<a href="game.html?id=${currentG.id}" class="invite-btn" style="text-decoration:none">Join</a>` : ""}
             </div>`;
             })
             .join("");
