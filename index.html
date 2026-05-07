@@ -408,13 +408,31 @@
         border-right: 1px solid var(--border);
         overflow-y: auto;
         overflow-x: hidden;
-        scrollbar-width: thin;
+        scrollbar-width: none;
         scrollbar-color: var(--bg4) transparent;
         padding: 16px 0 32px;
         transition:
           transform 0.3s ease,
           width 0.3s ease;
         z-index: 100;
+      }
+      .sidebar::-webkit-scrollbar {
+        width: 4px;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .sidebar:hover {
+        scrollbar-width: thin;
+      }
+      .sidebar:hover::-webkit-scrollbar {
+        opacity: 1;
+      }
+      .sidebar::-webkit-scrollbar-thumb {
+        background: var(--bg4);
+        border-radius: 4px;
+      }
+      .sidebar::-webkit-scrollbar-track {
+        background: transparent;
       }
       .sidebar.collapsed {
         width: 52px;
@@ -1488,6 +1506,45 @@
         color: var(--text);
       }
 
+      /* ── NOTIFICATIONS PANEL ── */
+      #notifPanel {
+        position: fixed;
+        right: 0;
+        top: 60px;
+        bottom: 0;
+        width: 300px;
+        background: var(--bg2);
+        border-left: 1px solid var(--border);
+        z-index: 150;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        padding: 20px;
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+      #notifPanel.open {
+        transform: translateX(0);
+      }
+      .notif-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        color: var(--text3);
+        text-align: center;
+        gap: 12px;
+      }
+      .notif-empty svg {
+        opacity: 0.3;
+      }
+      .notif-empty p {
+        font-size: 13px;
+      }
+      /* ── NAV ICON BUTTON ADJUSTMENTS ── */
+      .nav-icon-btn svg {
+        flex-shrink: 0;
+      }
       /* ── FRIENDS PANEL ── */
       #friendsPanel {
         position: fixed;
@@ -1755,15 +1812,21 @@
       </div>
 
       <div class="nav-right">
+        <button class="nav-icon-btn" id="notifBtn" onclick="toggleNotifications()" title="Notifications" style="position:relative">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </button>
         <button
           class="nav-icon-btn friends-btn"
           id="friendsToggle"
           onclick="toggleFriends()"
+          title="Friends"
         >
-          👥 <span>Friends</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Friends</span>
         </button>
-        <button class="nav-icon-btn" id="favNavBtn" onclick="showFavourites()">
-          ❤️ Favourites
+        <button class="nav-icon-btn" id="favNavBtn" onclick="showFavourites()" title="Favourites">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span>Favourites</span>
         </button>
 
         <!-- USER DROPDOWN (shown when logged in) -->
@@ -1784,14 +1847,27 @@
                 </div>
               </div>
             </div>
-            <a class="dropdown-profile-btn" href="profile.html">👤 Profile</a>
+            <a class="dropdown-profile-btn" href="profile.html">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Profile
+            </a>
             <div class="dropdown-links">
-              <a class="dropdown-link" href="#">🔔 Notification preferences</a>
-              <a class="dropdown-link" href="#">🔒 Privacy preferences</a>
-              <a class="dropdown-link" href="#">⚙️ Account settings</a>
+              <a class="dropdown-link" href="#">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                Notification preferences
+              </a>
+              <a class="dropdown-link" href="#">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Privacy preferences
+              </a>
+              <a class="dropdown-link" href="#">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+                Account settings
+              </a>
               <div class="dropdown-divider"></div>
               <button class="dropdown-link logout" onclick="doLogout()">
-                🚪 Log out
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Log out
               </button>
             </div>
           </div>
@@ -1812,11 +1888,11 @@
           data-tag="all"
           onclick="filterBy('all', this)"
         >
-          <span class="sidebar-icon">🏠</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span
           ><span class="sidebar-text">Home</span>
         </button>
         <button class="sidebar-item" onclick="showFavourites()">
-          <span class="sidebar-icon">❤️</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span
           ><span class="sidebar-text">Favourites</span>
         </button>
         <button
@@ -1824,7 +1900,7 @@
           data-tag="new"
           onclick="filterBy('new', this)"
         >
-          <span class="sidebar-icon">✨</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span
           ><span class="sidebar-text">New Games</span>
           <span class="sidebar-badge">NEW</span>
         </button>
@@ -1835,16 +1911,16 @@
           data-tag="brainrot"
           onclick="filterBy('brainrot', this)"
         >
-          <span class="sidebar-icon">🧠</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14Z"/></svg></span
           ><span class="sidebar-text">Brainrot</span
-          ><span class="sidebar-badge">🔥</span>
+          ><span class="sidebar-badge">HOT</span>
         </button>
         <button
           class="sidebar-item"
           data-tag="roblox"
           onclick="filterBy('roblox', this)"
         >
-          <span class="sidebar-icon">🟦</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span
           ><span class="sidebar-text">Roblox-Like</span>
         </button>
         <button
@@ -1852,7 +1928,7 @@
           data-tag="action"
           onclick="filterBy('action', this)"
         >
-          <span class="sidebar-icon">⚔️</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span
           ><span class="sidebar-text">Action</span>
         </button>
         <button
@@ -1860,7 +1936,7 @@
           data-tag="adventure"
           onclick="filterBy('adventure', this)"
         >
-          <span class="sidebar-icon">🗺️</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span
           ><span class="sidebar-text">Adventure</span>
         </button>
         <button
@@ -1868,7 +1944,7 @@
           data-tag="multiplayer"
           onclick="filterBy('multiplayer', this)"
         >
-          <span class="sidebar-icon">👥</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span
           ><span class="sidebar-text">Multiplayer</span>
         </button>
         <button
@@ -1876,7 +1952,7 @@
           data-tag="racing"
           onclick="filterBy('racing', this)"
         >
-          <span class="sidebar-icon">🏎️</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v9a2 2 0 0 1-2 2h-2"/><circle cx="9" cy="17" r="2"/><path d="M10 5H8"/><circle cx="15" cy="17" r="2"/></svg></span
           ><span class="sidebar-text">Racing</span>
         </button>
         <button
@@ -1884,7 +1960,7 @@
           data-tag="puzzle"
           onclick="filterBy('puzzle', this)"
         >
-          <span class="sidebar-icon">🧩</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span
           ><span class="sidebar-text">Puzzle</span>
         </button>
         <button
@@ -1892,7 +1968,7 @@
           data-tag="survival"
           onclick="filterBy('survival', this)"
         >
-          <span class="sidebar-icon">☠️</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span
           ><span class="sidebar-text">Survival</span>
         </button>
         <button
@@ -1900,7 +1976,7 @@
           data-tag="shooting"
           onclick="filterBy('shooting', this)"
         >
-          <span class="sidebar-icon">🔫</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></span
           ><span class="sidebar-text">Shooting</span>
         </button>
         <button
@@ -1908,7 +1984,7 @@
           data-tag="io"
           onclick="filterBy('io', this)"
         >
-          <span class="sidebar-icon">🌐</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span
           ><span class="sidebar-text">.io Games</span>
         </button>
         <button
@@ -1916,7 +1992,7 @@
           data-tag="3d"
           onclick="filterBy('3d', this)"
         >
-          <span class="sidebar-icon">🎲</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span
           ><span class="sidebar-text">3D Games</span>
         </button>
         <button
@@ -1924,7 +2000,7 @@
           data-tag="simulators"
           onclick="filterBy('simulators', this)"
         >
-          <span class="sidebar-icon">🕹️</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M7 12h.01"/><path d="M17 12h.01"/></svg></span
           ><span class="sidebar-text">Simulators</span>
         </button>
         <button
@@ -1932,17 +2008,17 @@
           data-tag="soccer"
           onclick="filterBy('soccer', this)"
         >
-          <span class="sidebar-icon">⚽</span
+          <span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 0 0 0 20"/><path d="M2 12h20"/><path d="M12 2C6.48 2 2 6.48 2 12"/></svg></span
           ><span class="sidebar-text">Soccer</span>
         </button>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section-label">More</div>
         <a class="sidebar-item" href="about.html"
-          ><span class="sidebar-icon">ℹ️</span
+          ><span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span
           ><span class="sidebar-text">About</span></a
         >
         <a class="sidebar-item" href="earn.html" style="color: var(--neon)"
-          ><span class="sidebar-icon">💰</span
+          ><span class="sidebar-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span
           ><span class="sidebar-text">Earn</span></a
         >
       </aside>
@@ -2017,7 +2093,7 @@
             <div class="section-header">
               <div class="section-title">
                 <div class="dot"></div>
-                🔥 Hot Right Now
+                Hot Right Now
               </div>
               <a class="view-all" onclick="filterBy('popular', null)"
                 >View All</a
@@ -2046,7 +2122,7 @@
                 data-tag="all"
                 onclick="setFilter('all', this)"
               >
-                🔥 All
+                All Games
               </button>
               <button
                 class="filter-btn"
@@ -2095,7 +2171,7 @@
                 data-tag="puzzle"
                 onclick="setFilter('puzzle', this)"
               >
-                🧩 Puzzle
+                Puzzle
               </button>
               <button
                 class="filter-btn"
@@ -2158,7 +2234,7 @@
               class="dot"
               style="background: #ef4444; box-shadow: 0 0 8px #ef4444"
             ></div>
-            ❤️ Your Favourites
+            Your Favourites
           </div>
           <div class="game-grid" id="favsGrid"></div>
           <div
@@ -2170,11 +2246,28 @@
               color: var(--text3);
             "
           >
-            <div style="font-size: 48px; margin-bottom: 12px">❤️</div>
+            <div style="margin-bottom: 12px; color: var(--text3)"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
             <p>No favourites yet! Click the heart on any game to save it.</p>
           </div>
         </div>
       </main>
+    </div>
+
+    <!-- NOTIFICATIONS PANEL -->
+    <div id="notifPanel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div class="friends-title" style="display:flex;align-items:center;gap:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Notifications
+        </div>
+        <button onclick="toggleNotifications()" style="background:none;border:none;color:var(--text2);cursor:pointer;display:flex;align-items:center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="notif-empty">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <p>No notifications yet.<br>Check back later!</p>
+      </div>
     </div>
 
     <!-- FRIENDS PANEL -->
@@ -2187,7 +2280,10 @@
           margin-bottom: 16px;
         "
       >
-        <div class="friends-title">👥 Friends</div>
+        <div class="friends-title" style="display:flex;align-items:center;gap:8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Friends
+        </div>
         <button
           onclick="toggleFriends()"
           style="
@@ -2196,9 +2292,10 @@
             color: var(--text2);
             cursor: pointer;
             font-size: 18px;
+            display:flex;align-items:center;
           "
         >
-          ✕
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
       <div id="friendsLoginPrompt">
@@ -2249,7 +2346,7 @@
             <div style="font-size: 13px; font-weight: 800" id="panelUsername">
               You
             </div>
-            <div style="font-size: 11px; color: var(--neon)">🟢 Online</div>
+            <div style="font-size: 11px; color: var(--neon); display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e"></span> Online</div>
           </div>
           <button
             onclick="doLogout()"
@@ -2331,7 +2428,7 @@
               margin-bottom: 8px;
             "
           >
-            ⚡ Friend Requests
+            ⚡ Incoming Requests
           </div>
           <div id="pendingList"></div>
         </div>
@@ -2946,18 +3043,18 @@
           all: "All Games",
           brainrot: "🧠 Brainrot",
           roblox: "🟦 Roblox-Like",
-          popular: "🔥 Popular",
+          popular: "Popular",
           new: "✨ New Games",
           best: "👑 Best",
           multiplayer: "👥 Multiplayer",
           racing: "🏎️ Racing",
-          puzzle: "🧩 Puzzle",
+          puzzle: "Puzzle",
           survival: "☠️ Survival",
           action: "⚔️ Action",
           shooting: "🔫 Shooting",
           io: ".io Games",
           "3d": "🎲 3D Games",
-          simulators: "🕹️ Simulators",
+          simulators: "Simulators",
           soccer: "⚽ Soccer",
         };
         document.getElementById("sectionLabel").textContent =
@@ -2974,12 +3071,12 @@
           all: "All Games",
           brainrot: "🧠 Brainrot",
           roblox: "🟦 Roblox-Like",
-          popular: "🔥 Popular",
+          popular: "Popular",
           new: "✨ New",
           best: "👑 Best",
           multiplayer: "👥 Multiplayer",
           racing: "🏎️ Racing",
-          puzzle: "🧩 Puzzle",
+          puzzle: "Puzzle",
           survival: "☠️ Survival",
           action: "⚔️ Action",
           shooting: "🔫 Shooting",
@@ -3105,7 +3202,13 @@
 
       // ── FRIENDS ──
       function toggleFriends() {
+        document.getElementById("notifPanel").classList.remove("open");
         document.getElementById("friendsPanel").classList.toggle("open");
+      }
+
+      function toggleNotifications() {
+        document.getElementById("friendsPanel").classList.remove("open");
+        document.getElementById("notifPanel").classList.toggle("open");
       }
 
       // ── USER DROPDOWN ──
