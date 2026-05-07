@@ -2852,7 +2852,7 @@
         const tagHTML = topTag
           ? `<span class="game-tag ${topTag}">${topTag}</span>`
           : "";
-        return `<a class="game-card" href="game.html?id=${g.id}" style="animation-delay:${index * 0.04}s"
+        return `<a class="game-card" href="#" onclick="openGame('${g.id}','${g.title.replace(/'/g, "\\'")}','${g.src}');return false;" style="animation-delay:${index * 0.04}s"
           data-game-id="${g.id}" data-game-src="${g.src}"
           data-game-title="${g.title.replace(/"/g, "&quot;")}"
           data-game-tags='${JSON.stringify(g.tags || [])}'>
@@ -3674,7 +3674,7 @@
                 <div class="friend-name">${esc(f.username)}</div>
                 ${isOnline ? `<div class="friend-status friend-online">${currentG ? "🟢 Playing " + esc(currentG.title) : "🟢 Online"}</div>` : `<div class="friend-status">⚫ Offline</div>`}
               </div>
-              ${isOnline && currentG ? `<a href="game.html?id=${currentG.id}" class="invite-btn" style="text-decoration:none">Join</a>` : ""}
+              ${isOnline && currentG ? `<button onclick="openGame('${currentG.id}','${currentG.title}','${currentG.src}')" class="invite-btn">Join</button>` : ""}
             </div>`;
             })
             .join("");
