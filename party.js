@@ -43,6 +43,7 @@
   var currentView = 'lobby';
   var currentPartyId = null;
   var currentDmId = null;
+  var currentGroupId = null;
 
   // ── BUTTON INJECT ──
   function injectButton() {
@@ -162,6 +163,7 @@
     if (!loggedIn()) { tabs.innerHTML = ''; return; }
     var list = [
       {v:'lobby',   l:'🎮 Lobby'},
+      {v:'groups',  l:'🎭 Groups'},
       {v:'friends', l:'👥 Friends'},
       {v:'dms',     l:'💬 Messages'},
       {v:'profile', l:'👤 Me'},
