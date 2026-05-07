@@ -133,20 +133,17 @@
         text-decoration: none;
       }
       .logo-icon {
-        width: 36px;
-        height: 36px;
-        background: linear-gradient(135deg, var(--jay), #ff3d00);
-        border-radius: 9px;
+        width: 38px;
+        height: 38px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 18px;
-        box-shadow: 0 0 18px rgba(255, 107, 53, 0.4);
-        overflow: hidden;
       }
       .logo-jey {
-        width: 36px;
-        border-radius: 4px;
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+        border-radius: 0;
       }
       .logo-text {
         font-weight: 900;
@@ -1822,8 +1819,8 @@
             <img
               class="logo-jey"
               src="Jeygameslogo.png"
-              alt=""
-              onerror="this.outerHTML = '<svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.543-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>'"
+              alt="JeyGames"
+              onerror="this.style.display='none'"
             />
           </div>
           <span class="logo-text">JeyGames</span>
@@ -3011,19 +3008,41 @@
       }
 
       // ── HOME ──
+      function gameMatchesTag(g, tag) {
+        const t = tag.toLowerCase();
+        const cats = (g.category || "").toLowerCase();
+        const tags = (g.tags || []).map(x => x.toLowerCase());
+        if (tags.includes(t)) return true;
+        if (cats === t) return true;
+        const map = {
+          brainrot: ["brainrot", "italian brainrot"],
+          roblox: ["roblox", "roblox-like"],
+          popular: ["popular", "best games", "bestgames"],
+          new: ["new"],
+          action: ["action"],
+          adventure: ["adventure"],
+          multiplayer: ["multiplayer", "2 player"],
+          racing: ["racing"],
+          puzzle: ["puzzle", "puzzles"],
+          survival: ["survival"],
+          shooting: ["shooting"],
+          io: [".io", "io"],
+          "3d": ["3d", "3d games"],
+          simulators: ["simulator", "simulators"],
+          soccer: ["soccer", "football"],
+        };
+        return (map[t] || []).some(k => tags.includes(k) || cats.includes(k));
+      }
+
       function renderHome() {
-        const brainrot = dedupedGames
-          .filter((g) => g.tags?.includes("brainrot"))
-          .slice(0, 8);
-        const roblox = dedupedGames
-          .filter((g) => g.tags?.includes("roblox"))
-          .slice(0, 8);
-        const hot = dedupedGames
-          .filter((g) => g.tags?.includes("popular"))
-          .slice(0, 12);
-        const newG = dedupedGames
-          .filter((g) => g.tags?.includes("new"))
-          .slice(0, 12);
+        const brainrot = dedupedGames.filter(g => gameMatchesTag(g, "brainrot")).slice(0, 8);
+        const roblox = dedupedGames.filter(g => gameMatchesTag(g, "roblox")).slice(0, 8);
+        const hot = dedupedGames.filter(g =>
+          gameMatchesTag(g, "shooting") || gameMatchesTag(g, "action")
+        ).slice(0, 12);
+        const newG = dedupedGames.filter(g => gameMatchesTag(g, "new")).slice(0, 12).length > 0
+          ? dedupedGames.filter(g => gameMatchesTag(g, "new")).slice(0, 12)
+          : dedupedGames.slice(0, 12);
         renderGrid("brainrotGrid", brainrot, true);
         renderGrid("robloxGrid", roblox, true);
         renderGrid("hotGrid", hot);
@@ -3133,10 +3152,7 @@
           page = 1;
         }
         const filtered = dedupedGames.filter((g) => {
-          const matchTag =
-            currentTag === "all" ||
-            (g.tags &&
-              g.tags.some((t) => t.toLowerCase() === currentTag.toLowerCase()));
+          const matchTag = currentTag === "all" || gameMatchesTag(g, currentTag);
           const matchSearch =
             !currentSearch || g.title.toLowerCase().includes(currentSearch);
           return matchTag && matchSearch;
