@@ -558,6 +558,16 @@
       .mode-tab:hover:not(.active) {
         color: var(--text);
       }
+
+      .inline-icon { display: inline-block; vertical-align: middle; margin-right: 5px; position: relative; top: -1px; }
+      .icon .inline-icon, .icon svg.inline-icon { width: 36px; height: 36px; stroke-width: 1.5; }
+      .step-icon .inline-icon, .step-icon svg.inline-icon { width: 36px; height: 36px; stroke-width: 1.5; }
+      .platform-chip .inline-icon { width: 14px; height: 14px; margin-right: 3px; }
+      h2 .inline-icon, h3 .inline-icon { width: 24px; height: 24px; }
+      .eyebrow .inline-icon { width: 18px; height: 18px; }
+      .footer-logo .inline-icon { width: 20px; height: 20px; }
+      .mode-tab .inline-icon { width: 16px; height: 16px; }
+      .btn-primary .inline-icon { width: 18px; height: 18px; }
     </style>
   </head>
   <body>
@@ -571,12 +581,12 @@
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
-        <a href="earn.html" class="earn-link active">💰 Earn</a>
+        <a href="earn.html" class="earn-link active"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Earn</a>
       </div>
     </nav>
 
     <section class="earn-hero">
-      <div class="eyebrow">💰 Creator Programme</div>
+      <div class="eyebrow"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Creator Programme</div>
       <h1>Two Ways to<br /><span>Get Paid.</span></h1>
       <p>
         Post gaming videos or publish your own game on JeyGames — hit the milestones and we'll pay you.
@@ -586,8 +596,8 @@
     <!-- MODE TABS -->
     <div class="mode-tabs-wrap">
       <div class="mode-tabs">
-        <button class="mode-tab active" onclick="switchMode('video', this)">🎬 Post Videos</button>
-        <button class="mode-tab" onclick="switchMode('game', this)">🎮 Publish a Game</button>
+        <button class="mode-tab active" onclick="switchMode('video', this)"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg> Post Videos</button>
+        <button class="mode-tab" onclick="switchMode('game', this)"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.543-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg> Publish a Game</button>
       </div>
     </div>
 
@@ -597,11 +607,11 @@
 
       <!-- HOW IT WORKS -->
       <div class="how-section">
-        <div class="section-title">⚡ How It Works</div>
+        <div class="section-title"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> How It Works</div>
         <div class="steps">
           <div class="step">
             <div class="step-num">01</div>
-            <div class="step-icon">📝</div>
+            <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
             <h3>Apply Below</h3>
             <p>
               Fill out the creator application form with your channel details
@@ -610,7 +620,7 @@
           </div>
           <div class="step">
             <div class="step-num">02</div>
-            <div class="step-icon">✅</div>
+            <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             <h3>Get Approved</h3>
             <p>
               We review your application within 48 hours. If you're a good fit,
@@ -619,7 +629,7 @@
           </div>
           <div class="step">
             <div class="step-num">03</div>
-            <div class="step-icon">🎬</div>
+            <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg></div>
             <h3>Post Your Video</h3>
             <p>
               Create a video featuring games from JeyGames. Include our link in
@@ -628,7 +638,7 @@
           </div>
           <div class="step">
             <div class="step-num">04</div>
-            <div class="step-icon">💸</div>
+            <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></div>
             <h3>Hit the Milestone</h3>
             <p>
               Once your video reaches the required view count, submit the link
@@ -640,7 +650,7 @@
 
       <!-- PAYOUTS -->
       <div class="payouts-section">
-        <div class="section-title">💵 Payout Tiers</div>
+        <div class="section-title"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg> Payout Tiers</div>
         <div class="payout-cards">
           <div class="payout-card">
             <div class="views">1,000 views</div>
@@ -655,7 +665,7 @@
           <div class="payout-card highlight">
             <div class="views">10,000 views</div>
             <div class="amount">£10</div>
-            <div class="desc">🔥 Most popular tier</div>
+            <div class="desc"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Most popular tier</div>
           </div>
           <div class="payout-card">
             <div class="views">50,000 views</div>
@@ -683,22 +693,22 @@
 
       <!-- PLATFORMS -->
       <div class="platforms-section">
-        <h2>📱 Accepted Platforms</h2>
+        <h2><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Accepted Platforms</h2>
         <div class="platform-chips">
-          <div class="platform-chip">📺 YouTube</div>
-          <div class="platform-chip">🎵 TikTok</div>
-          <div class="platform-chip">📸 Instagram Reels</div>
-          <div class="platform-chip">🎮 Twitch VODs</div>
-          <div class="platform-chip">✈️ Telegram</div>
+          <div class="platform-chip"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg> YouTube</div>
+          <div class="platform-chip"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> TikTok</div>
+          <div class="platform-chip"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Instagram Reels</div>
+          <div class="platform-chip"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.543-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg> Twitch VODs</div>
+          <div class="platform-chip"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 19 2c-2-2-4-2-5.5-.5L10 5 1.8 6.2c-.5.1-.9.5-.8 1.1l1 4.5c.1.5.5.9 1.1.9H8l-1 4 1 1 4-1v3.9c0 .6.4 1 1 1.1l4.5 1c.6.1 1-.2 1.1-.8l.2-2z"/></svg>️ Telegram</div>
         </div>
       </div>
 
       <!-- RULES -->
       <div class="rules-section">
-        <div class="section-title">📋 Content Rules</div>
+        <div class="section-title"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Content Rules</div>
         <div class="rules-grid">
           <div class="rules-card">
-            <h3>✅ Required</h3>
+            <h3><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Required</h3>
             <ul>
               <li>
                 <span class="dot"></span>Must feature at least one JeyGames game
@@ -728,7 +738,7 @@
             </ul>
           </div>
           <div class="rules-card bad">
-            <h3>❌ Not Allowed</h3>
+            <h3><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Not Allowed</h3>
             <ul>
               <li><span class="dot"></span>Paid/bought views or engagement</li>
               <li>
@@ -757,7 +767,7 @@
 
       <!-- APPLICATION FORM -->
       <div class="form-section" id="applyForm">
-        <h2>🚀 Apply to the Creator Programme</h2>
+        <h2><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> Apply to the Creator Programme</h2>
         <div class="sub">
           Fill in all fields below. We'll review your application and get back
           to you within 48 hours.
@@ -848,10 +858,10 @@
           </div>
         </div>
         <button class="submit-btn" onclick="submitForm()">
-          🚀 Submit Application
+          <svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg> Submit Application
         </button>
         <div class="success-msg" id="successMsg">
-          ✅ Application submitted! We'll review it and get back to you within
+          <svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Application submitted! We'll review it and get back to you within
           48 hours. Check your email inbox (and spam folder).
         </div>
       </div>
@@ -862,29 +872,29 @@
 
         <!-- HOW IT WORKS -->
         <div class="how-section">
-          <div class="section-title">⚡ How It Works</div>
+          <div class="section-title"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> How It Works</div>
           <div class="steps">
             <div class="step">
               <div class="step-num">01</div>
-              <div class="step-icon">🎮</div>
+              <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.543-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></div>
               <h3>Submit Your Game</h3>
               <p>Fill out the game submission form below with your game's details, playable link, and category.</p>
             </div>
             <div class="step">
               <div class="step-num">02</div>
-              <div class="step-icon">✅</div>
+              <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
               <h3>We Review It</h3>
               <p>We check your game works properly, is appropriate, and is fun. Review takes up to 72 hours.</p>
             </div>
             <div class="step">
               <div class="step-num">03</div>
-              <div class="step-icon">🚀</div>
+              <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
               <h3>Goes Live</h3>
               <p>Your game gets added to JeyGames and shown to thousands of players every day.</p>
             </div>
             <div class="step">
               <div class="step-num">04</div>
-              <div class="step-icon">💸</div>
+              <div class="step-icon"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></div>
               <h3>Earn Per Play</h3>
               <p>Once your game hits the play milestones, submit proof and we'll process your payment within 7 days.</p>
             </div>
@@ -893,7 +903,7 @@
 
         <!-- PAYOUTS -->
         <div class="payouts-section">
-          <div class="section-title">💵 Payout Tiers</div>
+          <div class="section-title"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg> Payout Tiers</div>
           <div class="payout-cards">
             <div class="payout-card">
               <div class="views">500 plays</div>
@@ -908,7 +918,7 @@
             <div class="payout-card highlight">
               <div class="views">5,000 plays</div>
               <div class="amount">£12</div>
-              <div class="desc">🔥 Most popular tier</div>
+              <div class="desc"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Most popular tier</div>
             </div>
             <div class="payout-card">
               <div class="views">20,000 plays</div>
@@ -928,10 +938,10 @@
 
         <!-- RULES -->
         <div class="rules-section">
-          <div class="section-title">📋 Game Requirements</div>
+          <div class="section-title"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg> Game Requirements</div>
           <div class="rules-grid">
             <div class="rules-card">
-              <h3>✅ Required</h3>
+              <h3><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Required</h3>
               <ul>
                 <li><span class="dot"></span>Must be an original game you made or own rights to</li>
                 <li><span class="dot"></span>Must run in the browser (HTML5 / iframe embeddable)</li>
@@ -942,7 +952,7 @@
               </ul>
             </div>
             <div class="rules-card bad">
-              <h3>❌ Not Allowed</h3>
+              <h3><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Not Allowed</h3>
               <ul>
                 <li><span class="dot"></span>Games you don't own or have permission to publish</li>
                 <li><span class="dot"></span>Adult, violent or inappropriate content</li>
@@ -957,7 +967,7 @@
 
         <!-- GAME SUBMISSION FORM -->
         <div class="form-section" id="gameForm">
-          <h2>🎮 Submit Your Game</h2>
+          <h2><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.543-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg> Submit Your Game</h2>
           <div class="sub">Fill in all fields. We'll review your game and get back to you within 72 hours.</div>
           <div class="form-grid">
             <div class="field">
@@ -1016,10 +1026,10 @@
             </div>
           </div>
           <button class="submit-btn" onclick="submitGameForm()">
-            🎮 Submit Game
+            <svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.543-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg> Submit Game
           </button>
           <div class="success-msg" id="gameSuccessMsg">
-            ✅ Game submitted! We'll review it and get back to you within 72 hours. Check your email inbox (and spam folder).
+            <svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Game submitted! We'll review it and get back to you within 72 hours. Check your email inbox (and spam folder).
           </div>
         </div>
 
@@ -1028,7 +1038,7 @@
     </div>
 
     <footer>
-      <div class="footer-logo">🎮 JeyGames</div>
+      <div class="footer-logo"><svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.543-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg> JeyGames</div>
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -1080,7 +1090,7 @@
 
         document.getElementById("successMsg").style.display = "block";
         document.getElementById("applyForm").querySelector(".submit-btn").disabled = true;
-        document.getElementById("applyForm").querySelector(".submit-btn").textContent = "✅ Application Sent";
+        document.getElementById("applyForm").querySelector(".submit-btn").textContent = "<svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Application Sent";
         document.getElementById("applyForm").querySelector(".submit-btn").style.opacity = "0.6";
         document.getElementById("successMsg").scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
@@ -1117,7 +1127,7 @@
 
         document.getElementById("gameSuccessMsg").style.display = "block";
         document.getElementById("gameForm").querySelector(".submit-btn").disabled = true;
-        document.getElementById("gameForm").querySelector(".submit-btn").textContent = "✅ Game Submitted";
+        document.getElementById("gameForm").querySelector(".submit-btn").textContent = "<svg class="inline-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Game Submitted";
         document.getElementById("gameForm").querySelector(".submit-btn").style.opacity = "0.6";
         document.getElementById("gameSuccessMsg").scrollIntoView({ behavior: "smooth", block: "nearest" });
       }
