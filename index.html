@@ -2917,23 +2917,11 @@
       }
 
       // =============================================
-      // EXTRA GAMES
       // =============================================
-      const extraGames = [
-        {
-          id: "skibidi-runner",
-          title: "Skibidi Runner",
-          src: "https://html5.gamemonetize.co/mh08lk78gtrvf2nfp2kbvqj9n1xl8voi/",
-          img: "https://img.gamemonetize.com/mh08lk78gtrvf2nfp2kbvqj9n1xl8voi/512x384.jpg",
-          tags: ["brainrot", "action", "popular", "new"],
-        },
-      ];
-      const allGames = [
-        ...extraGames,
-        ...(typeof games !== "undefined" ? games : []),
-      ];
+      // GAMES - loaded from games.js
+      // =============================================
       const seen = new Set();
-      const dedupedGames = allGames.filter((g) => {
+      const dedupedGames = (typeof games !== "undefined" ? games : []).filter((g) => {
         if (seen.has(g.id)) return false;
         seen.add(g.id);
         return true;
