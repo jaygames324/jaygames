@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1191415751531949"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1191415751531949" crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JayGames Admin</title>
@@ -20,11 +19,10 @@
       --green: #22c55e; --green2: rgba(34,197,94,0.12);
       --red: #ef4444; --red2: rgba(239,68,68,0.12);
       --yellow: #f59e0b; --yellow2: rgba(245,158,11,0.12);
+      --blue: #3b82f6; --blue2: rgba(59,130,246,0.12);
       --mono: 'JetBrains Mono', monospace;
     }
     body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
-    /* ── LOGIN ── */
     #loginScreen { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: radial-gradient(ellipse at 50% 0%, rgba(255,107,53,0.06), transparent 60%); }
     .login-box { width: 380px; margin: 16px; background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 44px 40px; }
     .login-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
@@ -35,13 +33,9 @@
     .login-box input { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--text); font-size: 15px; outline: none; margin-bottom: 12px; font-family: 'Outfit', sans-serif; transition: border-color 0.2s; }
     .login-box input:focus { border-color: var(--jay); }
     .login-btn { width: 100%; background: var(--jay); color: #fff; border: none; border-radius: 10px; padding: 13px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 16px rgba(255,107,53,0.3); }
-    .login-btn:hover { background: var(--jay3); box-shadow: 0 8px 24px rgba(255,107,53,0.4); }
+    .login-btn:hover { background: var(--jay3); }
     .login-err { margin-top: 10px; color: var(--red); font-size: 13px; text-align: center; min-height: 18px; }
-
-    /* ── DASHBOARD ── */
     #dashboard { display: none; flex-direction: column; min-height: 100vh; }
-
-    /* TOPBAR */
     .topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; position: sticky; top: 0; z-index: 50; }
     .topbar-logo { display: flex; align-items: center; gap: 10px; }
     .topbar-logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--jay), #ff3d00); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
@@ -51,11 +45,7 @@
     .topbar-time { font-family: var(--mono); font-size: 12px; color: var(--text3); }
     .logout-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 6px 14px; color: var(--text2); font-size: 13px; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.2s; }
     .logout-btn:hover { border-color: var(--red); color: var(--red); }
-
-    /* LAYOUT */
     .layout { display: flex; flex: 1; }
-
-    /* SIDEBAR */
     .sidebar { width: 220px; background: var(--bg2); border-right: 1px solid var(--border); padding: 20px 0; flex-shrink: 0; }
     .sidebar-section { margin-bottom: 20px; }
     .sidebar-label { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.12em; padding: 0 16px 8px; font-family: var(--mono); }
@@ -64,82 +54,72 @@
     .nav-item.active { background: var(--bg3); color: var(--text); border-left-color: var(--jay); }
     .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
     .nav-item .badge { margin-left: auto; background: var(--red); color: #fff; border-radius: 999px; font-size: 10px; font-weight: 700; padding: 1px 7px; font-family: var(--mono); }
-    .nav-item .badge.green { background: var(--green); }
+    .nav-item .badge.green { background: var(--green); color: #000; }
     .nav-item .badge.yellow { background: var(--yellow); color: #000; }
-
-    /* MAIN */
+    .nav-item .badge.blue { background: var(--blue); }
     main { flex: 1; padding: 28px; overflow-y: auto; background: var(--bg); }
-
-    /* CARDS */
     .page { display: none; }
     .page.active { display: block; }
     .page-title { font-size: 22px; font-weight: 900; margin-bottom: 4px; }
     .page-sub { font-size: 14px; color: var(--text2); margin-bottom: 28px; }
-
-    /* STAT CARDS */
-    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 28px; }
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 28px; }
     .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
     .stat-card .s-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; font-family: var(--mono); }
     .stat-card .s-num { font-size: 28px; font-weight: 900; }
-    .stat-card .s-num.orange { color: var(--jay); }
-    .stat-card .s-num.green { color: var(--green); }
-    .stat-card .s-num.neon { color: var(--neon); }
-    .stat-card .s-num.purple { color: var(--purple); }
-
-    /* TABLE */
+    .s-num.orange { color: var(--jay); } .s-num.green { color: var(--green); } .s-num.neon { color: var(--neon); }
+    .s-num.purple { color: var(--purple); } .s-num.yellow { color: var(--yellow); } .s-num.red { color: var(--red); } .s-num.blue { color: var(--blue); }
     .table-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
-    .table-head { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .table-head { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 8px; }
     .table-head h3 { font-size: 15px; font-weight: 700; }
-    .table-actions { display: flex; gap: 8px; }
+    .table-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .tbl-btn { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 600; color: var(--text2); cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; }
     .tbl-btn:hover { border-color: var(--border2); color: var(--text); }
+    .search-input { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 13px; outline: none; width: 180px; transition: border-color 0.2s; }
+    .search-input:focus { border-color: var(--jay); }
     table { width: 100%; border-collapse: collapse; }
     th { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--mono); padding: 10px 20px; text-align: left; border-bottom: 1px solid var(--border); background: var(--bg3); }
     td { padding: 12px 20px; font-size: 13px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
     tr:hover td { background: rgba(255,255,255,0.02); }
-
-    .status-badge { display: inline-flex; align-items: center; gap: 5px; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 700; font-family: var(--mono); }
-    .status-badge.pending { background: var(--yellow2); color: var(--yellow); }
-    .status-badge.approved { background: var(--green2); color: var(--green); }
-    .status-badge.rejected { background: var(--red2); color: var(--red); }
-    .status-badge.paid { background: var(--neon2); color: var(--neon); }
-
-    .action-btn { background: none; border: 1px solid var(--border); border-radius: 7px; padding: 5px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; color: var(--text2); margin-right: 4px; }
-    .action-btn.approve { border-color: rgba(34,197,94,0.3); color: var(--green); }
-    .action-btn.approve:hover { background: var(--green2); }
-    .action-btn.reject { border-color: rgba(239,68,68,0.3); color: var(--red); }
-    .action-btn.reject:hover { background: var(--red2); }
-    .action-btn.view { border-color: rgba(0,245,212,0.3); color: var(--neon); }
-    .action-btn.view:hover { background: var(--neon2); }
-
-    /* MODAL */
-    #appModal { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
-    #appModal.open { display: flex; }
-    .app-modal-box { background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 36px; width: min(94vw, 560px); max-height: 85vh; overflow-y: auto; }
-    .app-modal-box h3 { font-size: 20px; font-weight: 800; margin-bottom: 20px; }
-    .app-field { margin-bottom: 14px; }
-    .app-field .lbl { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--mono); margin-bottom: 4px; }
-    .app-field .val { font-size: 14px; color: var(--text); line-height: 1.6; word-break: break-word; }
+    .sbadge { display: inline-flex; align-items: center; gap: 5px; border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 700; font-family: var(--mono); }
+    .sbadge.pending { background: var(--yellow2); color: var(--yellow); }
+    .sbadge.approved { background: var(--green2); color: var(--green); }
+    .sbadge.rejected { background: var(--red2); color: var(--red); }
+    .sbadge.active { background: var(--green2); color: var(--green); }
+    .sbadge.banned { background: var(--red2); color: var(--red); }
+    .sbadge.ended { background: var(--bg4); color: var(--text3); }
+    .vbadge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: #60a5fa; }
+    .vbadge .tick { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; background: #3b82f6; border-radius: 50%; font-size: 9px; color: #fff; flex-shrink: 0; }
+    .abtn { background: none; border: 1px solid var(--border); border-radius: 7px; padding: 5px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; transition: all 0.15s; color: var(--text2); margin-right: 4px; white-space: nowrap; }
+    .abtn:hover { background: var(--bg4); }
+    .abtn.av { border-color: rgba(0,245,212,0.3); color: var(--neon); } .abtn.av:hover { background: var(--neon2); }
+    .abtn.aa { border-color: rgba(34,197,94,0.3); color: var(--green); } .abtn.aa:hover { background: var(--green2); }
+    .abtn.ar { border-color: rgba(239,68,68,0.3); color: var(--red); } .abtn.ar:hover { background: var(--red2); }
+    .abtn.aban { border-color: rgba(239,68,68,0.3); color: var(--red); } .abtn.aban:hover { background: var(--red2); }
+    .abtn.aub { border-color: rgba(34,197,94,0.3); color: var(--green); } .abtn.aub:hover { background: var(--green2); }
+    .abtn.adel { border-color: rgba(239,68,68,0.5); color: var(--red); background: rgba(239,68,68,0.04); } .abtn.adel:hover { background: var(--red2); }
+    .abtn.avfy { border-color: rgba(59,130,246,0.4); color: #60a5fa; } .abtn.avfy:hover { background: var(--blue2); }
+    .abtn.auvfy { border-color: rgba(180,195,255,0.15); color: var(--text3); }
+    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--bg2); border: 1px solid var(--border2); border-radius: 20px; padding: 36px; width: min(94vw, 560px); max-height: 85vh; overflow-y: auto; }
+    .modal-box h3 { font-size: 20px; font-weight: 800; margin-bottom: 20px; }
+    .mfield { margin-bottom: 14px; }
+    .mfield .lbl { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--mono); margin-bottom: 4px; }
+    .mfield .val { font-size: 14px; color: var(--text); line-height: 1.6; word-break: break-word; }
     .modal-close { margin-top: 20px; width: 100%; background: var(--bg4); border: 1px solid var(--border); border-radius: 10px; padding: 12px; color: var(--text2); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
     .modal-close:hover { border-color: var(--border2); color: var(--text); }
-
-    /* EMPTY */
     .empty { text-align: center; padding: 48px; color: var(--text3); }
     .empty .icon { font-size: 40px; margin-bottom: 12px; }
     .empty p { font-size: 14px; }
-
-    /* SETTINGS */
     .settings-grid { display: grid; gap: 16px; }
-    .setting-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .setting-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .setting-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
     .setting-info p { font-size: 13px; color: var(--text2); }
     .setting-input { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--text); font-family: 'Outfit', sans-serif; font-size: 14px; outline: none; min-width: 200px; transition: border-color 0.2s; }
     .setting-input:focus { border-color: var(--jay); }
     .save-btn { background: var(--jay); color: #fff; border: none; border-radius: 9px; padding: 8px 18px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
     .save-btn:hover { background: var(--jay3); }
-
-    /* OVERVIEW QUICK TABLE */
     .ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 700px) { .ov-grid { grid-template-columns: 1fr; } .sidebar { display: none; } }
     .ov-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
@@ -148,12 +128,17 @@
     .ov-row:last-child { border-bottom: none; }
     .ov-row .ov-label { color: var(--text2); }
     .ov-row .ov-val { font-weight: 600; }
-
-    /* TOAST */
-    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg2); border: 1px solid var(--border2); border-radius: 12px; padding: 14px 20px; font-size: 14px; font-weight: 600; z-index: 999; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; }
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg2); border: 1px solid var(--border2); border-radius: 12px; padding: 14px 20px; font-size: 14px; font-weight: 600; z-index: 999; opacity: 0; transform: translateY(10px); transition: all 0.3s; pointer-events: none; max-width: 320px; }
     .toast.show { opacity: 1; transform: translateY(0); }
     .toast.success { border-color: rgba(34,197,94,0.4); color: var(--green); }
     .toast.error { border-color: rgba(239,68,68,0.4); color: var(--red); }
+    .toast.info { border-color: rgba(0,245,212,0.4); color: var(--neon); }
+    .uavatar { width: 30px; height: 30px; border-radius: 50%; background: var(--bg4); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; }
+    .loading { text-align: center; padding: 40px; color: var(--text3); font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--jay); border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+    .modal-btn-row { display: flex; gap: 8px; margin-top: 16px; }
+    .modal-btn-row .abtn { flex: 1; padding: 10px; text-align: center; }
   </style>
 </head>
 <body>
@@ -175,12 +160,11 @@
 
 <!-- DASHBOARD -->
 <div id="dashboard">
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="topbar-logo">
       <div class="topbar-logo-icon">🎮</div>
       <div class="topbar-logo-text">JayGames</div>
-      <div class="topbar-badge">ADMIN</div>
+      <div class="topbar-badge">ADMIN v3</div>
     </div>
     <div class="topbar-right">
       <span class="topbar-time" id="clock"></span>
@@ -189,42 +173,31 @@
   </div>
 
   <div class="layout">
-    <!-- SIDEBAR -->
     <div class="sidebar">
       <div class="sidebar-section">
         <div class="sidebar-label">Main</div>
-        <div class="nav-item active" onclick="showPage('overview', this)">
-          <span class="icon">🏠</span> Overview
-        </div>
-        <div class="nav-item" onclick="showPage('applications', this)">
-          <span class="icon">📝</span> Applications
-          <span class="badge yellow" id="appBadge">0</span>
-        </div>
-        <div class="nav-item" onclick="showPage('payouts', this)">
-          <span class="icon">💰</span> Payouts
-        </div>
+        <div class="nav-item active" onclick="showPage('overview',this)"><span class="icon">🏠</span> Overview</div>
+        <div class="nav-item" onclick="showPage('applications',this)"><span class="icon">📝</span> Applications<span class="badge yellow" id="appBadge">0</span></div>
+        <div class="nav-item" onclick="showPage('payouts',this)"><span class="icon">💰</span> Payouts</div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Community</div>
+        <div class="nav-item" onclick="showPage('users',this)"><span class="icon">👥</span> Users<span class="badge green" id="userBadge">0</span></div>
+        <div class="nav-item" onclick="showPage('groups',this)"><span class="icon">🎭</span> Groups<span class="badge blue" id="groupBadge">0</span></div>
+        <div class="nav-item" onclick="showPage('parties',this)"><span class="icon">🎉</span> Parties</div>
       </div>
       <div class="sidebar-section">
         <div class="sidebar-label">Site</div>
-        <div class="nav-item" onclick="showPage('games', this)">
-          <span class="icon">🎮</span> Games
-        </div>
-        <div class="nav-item" onclick="showPage('settings', this)">
-          <span class="icon">⚙️</span> Settings
-        </div>
+        <div class="nav-item" onclick="showPage('games',this)"><span class="icon">🎮</span> Games</div>
+        <div class="nav-item" onclick="showPage('settings',this)"><span class="icon">⚙️</span> Settings</div>
       </div>
       <div class="sidebar-section">
         <div class="sidebar-label">Links</div>
-        <div class="nav-item" onclick="window.open('index.html','_blank')">
-          <span class="icon">🌐</span> View Site
-        </div>
-        <div class="nav-item" onclick="window.open('earn.html','_blank')">
-          <span class="icon">💸</span> Earn Page
-        </div>
+        <div class="nav-item" onclick="window.open('index.html','_blank')"><span class="icon">🌐</span> View Site</div>
+        <div class="nav-item" onclick="window.open('earn.html','_blank')"><span class="icon">💸</span> Earn Page</div>
       </div>
     </div>
 
-    <!-- MAIN -->
     <main>
 
       <!-- OVERVIEW -->
@@ -234,8 +207,10 @@
         <div class="stat-row">
           <div class="stat-card"><div class="s-label">Applications</div><div class="s-num orange" id="ov-apps">0</div></div>
           <div class="stat-card"><div class="s-label">Pending Review</div><div class="s-num yellow" id="ov-pending">0</div></div>
-          <div class="stat-card"><div class="s-label">Approved</div><div class="s-num green" id="ov-approved">0</div></div>
-          <div class="stat-card"><div class="s-label">Payouts Made</div><div class="s-num neon" id="ov-paid">0</div></div>
+          <div class="stat-card"><div class="s-label">Total Users</div><div class="s-num neon" id="ov-users">—</div></div>
+          <div class="stat-card"><div class="s-label">Banned Users</div><div class="s-num red" id="ov-banned">—</div></div>
+          <div class="stat-card"><div class="s-label">Groups</div><div class="s-num purple" id="ov-groups">—</div></div>
+          <div class="stat-card"><div class="s-label">Verified Groups</div><div class="s-num blue" id="ov-verified">—</div></div>
         </div>
         <div class="ov-grid">
           <div class="ov-card">
@@ -245,7 +220,7 @@
           <div class="ov-card">
             <div class="ov-card-head">ℹ️ Quick Info</div>
             <div class="ov-row"><span class="ov-label">Total Games</span><span class="ov-val" id="ov-game-count">—</span></div>
-            <div class="ov-row"><span class="ov-label">Admin Version</span><span class="ov-val">v2.0</span></div>
+            <div class="ov-row"><span class="ov-label">Admin Version</span><span class="ov-val">v3.0</span></div>
             <div class="ov-row"><span class="ov-label">Site</span><span class="ov-val">JayGames</span></div>
             <div class="ov-row"><span class="ov-label">Status</span><span class="ov-val" style="color:var(--green)">● Live</span></div>
           </div>
@@ -255,7 +230,7 @@
       <!-- APPLICATIONS -->
       <div class="page" id="p-applications">
         <div class="page-title">Creator Applications</div>
-        <div class="page-sub">Review and manage creator programme applications from the Earn page.</div>
+        <div class="page-sub">Review and manage creator programme applications.</div>
         <div class="stat-row">
           <div class="stat-card"><div class="s-label">Total</div><div class="s-num orange" id="ap-total">0</div></div>
           <div class="stat-card"><div class="s-label">Pending</div><div class="s-num yellow" id="ap-pending">0</div></div>
@@ -284,12 +259,76 @@
         </div>
       </div>
 
+      <!-- USERS -->
+      <div class="page" id="p-users">
+        <div class="page-title">User Management</div>
+        <div class="page-sub">View, ban, and delete users from the JayGames community.</div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="s-label">Total Users</div><div class="s-num orange" id="um-total">—</div></div>
+          <div class="stat-card"><div class="s-label">Active</div><div class="s-num green" id="um-active">—</div></div>
+          <div class="stat-card"><div class="s-label">Banned</div><div class="s-num red" id="um-banned">—</div></div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-head">
+            <h3>👥 All Users</h3>
+            <div class="table-actions">
+              <input type="text" class="search-input" id="userSearch" placeholder="🔍 Search users..." oninput="filterUsers()" />
+              <button class="tbl-btn" onclick="loadUsers()">🔄 Refresh</button>
+            </div>
+          </div>
+          <div id="usersTable"><div class="loading"><span class="spinner"></span>Loading from Firebase…</div></div>
+        </div>
+      </div>
+
+      <!-- GROUPS -->
+      <div class="page" id="p-groups">
+        <div class="page-title">Group Management</div>
+        <div class="page-sub">Verify groups with a badge, delete groups, and manage the JayGames community groups.</div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="s-label">Total Groups</div><div class="s-num orange" id="gm-total">—</div></div>
+          <div class="stat-card"><div class="s-label">Verified</div><div class="s-num blue" id="gm-verified">—</div></div>
+          <div class="stat-card"><div class="s-label">Unverified</div><div class="s-num yellow" id="gm-unverified">—</div></div>
+          <div class="stat-card"><div class="s-label">Total Members</div><div class="s-num green" id="gm-members">—</div></div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-head">
+            <h3>🎭 All Groups</h3>
+            <div class="table-actions">
+              <input type="text" class="search-input" id="groupSearch" placeholder="🔍 Search groups..." oninput="filterGroups()" />
+              <button class="tbl-btn" onclick="loadGroups()">🔄 Refresh</button>
+            </div>
+          </div>
+          <div id="groupsTable"><div class="loading"><span class="spinner"></span>Loading from Firebase…</div></div>
+        </div>
+      </div>
+
+      <!-- PARTIES -->
+      <div class="page" id="p-parties">
+        <div class="page-title">Active Parties</div>
+        <div class="page-sub">Monitor and manage all party chats.</div>
+        <div class="table-wrap">
+          <div class="table-head">
+            <h3>🎉 All Parties</h3>
+            <div class="table-actions">
+              <button class="tbl-btn" onclick="loadParties()">🔄 Refresh</button>
+            </div>
+          </div>
+          <div id="partiesTable"><div class="loading"><span class="spinner"></span>Loading from Firebase…</div></div>
+        </div>
+      </div>
+
       <!-- GAMES -->
       <div class="page" id="p-games">
         <div class="page-title">Games Library</div>
         <div class="page-sub">Overview of all games on JayGames.</div>
         <div class="table-wrap">
-          <div class="table-head"><h3>🎮 All Games</h3><div class="table-actions"><span style="font-size:13px;color:var(--text3)" id="gameCountLabel"></span></div></div>
+          <div class="table-head">
+            <h3>🎮 All Games</h3>
+            <div class="table-actions">
+              <input type="text" class="search-input" id="gameSearch" placeholder="🔍 Search games..." oninput="filterGames()" />
+              <span style="font-size:13px;color:var(--text3)" id="gameCountLabel"></span>
+            </div>
+          </div>
           <div id="gamesTable"></div>
         </div>
       </div>
@@ -297,7 +336,7 @@
       <!-- SETTINGS -->
       <div class="page" id="p-settings">
         <div class="page-title">Settings</div>
-        <div class="page-sub">Configure your JayGames admin settings.</div>
+        <div class="page-sub">Configure your JayGames admin panel.</div>
         <div class="settings-grid">
           <div class="setting-item">
             <div class="setting-info">
@@ -311,15 +350,22 @@
           </div>
           <div class="setting-item">
             <div class="setting-info">
+              <h4>Firebase Database</h4>
+              <p>The database used for users, groups, and parties.</p>
+            </div>
+            <code style="font-family:var(--mono);font-size:11px;color:var(--text3);background:var(--bg3);padding:6px 10px;border-radius:6px">unblocked-games-chat-default-rtdb</code>
+          </div>
+          <div class="setting-item">
+            <div class="setting-info">
               <h4>Payout Tiers</h4>
-              <p>Edit payout amounts per view milestone on the Earn page (edit earn.html directly).</p>
+              <p>Edit payout amounts on the Earn page.</p>
             </div>
             <button class="save-btn" onclick="window.open('earn.html','_blank')">Open Earn Page</button>
           </div>
           <div class="setting-item">
             <div class="setting-info">
               <h4>View Live Site</h4>
-              <p>Open JayGames in a new tab to check the live website.</p>
+              <p>Open JayGames in a new tab.</p>
             </div>
             <button class="save-btn" onclick="window.open('index.html','_blank')">Open Site</button>
           </div>
@@ -337,254 +383,413 @@
   </div>
 </div>
 
-<!-- APP DETAIL MODAL -->
-<div id="appModal">
-  <div class="app-modal-box">
+<!-- APP MODAL -->
+<div id="appModal" class="modal-overlay">
+  <div class="modal-box">
     <h3>📝 Application Details</h3>
     <div id="appModalContent"></div>
-    <button class="modal-close" onclick="document.getElementById('appModal').classList.remove('open')">Close</button>
+    <button class="modal-close" onclick="closeModal('appModal')">Close</button>
+  </div>
+</div>
+
+<!-- USER MODAL -->
+<div id="userModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 id="userModalTitle">👤 User Details</h3>
+    <div id="userModalContent"></div>
+    <button class="modal-close" onclick="closeModal('userModal')">Close</button>
+  </div>
+</div>
+
+<!-- GROUP MODAL -->
+<div id="groupModal" class="modal-overlay">
+  <div class="modal-box">
+    <h3 id="groupModalTitle">🎭 Group Details</h3>
+    <div id="groupModalContent"></div>
+    <button class="modal-close" onclick="closeModal('groupModal')">Close</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  const ADMIN_PASSWORD_KEY = 'jaygames_admin_pw';
-  let ADMIN_PASSWORD = localStorage.getItem(ADMIN_PASSWORD_KEY) || 'JayAdmin2025';
+  var DB = 'https://unblocked-games-chat-default-rtdb.firebaseio.com';
+  var ADMIN_PASSWORD_KEY = 'jaygames_admin_pw';
+  var ADMIN_PASSWORD = localStorage.getItem(ADMIN_PASSWORD_KEY) || 'Vp11072012';
+
+  // FIREBASE
+  function fbUrl(p){ return DB+p+'.json'; }
+  function fbGet(p,cb){ fetch(fbUrl(p)).then(function(r){return r.json();}).then(cb).catch(function(){cb(null);}); }
+  function fbSet(p,d,cb){ fetch(fbUrl(p),{method:'PUT',body:JSON.stringify(d),headers:{'Content-Type':'application/json'}}).then(function(){if(cb)cb();}).catch(function(){if(cb)cb();}); }
+  function fbUpdate(p,d,cb){ fetch(fbUrl(p),{method:'PATCH',body:JSON.stringify(d),headers:{'Content-Type':'application/json'}}).then(function(){if(cb)cb();}).catch(function(){if(cb)cb();}); }
+  function fbDelete(p,cb){ fetch(fbUrl(p),{method:'DELETE'}).then(function(){if(cb)cb();}).catch(function(){if(cb)cb();}); }
 
   // LOGIN
-  document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-  document.getElementById('loginBtn').addEventListener('click', doLogin);
-
-  function doLogin() {
-    const v = document.getElementById('pwInput').value;
-    if (v === ADMIN_PASSWORD) {
-      sessionStorage.setItem('jayadmin', 'yes');
-      showDashboard();
-    } else {
-      document.getElementById('loginErr').textContent = '✕ Incorrect password.';
-      document.getElementById('pwInput').value = '';
-      document.getElementById('pwInput').focus();
-    }
+  document.getElementById('pwInput').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+  document.getElementById('loginBtn').addEventListener('click',doLogin);
+  function doLogin(){
+    var v=document.getElementById('pwInput').value;
+    if(v===ADMIN_PASSWORD){sessionStorage.setItem('jayadmin','yes');showDashboard();}
+    else{document.getElementById('loginErr').textContent='✕ Incorrect password.';document.getElementById('pwInput').value='';document.getElementById('pwInput').focus();}
   }
-
-  function logout() {
-    sessionStorage.removeItem('jayadmin');
-    location.reload();
-  }
-
-  function showDashboard() {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'flex';
+  function logout(){sessionStorage.removeItem('jayadmin');location.reload();}
+  function showDashboard(){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('dashboard').style.display='flex';
     initDashboard();
   }
-
-  if (sessionStorage.getItem('jayadmin') === 'yes') showDashboard();
+  if(sessionStorage.getItem('jayadmin')==='yes') showDashboard();
 
   // CLOCK
-  function updateClock() {
-    const el = document.getElementById('clock');
-    if (el) el.textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  }
-  setInterval(updateClock, 1000); updateClock();
+  setInterval(function(){var el=document.getElementById('clock');if(el)el.textContent=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});},1000);
 
   // PAGE NAV
-  function showPage(id, el) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    document.getElementById('p-' + id).classList.add('active');
+  function showPage(id,el){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+    document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+    document.getElementById('p-'+id).classList.add('active');
     el.classList.add('active');
-    if (id === 'applications') loadApplications();
-    if (id === 'games') loadGamesTable();
-    if (id === 'payouts') loadPayouts();
+    var fns={applications:loadApplications,games:loadGamesTable,payouts:loadPayouts,users:loadUsers,groups:loadGroups,parties:loadParties};
+    if(fns[id]) fns[id]();
   }
 
-  // INIT
-  function initDashboard() {
+  function initDashboard(){
     loadOverview();
     loadApplications();
     loadGamesTable();
+    loadUsers();
+    loadGroups();
   }
 
   // APPLICATIONS
-  function getApplications() {
-    return JSON.parse(localStorage.getItem('jaygames_applications') || '[]');
+  function getApps(){return JSON.parse(localStorage.getItem('jaygames_applications')||'[]');}
+  function saveApps(a){localStorage.setItem('jaygames_applications',JSON.stringify(a));}
+
+  function loadApplications(){
+    var apps=getApps();
+    var p=apps.filter(function(a){return !a.status||a.status==='pending';}).length;
+    var ap=apps.filter(function(a){return a.status==='approved';}).length;
+    var re=apps.filter(function(a){return a.status==='rejected';}).length;
+    document.getElementById('ap-total').textContent=apps.length;
+    document.getElementById('ap-pending').textContent=p;
+    document.getElementById('ap-approved').textContent=ap;
+    document.getElementById('ap-rejected').textContent=re;
+    document.getElementById('appBadge').textContent=p;
+    var c=document.getElementById('applicationsTable');
+    if(!apps.length){c.innerHTML='<div class="empty"><div class="icon">📭</div><p>No applications yet.</p></div>';return;}
+    c.innerHTML='<table><thead><tr><th>Name</th><th>Email</th><th>Platform</th><th>Followers</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody>'+
+      apps.map(function(a,i){
+        var s=a.status||'pending';
+        var d=a.timestamp?new Date(a.timestamp).toLocaleDateString('en-GB'):'—';
+        return '<tr><td><strong>'+esc(a.name)+'</strong></td><td style="color:var(--text2)">'+esc(a.email)+'</td><td>'+esc(a.platform)+'</td><td style="color:var(--text2);font-size:12px">'+esc(a.subs)+'</td><td><span class="sbadge '+s+'">'+s+'</span></td><td style="color:var(--text3);font-size:12px;font-family:var(--mono)">'+d+'</td><td>'+
+          '<button class="abtn av" onclick="viewApp('+i+')">View</button>'+
+          (s!=='approved'?'<button class="abtn aa" onclick="setAppStatus('+i+',\'approved\')">Approve</button>':'')+
+          (s!=='rejected'?'<button class="abtn ar" onclick="setAppStatus('+i+',\'rejected\')">Reject</button>':'')+
+          '</td></tr>';
+      }).join('')+'</tbody></table>';
   }
 
-  function saveApplications(apps) {
-    localStorage.setItem('jaygames_applications', JSON.stringify(apps));
+  function setAppStatus(i,s){var a=getApps();a[i].status=s;saveApps(a);loadApplications();loadOverview();showToast('Application '+s+'!',s==='approved'?'success':'error');}
+
+  function viewApp(i){
+    var a=getApps()[i];
+    var f=[['Name',a.name],['Email',a.email],['Platform',a.platform],['Channel',a.channel],
+      ['Profile URL',a.url?'<a href="'+esc(a.url)+'" target="_blank" style="color:var(--neon)">'+esc(a.url)+'</a>':'—'],
+      ['Followers',a.subs],['Content Type',a.type],['About',a.about],['Payment',a.pay||'—'],
+      ['Status',a.status||'pending'],['Submitted',a.timestamp?new Date(a.timestamp).toLocaleString('en-GB'):'—']];
+    document.getElementById('appModalContent').innerHTML=f.map(function(x){return '<div class="mfield"><div class="lbl">'+x[0]+'</div><div class="val">'+(x[1]||'—')+'</div></div>';}).join('');
+    openModal('appModal');
   }
 
-  function loadApplications() {
-    const apps = getApplications();
-    const pending = apps.filter(a => !a.status || a.status === 'pending').length;
-    const approved = apps.filter(a => a.status === 'approved').length;
-    const rejected = apps.filter(a => a.status === 'rejected').length;
-
-    document.getElementById('ap-total').textContent = apps.length;
-    document.getElementById('ap-pending').textContent = pending;
-    document.getElementById('ap-approved').textContent = approved;
-    document.getElementById('ap-rejected').textContent = rejected;
-    document.getElementById('appBadge').textContent = pending;
-
-    const container = document.getElementById('applicationsTable');
-    if (apps.length === 0) {
-      container.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No applications yet. They'll appear here when creators apply via the Earn page.</p></div>`;
-      return;
-    }
-
-    container.innerHTML = `<table>
-      <thead><tr>
-        <th>Name</th><th>Email</th><th>Platform</th><th>Channel</th><th>Followers</th><th>Status</th><th>Date</th><th>Actions</th>
-      </tr></thead>
-      <tbody>
-        ${apps.map((a, i) => {
-          const status = a.status || 'pending';
-          const date = a.timestamp ? new Date(a.timestamp).toLocaleDateString('en-GB') : '—';
-          return `<tr>
-            <td><strong>${esc(a.name)}</strong></td>
-            <td style="color:var(--text2)">${esc(a.email)}</td>
-            <td>${esc(a.platform)}</td>
-            <td style="font-family:var(--mono);font-size:12px">${esc(a.channel)}</td>
-            <td style="color:var(--text2);font-size:12px">${esc(a.subs)}</td>
-            <td><span class="status-badge ${status}">${status}</span></td>
-            <td style="color:var(--text3);font-size:12px;font-family:var(--mono)">${date}</td>
-            <td>
-              <button class="action-btn view" onclick="viewApplication(${i})">View</button>
-              ${status !== 'approved' ? `<button class="action-btn approve" onclick="setStatus(${i},'approved')">Approve</button>` : ''}
-              ${status !== 'rejected' ? `<button class="action-btn reject" onclick="setStatus(${i},'rejected')">Reject</button>` : ''}
-            </td>
-          </tr>`;
-        }).join('')}
-      </tbody>
-    </table>`;
-  }
-
-  function setStatus(index, status) {
-    const apps = getApplications();
-    apps[index].status = status;
-    saveApplications(apps);
-    loadApplications();
-    loadOverview();
-    showToast(`Application ${status}!`, status === 'approved' ? 'success' : 'error');
-  }
-
-  function viewApplication(index) {
-    const apps = getApplications();
-    const a = apps[index];
-    const fields = [
-      ['Name', a.name], ['Email', a.email], ['Platform', a.platform],
-      ['Channel', a.channel], ['Profile URL', a.url ? `<a href="${esc(a.url)}" target="_blank" style="color:var(--neon)">${esc(a.url)}</a>` : '—'],
-      ['Followers', a.subs], ['Content Type', a.type], ['About', a.about],
-      ['Previous Content', a.prev ? `<a href="${esc(a.prev)}" target="_blank" style="color:var(--neon)">${esc(a.prev)}</a>` : '—'],
-      ['Payment Method', a.pay || '—'], ['Status', a.status || 'pending'],
-      ['Submitted', a.timestamp ? new Date(a.timestamp).toLocaleString('en-GB') : '—']
-    ];
-    document.getElementById('appModalContent').innerHTML = fields.map(([l, v]) =>
-      `<div class="app-field"><div class="lbl">${l}</div><div class="val">${v}</div></div>`
-    ).join('');
-    document.getElementById('appModal').classList.add('open');
-  }
-
-  function clearApplications() {
-    if (!confirm('Clear ALL application data? This cannot be undone.')) return;
+  function clearApplications(){
+    if(!confirm('Clear ALL application data? Cannot be undone.')) return;
     localStorage.removeItem('jaygames_applications');
-    loadApplications();
-    loadOverview();
-    showToast('Applications cleared.', 'error');
+    loadApplications();loadOverview();showToast('Applications cleared.','error');
   }
 
   // PAYOUTS
-  function loadPayouts() {
-    const apps = getApplications().filter(a => a.status === 'paid');
-    const container = document.getElementById('payoutsTable');
-    if (apps.length === 0) {
-      container.innerHTML = `<div class="empty"><div class="icon">💰</div><p>No payouts recorded yet. Approve applications and mark them as paid when processed.</p></div>`;
-      return;
-    }
-    container.innerHTML = `<table><thead><tr><th>Creator</th><th>Email</th><th>Platform</th><th>Amount</th><th>Date</th></tr></thead><tbody>
-      ${apps.map(a => `<tr><td>${esc(a.name)}</td><td>${esc(a.email)}</td><td>${esc(a.platform)}</td><td style="color:var(--neon);font-weight:700">—</td><td>${a.timestamp ? new Date(a.timestamp).toLocaleDateString('en-GB') : '—'}</td></tr>`).join('')}
-    </tbody></table>`;
+  function loadPayouts(){
+    var a=getApps().filter(function(a){return a.status==='paid';});
+    var c=document.getElementById('payoutsTable');
+    if(!a.length){c.innerHTML='<div class="empty"><div class="icon">💰</div><p>No payouts recorded yet.</p></div>';return;}
+    c.innerHTML='<table><thead><tr><th>Creator</th><th>Email</th><th>Platform</th><th>Date</th></tr></thead><tbody>'+
+      a.map(function(x){return '<tr><td>'+esc(x.name)+'</td><td>'+esc(x.email)+'</td><td>'+esc(x.platform)+'</td><td>'+( x.timestamp?new Date(x.timestamp).toLocaleDateString('en-GB'):'—')+'</td></tr>';}).join('')+'</tbody></table>';
   }
 
-  // GAMES TABLE
-  function loadGamesTable() {
-    if (typeof games === 'undefined') return;
-    const seen = new Set();
-    const unique = games.filter(g => { if (seen.has(g.id)) return false; seen.add(g.id); return true; });
-    document.getElementById('gameCountLabel').textContent = `${unique.length} games`;
-    document.getElementById('ov-game-count').textContent = unique.length;
-    const container = document.getElementById('gamesTable');
-    container.innerHTML = `<table>
-      <thead><tr><th>Title</th><th>ID</th><th>Tags</th></tr></thead>
-      <tbody>
-        ${unique.map(g => `<tr>
-          <td><strong>${esc(g.title)}</strong></td>
-          <td style="font-family:var(--mono);font-size:12px;color:var(--text3)">${esc(g.id)}</td>
-          <td style="font-size:12px;color:var(--text2)">${(g.tags||[]).join(', ')}</td>
-        </tr>`).join('')}
-      </tbody>
-    </table>`;
+  // GAMES
+  var allGames=[];
+  function loadGamesTable(){
+    if(typeof games==='undefined') return;
+    var seen=new Set();
+    allGames=games.filter(function(g){if(seen.has(g.id))return false;seen.add(g.id);return true;});
+    document.getElementById('gameCountLabel').textContent=allGames.length+' games';
+    document.getElementById('ov-game-count').textContent=allGames.length;
+    renderGames(allGames);
+  }
+  function renderGames(list){
+    document.getElementById('gamesTable').innerHTML='<table><thead><tr><th>Title</th><th>ID</th><th>Tags</th></tr></thead><tbody>'+
+      list.map(function(g){return '<tr><td><strong>'+esc(g.title)+'</strong></td><td style="font-family:var(--mono);font-size:12px;color:var(--text3)">'+esc(g.id)+'</td><td style="font-size:12px;color:var(--text2)">'+(g.tags||[]).join(', ')+'</td></tr>';}).join('')+'</tbody></table>';
+  }
+  function filterGames(){
+    var q=document.getElementById('gameSearch').value.toLowerCase();
+    renderGames(q?allGames.filter(function(g){return g.title.toLowerCase().includes(q)||g.id.toLowerCase().includes(q);}):allGames);
+  }
+
+  // USERS
+  var allUsers=[];
+  function loadUsers(){
+    document.getElementById('usersTable').innerHTML='<div class="loading"><span class="spinner"></span>Loading from Firebase…</div>';
+    fbGet('/users',function(data){
+      if(!data){document.getElementById('usersTable').innerHTML='<div class="empty"><div class="icon">👥</div><p>No users in Firebase database yet.</p></div>';updateUserStats([]);return;}
+      allUsers=Object.entries(data).map(function(e){var u=e[1];u._uid=e[0];return u;}).sort(function(a,b){return(b.createdAt||0)-(a.createdAt||0);});
+      updateUserStats(allUsers);renderUsers(allUsers);
+    });
+  }
+  function updateUserStats(u){
+    var banned=u.filter(function(x){return x.banned;}).length;
+    document.getElementById('um-total').textContent=u.length;
+    document.getElementById('um-active').textContent=u.length-banned;
+    document.getElementById('um-banned').textContent=banned;
+    document.getElementById('userBadge').textContent=u.length;
+    document.getElementById('ov-users').textContent=u.length;
+    document.getElementById('ov-banned').textContent=banned;
+  }
+  function renderUsers(users){
+    var c=document.getElementById('usersTable');
+    if(!users.length){c.innerHTML='<div class="empty"><div class="icon">👥</div><p>No users found.</p></div>';return;}
+    c.innerHTML='<table><thead><tr><th></th><th>Username</th><th>UID</th><th>Joined</th><th>Last Seen</th><th>Status</th><th>Actions</th></tr></thead><tbody>'+
+      users.map(function(u){
+        var banned=u.banned;
+        return '<tr>'+
+          '<td><span class="uavatar">'+esc(u.emoji||'👤')+'</span></td>'+
+          '<td><strong>'+esc(u.name||'Unknown')+'</strong></td>'+
+          '<td style="font-family:var(--mono);font-size:11px;color:var(--text3)">'+esc((u._uid||'').slice(0,10))+'…</td>'+
+          '<td style="color:var(--text2);font-size:12px">'+(u.createdAt?new Date(u.createdAt).toLocaleDateString('en-GB'):'—')+'</td>'+
+          '<td style="color:var(--text3);font-size:12px">'+(u.lastSeen?timeAgo(u.lastSeen):'—')+'</td>'+
+          '<td><span class="sbadge '+(banned?'banned':'active')+'">'+(banned?'Banned':'Active')+'</span></td>'+
+          '<td>'+
+            '<button class="abtn av" onclick="viewUser(\''+esc(u._uid)+'\')">View</button>'+
+            (banned
+              ?'<button class="abtn aub" onclick="unbanUser(\''+esc(u._uid)+'\',\''+esc(u.name||'')+'\')" >Unban</button>'
+              :'<button class="abtn aban" onclick="banUser(\''+esc(u._uid)+'\',\''+esc(u.name||'')+'\')">Ban</button>')+
+            '<button class="abtn adel" onclick="deleteUser(\''+esc(u._uid)+'\',\''+esc(u.name||'')+'\')">Delete</button>'+
+          '</td></tr>';
+      }).join('')+'</tbody></table>';
+  }
+  function filterUsers(){
+    var q=document.getElementById('userSearch').value.toLowerCase();
+    renderUsers(q?allUsers.filter(function(u){return(u.name||'').toLowerCase().includes(q)||(u._uid||'').includes(q);}):allUsers);
+  }
+  function viewUser(uid){
+    var u=allUsers.find(function(x){return x._uid===uid;}); if(!u) return;
+    document.getElementById('userModalTitle').textContent=(u.emoji||'👤')+' '+(u.name||'User')+' Details';
+    document.getElementById('userModalContent').innerHTML=
+      '<div class="mfield"><div class="lbl">UID</div><div class="val" style="font-family:var(--mono);font-size:12px">'+esc(u._uid||'—')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Username</div><div class="val">'+esc(u.name||'—')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Status</div><div class="val">'+(u.banned?'🚫 Banned':'✅ Active')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Joined</div><div class="val">'+(u.createdAt?new Date(u.createdAt).toLocaleString('en-GB'):'—')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Last Seen</div><div class="val">'+(u.lastSeen?new Date(u.lastSeen).toLocaleString('en-GB'):'—')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Friends</div><div class="val">'+(u.friends?Object.keys(u.friends).length:0)+'</div></div>'+
+      '<div class="modal-btn-row">'+
+        (u.banned
+          ?'<button class="abtn aub" onclick="unbanUser(\''+esc(uid)+'\',\''+esc(u.name||'')+'\');closeModal(\'userModal\')">✅ Unban User</button>'
+          :'<button class="abtn aban" onclick="banUser(\''+esc(uid)+'\',\''+esc(u.name||'')+'\');closeModal(\'userModal\')">🚫 Ban User</button>')+
+        '<button class="abtn adel" onclick="deleteUser(\''+esc(uid)+'\',\''+esc(u.name||'')+'\');closeModal(\'userModal\')">🗑️ Delete User</button>'+
+      '</div>';
+    openModal('userModal');
+  }
+  function banUser(uid,name){
+    if(!confirm('Ban user "'+name+'"? They cannot log in.')) return;
+    fbUpdate('/users/'+uid,{banned:true,bannedAt:Date.now()},function(){
+      var u=allUsers.find(function(x){return x._uid===uid;}); if(u) u.banned=true;
+      updateUserStats(allUsers);renderUsers(allUsers);showToast('🚫 '+name+' banned.','error');
+    });
+  }
+  function unbanUser(uid,name){
+    fbUpdate('/users/'+uid,{banned:false,bannedAt:null},function(){
+      var u=allUsers.find(function(x){return x._uid===uid;}); if(u) u.banned=false;
+      updateUserStats(allUsers);renderUsers(allUsers);showToast('✅ '+name+' unbanned.','success');
+    });
+  }
+  function deleteUser(uid,name){
+    if(!confirm('PERMANENTLY DELETE "'+name+'"?\nThis deletes their account, friends, and all data.\nThis CANNOT be undone!')) return;
+    if(!confirm('Final confirmation: delete "'+name+'"?')) return;
+    fbDelete('/users/'+uid,function(){
+      fbDelete('/userData/'+uid,function(){
+        allUsers=allUsers.filter(function(x){return x._uid!==uid;});
+        updateUserStats(allUsers);renderUsers(allUsers);showToast('🗑️ '+name+' deleted.','error');
+      });
+    });
+  }
+
+  // GROUPS
+  var allGroups=[];
+  function loadGroups(){
+    document.getElementById('groupsTable').innerHTML='<div class="loading"><span class="spinner"></span>Loading from Firebase…</div>';
+    fbGet('/groups',function(data){
+      if(!data){document.getElementById('groupsTable').innerHTML='<div class="empty"><div class="icon">🎭</div><p>No groups yet. Users create groups in the Party panel.</p></div>';updateGroupStats([]);return;}
+      allGroups=Object.entries(data).map(function(e){var g=e[1];g._id=e[0];return g;}).sort(function(a,b){return(b.createdAt||0)-(a.createdAt||0);});
+      updateGroupStats(allGroups);renderGroups(allGroups);
+    });
+  }
+  function updateGroupStats(gs){
+    var v=gs.filter(function(g){return g.verified;}).length;
+    var mem=gs.reduce(function(s,g){return s+(g.members?Object.keys(g.members).length:0);},0);
+    document.getElementById('gm-total').textContent=gs.length;
+    document.getElementById('gm-verified').textContent=v;
+    document.getElementById('gm-unverified').textContent=gs.length-v;
+    document.getElementById('gm-members').textContent=mem;
+    document.getElementById('groupBadge').textContent=gs.length;
+    document.getElementById('ov-groups').textContent=gs.length;
+    document.getElementById('ov-verified').textContent=v;
+  }
+  function renderGroups(groups){
+    var c=document.getElementById('groupsTable');
+    if(!groups.length){c.innerHTML='<div class="empty"><div class="icon">🎭</div><p>No groups found.</p></div>';return;}
+    c.innerHTML='<table><thead><tr><th>Group Name</th><th>Owner</th><th>Members</th><th>Created</th><th>Verified</th><th>Actions</th></tr></thead><tbody>'+
+      groups.map(function(g){
+        var mc=g.members?Object.keys(g.members).length:0;
+        var v=g.verified;
+        return '<tr>'+
+          '<td><strong>'+esc(g.name||'Unnamed')+'</strong></td>'+
+          '<td style="color:var(--text2)">'+esc(g.host||'Unknown')+'</td>'+
+          '<td><span style="color:var(--neon);font-weight:700">'+mc+'</span></td>'+
+          '<td style="color:var(--text3);font-size:12px">'+(g.createdAt?new Date(g.createdAt).toLocaleDateString('en-GB'):'—')+'</td>'+
+          '<td>'+(v?'<span class="vbadge"><span class="tick">✓</span> Verified</span>':'<span style="color:var(--text3);font-size:12px">—</span>')+'</td>'+
+          '<td>'+
+            '<button class="abtn av" onclick="viewGroup(\''+esc(g._id)+'\')">View</button>'+
+            (v
+              ?'<button class="abtn auvfy" onclick="unverifyGroup(\''+esc(g._id)+'\',\''+esc(g.name||'')+'\')">Unverify</button>'
+              :'<button class="abtn avfy" onclick="verifyGroup(\''+esc(g._id)+'\',\''+esc(g.name||'')+'\')">✓ Verify</button>')+
+            '<button class="abtn adel" onclick="deleteGroup(\''+esc(g._id)+'\',\''+esc(g.name||'')+'\')">Delete</button>'+
+          '</td></tr>';
+      }).join('')+'</tbody></table>';
+  }
+  function filterGroups(){
+    var q=document.getElementById('groupSearch').value.toLowerCase();
+    renderGroups(q?allGroups.filter(function(g){return(g.name||'').toLowerCase().includes(q)||(g.host||'').toLowerCase().includes(q);}):allGroups);
+  }
+  function viewGroup(gid){
+    var g=allGroups.find(function(x){return x._id===gid;}); if(!g) return;
+    var mc=g.members?Object.keys(g.members).length:0;
+    var mnames=g.members?Object.values(g.members).map(function(m){return esc(m.emoji||'👤')+' '+esc(m.name||'?');}).join(', '):'None';
+    document.getElementById('groupModalTitle').textContent='🎭 '+(g.name||'Group');
+    document.getElementById('groupModalContent').innerHTML=
+      '<div class="mfield"><div class="lbl">Name</div><div class="val">'+esc(g.name||'—')+(g.verified?' <span class="vbadge"><span class="tick">✓</span> Verified</span>':'')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Owner</div><div class="val">'+esc(g.host||'—')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Members ('+mc+')</div><div class="val" style="font-size:13px;color:var(--text2)">'+(mnames||'None')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Created</div><div class="val">'+(g.createdAt?new Date(g.createdAt).toLocaleString('en-GB'):'—')+'</div></div>'+
+      '<div class="mfield"><div class="lbl">Group ID</div><div class="val" style="font-family:var(--mono);font-size:12px">'+esc(gid)+'</div></div>'+
+      '<div class="modal-btn-row">'+
+        (g.verified
+          ?'<button class="abtn auvfy" onclick="unverifyGroup(\''+esc(gid)+'\',\''+esc(g.name||'')+'\');closeModal(\'groupModal\')">Remove Verification</button>'
+          :'<button class="abtn avfy" onclick="verifyGroup(\''+esc(gid)+'\',\''+esc(g.name||'')+'\');closeModal(\'groupModal\')">✓ Verify Group</button>')+
+        '<button class="abtn adel" onclick="deleteGroup(\''+esc(gid)+'\',\''+esc(g.name||'')+'\');closeModal(\'groupModal\')">🗑️ Delete Group</button>'+
+      '</div>';
+    openModal('groupModal');
+  }
+  function verifyGroup(gid,name){
+    fbUpdate('/groups/'+gid,{verified:true,verifiedAt:Date.now()},function(){
+      var g=allGroups.find(function(x){return x._id===gid;}); if(g) g.verified=true;
+      updateGroupStats(allGroups);renderGroups(allGroups);showToast('✓ "'+name+'" is now verified!','success');
+    });
+  }
+  function unverifyGroup(gid,name){
+    fbUpdate('/groups/'+gid,{verified:false,verifiedAt:null},function(){
+      var g=allGroups.find(function(x){return x._id===gid;}); if(g) g.verified=false;
+      updateGroupStats(allGroups);renderGroups(allGroups);showToast('"'+name+'" unverified.','info');
+    });
+  }
+  function deleteGroup(gid,name){
+    if(!confirm('Delete group "'+name+'"?\nThis deletes all messages and members. Cannot be undone!')) return;
+    fbDelete('/groups/'+gid,function(){
+      allGroups=allGroups.filter(function(x){return x._id!==gid;});
+      updateGroupStats(allGroups);renderGroups(allGroups);showToast('🗑️ "'+name+'" deleted.','error');
+    });
+  }
+
+  // PARTIES
+  function loadParties(){
+    document.getElementById('partiesTable').innerHTML='<div class="loading"><span class="spinner"></span>Loading from Firebase…</div>';
+    fbGet('/parties',function(data){
+      var c=document.getElementById('partiesTable');
+      if(!data){c.innerHTML='<div class="empty"><div class="icon">🎉</div><p>No parties found.</p></div>';return;}
+      var parties=Object.entries(data).map(function(e){var p=e[1];p._id=e[0];return p;}).sort(function(a,b){return(b.createdAt||0)-(a.createdAt||0);});
+      if(!parties.length){c.innerHTML='<div class="empty"><div class="icon">🎉</div><p>No parties found.</p></div>';return;}
+      c.innerHTML='<table><thead><tr><th>Party Name</th><th>Host</th><th>Members</th><th>Messages</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody>'+
+        parties.map(function(p){
+          var mc=p.members?Object.keys(p.members).length:0;
+          var msgc=p.messages?Object.keys(p.messages).length:0;
+          return '<tr>'+
+            '<td><strong>'+esc(p.name||'Unnamed')+'</strong></td>'+
+            '<td style="color:var(--text2)">'+esc(p.host||'Unknown')+'</td>'+
+            '<td><span style="color:var(--neon);font-weight:700">'+mc+'</span></td>'+
+            '<td style="color:var(--text2)">'+msgc+'</td>'+
+            '<td><span class="sbadge '+(p.active?'active':'ended')+'">'+(p.active?'Active':'Ended')+'</span></td>'+
+            '<td style="color:var(--text3);font-size:12px">'+(p.createdAt?new Date(p.createdAt).toLocaleDateString('en-GB'):'—')+'</td>'+
+            '<td>'+
+              (p.active?'<button class="abtn ar" onclick="disbandParty(\''+esc(p._id)+'\',\''+esc(p.name||'')+'\')">Disband</button>':'')+
+              '<button class="abtn adel" onclick="deleteParty(\''+esc(p._id)+'\',\''+esc(p.name||'')+'\')">Delete</button>'+
+            '</td></tr>';
+        }).join('')+'</tbody></table>';
+    });
+  }
+  function disbandParty(pid,name){
+    if(!confirm('Force disband "'+name+'"?')) return;
+    fbUpdate('/parties/'+pid,{active:false},function(){loadParties();showToast('Party disbanded.','info');});
+  }
+  function deleteParty(pid,name){
+    if(!confirm('Delete party "'+name+'" and all its messages?')) return;
+    fbDelete('/parties/'+pid,function(){loadParties();showToast('Party deleted.','error');});
   }
 
   // OVERVIEW
-  function loadOverview() {
-    const apps = getApplications();
-    const pending = apps.filter(a => !a.status || a.status === 'pending').length;
-    const approved = apps.filter(a => a.status === 'approved').length;
-    const paid = apps.filter(a => a.status === 'paid').length;
-
-    document.getElementById('ov-apps').textContent = apps.length;
-    document.getElementById('ov-pending').textContent = pending;
-    document.getElementById('ov-approved').textContent = approved;
-    document.getElementById('ov-paid').textContent = paid;
-    document.getElementById('appBadge').textContent = pending;
-
-    const recentEl = document.getElementById('ov-recent-apps');
-    const recent = apps.slice(0, 5);
-    if (recent.length === 0) {
-      recentEl.innerHTML = `<div class="ov-row"><span class="ov-label" style="color:var(--text3)">No applications yet</span></div>`;
-    } else {
-      recentEl.innerHTML = recent.map(a => `<div class="ov-row">
-        <span class="ov-label">${esc(a.name)} <span style="color:var(--text3);font-size:12px">(${esc(a.platform)})</span></span>
-        <span class="status-badge ${a.status || 'pending'}">${a.status || 'pending'}</span>
-      </div>`).join('');
-    }
-
-    if (typeof games !== 'undefined') {
-      const seen = new Set();
-      const unique = games.filter(g => { if (seen.has(g.id)) return false; seen.add(g.id); return true; });
-      document.getElementById('ov-game-count').textContent = unique.length;
+  function loadOverview(){
+    var apps=getApps();
+    var p=apps.filter(function(a){return !a.status||a.status==='pending';}).length;
+    var ap=apps.filter(function(a){return a.status==='approved';}).length;
+    document.getElementById('ov-apps').textContent=apps.length;
+    document.getElementById('ov-pending').textContent=p;
+    document.getElementById('appBadge').textContent=p;
+    var re=document.getElementById('ov-recent-apps');
+    var rec=apps.slice(0,5);
+    re.innerHTML=rec.length?rec.map(function(a){return '<div class="ov-row"><span class="ov-label">'+esc(a.name)+' <span style="color:var(--text3);font-size:12px">('+esc(a.platform)+')</span></span><span class="sbadge '+(a.status||'pending')+'">'+(a.status||'pending')+'</span></div>';}).join(''):'<div class="ov-row"><span class="ov-label" style="color:var(--text3)">No applications yet</span></div>';
+    if(typeof games!=='undefined'){
+      var seen=new Set();var u=games.filter(function(g){if(seen.has(g.id))return false;seen.add(g.id);return true;});
+      document.getElementById('ov-game-count').textContent=u.length;
     }
   }
 
   // SETTINGS
-  function changePassword() {
-    const v = document.getElementById('newPwInput').value.trim();
-    if (!v || v.length < 6) { showToast('Password must be at least 6 characters.', 'error'); return; }
-    ADMIN_PASSWORD = v;
-    localStorage.setItem(ADMIN_PASSWORD_KEY, v);
-    document.getElementById('newPwInput').value = '';
-    showToast('Password updated!', 'success');
+  function changePassword(){
+    var v=document.getElementById('newPwInput').value.trim();
+    if(!v||v.length<6){showToast('Password must be at least 6 characters.','error');return;}
+    ADMIN_PASSWORD=v;localStorage.setItem(ADMIN_PASSWORD_KEY,v);
+    document.getElementById('newPwInput').value='';showToast('Password updated!','success');
   }
 
-  // TOAST
-  function showToast(msg, type = 'success') {
-    const t = document.getElementById('toast');
-    t.textContent = type === 'success' ? '✅ ' + msg : '✕ ' + msg;
-    t.className = 'toast ' + type;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+  // UTILITIES
+  function timeAgo(ts){
+    var s=Math.floor((Date.now()-ts)/1000);
+    if(s<60) return 'Just now';
+    if(s<3600) return Math.floor(s/60)+'m ago';
+    if(s<86400) return Math.floor(s/3600)+'h ago';
+    return Math.floor(s/86400)+'d ago';
   }
-
-  function esc(s) {
-    if (!s) return '';
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  function showToast(msg,type){
+    type=type||'success';
+    var t=document.getElementById('toast');
+    t.textContent=(type==='success'?'✅ ':type==='info'?'ℹ️ ':'✕ ')+msg;
+    t.className='toast '+type+' show';
+    clearTimeout(t._tmr);
+    t._tmr=setTimeout(function(){t.classList.remove('show');},3500);
   }
+  function esc(s){if(!s)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function openModal(id){document.getElementById(id).classList.add('open');}
+  function closeModal(id){document.getElementById(id).classList.remove('open');}
 
-  // Close app modal on bg click
-  document.getElementById('appModal').addEventListener('click', e => {
-    if (e.target === document.getElementById('appModal')) document.getElementById('appModal').classList.remove('open');
+  ['appModal','userModal','groupModal'].forEach(function(id){
+    document.getElementById(id).addEventListener('click',function(e){if(e.target===document.getElementById(id))closeModal(id);});
   });
 </script>
 <script src="games.js"></script>
