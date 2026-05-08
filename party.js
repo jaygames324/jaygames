@@ -179,14 +179,16 @@
     stopPoll(); currentView = view; buildTabs(view);
     var body = document.getElementById('partyBody'); if (!body) return;
     body.innerHTML = '<div style="text-align:center;padding:32px;color:rgba(180,190,255,0.3);font-size:13px;">Loading...</div>';
-    if (view === 'login')    renderLogin(body);
-    else if (view === 'register') renderRegister(body);
-    else if (view === 'lobby')    renderLobby(body);
-    else if (view === 'friends')  renderFriends(body);
-    else if (view === 'dms')      renderDMs(body);
-    else if (view === 'profile')  renderProfile(body);
-    else if (view === 'chat')     renderChat(body, currentPartyId);
-    else if (view === 'dm')       renderDM(body, currentDmId);
+    if (view === 'login')       renderLogin(body);
+    else if (view === 'register')   renderRegister(body);
+    else if (view === 'lobby')      renderLobby(body);
+    else if (view === 'groups')     renderGroupsLobby(body);
+    else if (view === 'friends')    renderFriends(body);
+    else if (view === 'dms')        renderDMs(body);
+    else if (view === 'profile')    renderProfile(body);
+    else if (view === 'chat')       renderChat(body, currentPartyId);
+    else if (view === 'groupChat')  renderGroupChat(body, currentGroupId);
+    else if (view === 'dm')         renderDM(body, currentDmId);
   }
 
   // ── LOGIN / REGISTER ──
@@ -220,6 +222,7 @@
       if (!found) { err.textContent = 'Username not found.'; setBtn('loginBtn','Log In'); return; }
       var uid = found[0], user = found[1];
       if (user.passwordHash !== hashPass(pass)) { err.textContent = 'Wrong password.'; setBtn('loginBtn','Log In'); return; }
+      if (user.banned) { err.textContent = '🚫 This account has been banned.'; setBtn('loginBtn','Log In'); return; }
       saveSession({ uid:uid, name:user.name, emoji:user.emoji, passwordHash:user.passwordHash });
       fbUpdate('/users/'+uid, { lastSeen: Date.now() });
       hookPageEvents(); syncLocalToAccount(uid); showView('lobby');
@@ -716,6 +719,187 @@
     window.addEventListener('beforeunload', function(){ pushAllToCloud(uid); });
     document.addEventListener('visibilitychange', function(){ if(document.visibilityState==='hidden') pushAllToCloud(uid); });
     setInterval(function(){ pushAllToCloud(uid); }, 60000);
+  }
+
+  // ── GROUPS ──
+  function verifiedBadge() {
+    return '<span style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;color:#60a5fa;vertical-align:middle;">' +
+      '<span style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;background:#3b82f6;border-radius:50%;font-size:8px;color:#fff;flex-shrink:0;">✓</span>' +
+      'Verified</span>';
+  }
+
+  function renderGroupsLobby(body) {
+    var session = me();
+    body.innerHTML =
+      '<div style="padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;display:flex;gap:8px;">' +
+        '<button id="showCreateGroupBtn" style="' + bigBtn('#a855f7') + 'flex:1;margin:0;">+ Create a Group</button>' +
+      '</div>' +
+      '<div id="groupLobbyList" style="flex:1;overflow-y:auto;"></div>';
+    document.getElementById('showCreateGroupBtn').onclick = function(){ showCreateGroupForm(body); };
+    startPoll(loadGroupsLobby, 5000);
+  }
+
+  function loadGroupsLobby() {
+    fbGet('/groups', function(data){
+      var list = document.getElementById('groupLobbyList'); if (!list) return;
+      if (!data) { list.innerHTML = emptyMsg('🎭', 'No groups yet.<br>Create one to get started!'); return; }
+      var groups = Object.values(data).filter(function(g){ return g && g.name; })
+        .sort(function(a,b){ return (b.createdAt||0)-(a.createdAt||0); });
+      if (!groups.length) { list.innerHTML = emptyMsg('🎭', 'No groups yet.<br>Create one to get started!'); return; }
+      var session = me();
+      list.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(180,190,255,0.3);padding:10px 14px 4px;">🎭 All Groups</div>' +
+        groups.map(function(g){
+          var mc = g.members ? Object.keys(g.members).length : 0;
+          var isMember = g.members && Object.values(g.members).some(function(m){ return m.uid === session.uid; });
+          var verBadge = g.verified ? verifiedBadge() : '';
+          var btn = isMember
+            ? '<button data-gid="' + g.id + '" class="gOpenBtn" style="font-size:11px;font-weight:700;padding:5px 11px;border-radius:7px;background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.35);color:#a855f7;cursor:pointer;font-family:inherit;white-space:nowrap;">Open</button>'
+            : '<button data-gid="' + g.id + '" class="gJoinBtn" style="font-size:11px;font-weight:700;padding:5px 11px;border-radius:7px;background:linear-gradient(135deg,#a855f7,#7c3aed);border:none;color:#fff;cursor:pointer;font-family:inherit;white-space:nowrap;">Join</button>';
+          return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.07);">' +
+            '<div style="width:36px;height:36px;border-radius:8px;background:rgba(168,85,247,0.12);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🎭</div>' +
+            '<div style="flex:1;min-width:0;">' +
+              '<div style="font-size:13px;font-weight:700;color:#eef0ff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + esc(g.name) + ' ' + verBadge + '</div>' +
+              '<div style="font-size:11px;color:rgba(180,190,255,0.55);margin-top:1px;">by ' + esc(g.host) + ' · ' + mc + ' member' + (mc!==1?'s':'') + '</div>' +
+            '</div>' +
+            btn +
+          '</div>';
+        }).join('');
+      list.querySelectorAll('.gJoinBtn').forEach(function(b){ b.onclick = function(){ doJoinGroup(b.dataset.gid); }; });
+      list.querySelectorAll('.gOpenBtn').forEach(function(b){ b.onclick = function(){ openGroupChat(b.dataset.gid); }; });
+    });
+  }
+
+  function showCreateGroupForm(body) {
+    stopPoll();
+    body.innerHTML =
+      '<div style="padding:16px;">' +
+        '<div style="font-size:14px;font-weight:700;color:#eef0ff;margin-bottom:12px;">🎭 Create a Group</div>' +
+        '<div style="font-size:12px;color:rgba(180,190,255,0.55);margin-bottom:6px;">Group Name</div>' +
+        '<input id="cgName" type="text" maxlength="40" placeholder="Group name..." style="' + inputStyle() + 'margin-bottom:10px;" />' +
+        '<div style="font-size:12px;color:rgba(180,190,255,0.55);margin-bottom:6px;">Description (optional)</div>' +
+        '<input id="cgDesc" type="text" maxlength="100" placeholder="What\'s this group about?" style="' + inputStyle() + 'margin-bottom:14px;" />' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button id="cgCancel" style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.11);color:rgba(180,190,255,0.55);padding:9px;border-radius:9px;cursor:pointer;font-size:13px;font-family:inherit;">Cancel</button>' +
+          '<button id="cgSubmit" style="' + bigBtn('#a855f7') + 'flex:2;margin:0;">🎭 Create Group</button>' +
+        '</div>' +
+        '<div id="cgErr" style="font-size:12px;color:#ef4444;margin-top:8px;min-height:14px;"></div>' +
+      '</div>';
+    setTimeout(function(){ var i=document.getElementById('cgName'); if(i) i.focus(); }, 50);
+    document.getElementById('cgCancel').onclick = function(){ showView('groups'); };
+    document.getElementById('cgSubmit').onclick = doCreateGroup;
+    document.getElementById('cgName').onkeydown = function(e){ if(e.key==='Enter') doCreateGroup(); };
+  }
+
+  function doCreateGroup() {
+    var name = (document.getElementById('cgName')||{}).value;
+    var desc = (document.getElementById('cgDesc')||{}).value;
+    var err = document.getElementById('cgErr');
+    if (!name || !name.trim()) { if(err) err.textContent = 'Enter a group name.'; return; }
+    name = name.trim();
+    var btn = document.getElementById('cgSubmit');
+    if (btn) { btn.textContent = 'Creating...'; btn.disabled = true; }
+    var session = me();
+    var groupId = gid();
+    var group = {
+      id: groupId, name: name, desc: desc ? desc.trim() : '', host: session.name, hostUid: session.uid,
+      createdAt: Date.now(), verified: false, members: {}, messages: {}
+    };
+    var memKey = gid();
+    group.members[memKey] = { uid: session.uid, name: session.name, emoji: session.emoji, joinedAt: Date.now(), role: 'owner' };
+    fbSet('/groups/' + groupId, group, function(){
+      fbPush('/groups/' + groupId + '/messages', { author:'System', emoji:'🎭', text: session.name + ' created the group!', ts: Date.now(), system: true }, function(){
+        openGroupChat(groupId);
+      });
+    });
+  }
+
+  function doJoinGroup(groupId) {
+    var session = me();
+    fbGet('/groups/' + groupId + '/members', function(members){
+      var already = members && Object.values(members).some(function(m){ return m.uid === session.uid; });
+      if (already) { openGroupChat(groupId); return; }
+      fbSet('/groups/' + groupId + '/members/' + gid(), { uid: session.uid, name: session.name, emoji: session.emoji, joinedAt: Date.now(), role: 'member' }, function(){
+        fbPush('/groups/' + groupId + '/messages', { author:'System', emoji:'👋', text: session.name + ' joined!', ts: Date.now(), system: true }, function(){
+          openGroupChat(groupId);
+        });
+      });
+    });
+  }
+
+  function openGroupChat(groupId) {
+    stopPoll(); currentGroupId = groupId; currentView = 'groupChat';
+    buildTabs('groups');
+    var body = document.getElementById('partyBody'); if(body) renderGroupChat(body, groupId);
+  }
+
+  function renderGroupChat(body, groupId) {
+    var session = me();
+    body.innerHTML =
+      '<div style="flex-shrink:0;background:rgba(168,85,247,0.04);border-bottom:1px solid rgba(255,255,255,0.07);">' +
+        '<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;">' +
+          '<button id="gcBack" style="background:none;border:none;color:rgba(180,190,255,0.55);cursor:pointer;font-size:13px;padding:0;font-family:inherit;flex-shrink:0;">← Back</button>' +
+          '<div style="flex:1;min-width:0;"><div id="gcTitle" style="font-size:13px;font-weight:700;color:#eef0ff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Loading...</div>' +
+          '<div id="gcSubs" style="font-size:11px;color:rgba(180,190,255,0.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div></div>' +
+          '<div id="gcAct"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div id="gcMsgs" style="flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;min-height:220px;"></div>' +
+      '<div style="display:flex;gap:8px;padding:10px 14px;border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0;">' +
+        '<input id="gcInput" type="text" maxlength="200" placeholder="Message the group..." style="' + inputStyle() + '" />' +
+        '<button id="gcSend" style="flex-shrink:0;background:linear-gradient(135deg,#a855f7,#7c3aed);border:none;color:#fff;width:36px;height:36px;border-radius:9px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">➤</button>' +
+      '</div>';
+
+    document.getElementById('gcBack').onclick = function(){ stopPoll(); currentGroupId=null; showView('groups'); };
+
+    function sendMsg() {
+      var inp = document.getElementById('gcInput'); if (!inp || !inp.value.trim()) return;
+      var text = inp.value.trim(); inp.value = '';
+      fbPush('/groups/' + groupId + '/messages', { author: session.name, emoji: session.emoji, text: text, ts: Date.now() });
+    }
+    document.getElementById('gcSend').onclick = sendMsg;
+    document.getElementById('gcInput').onkeydown = function(e){ if(e.key==='Enter') sendMsg(); };
+
+    var lastCount = 0, actBuilt = false;
+    function pollGroupChat() {
+      fbGet('/groups/' + groupId, function(g){
+        if (!g) return;
+        var tEl = document.getElementById('gcTitle');
+        if (tEl) tEl.innerHTML = esc(g.name) + (g.verified ? ' ' + verifiedBadge() : '');
+        var members = g.members ? Object.values(g.members) : [];
+        var sEl = document.getElementById('gcSubs');
+        if (sEl) sEl.textContent = members.map(function(m){ return m.emoji+' '+m.name; }).join(' · ');
+        var aEl = document.getElementById('gcAct');
+        if (aEl && !actBuilt) {
+          actBuilt = true;
+          if (g.hostUid === session.uid) {
+            aEl.innerHTML = '<button id="gdisbandBtn" style="font-size:10px;padding:3px 10px;border-radius:6px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#ef4444;cursor:pointer;font-family:inherit;">Delete</button>';
+            document.getElementById('gdisbandBtn').onclick = function(){
+              if (!confirm('Delete this group and all messages?')) return;
+              fbDelete('/groups/' + groupId, function(){ stopPoll(); showView('groups'); });
+            };
+          } else {
+            aEl.innerHTML = '<button id="gleaveBtn" style="font-size:10px;padding:3px 10px;border-radius:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.11);color:rgba(180,190,255,0.55);cursor:pointer;font-family:inherit;">Leave</button>';
+            document.getElementById('gleaveBtn').onclick = function(){
+              fbGet('/groups/' + groupId + '/members', function(mems){
+                var key = mems && Object.entries(mems).find(function(e){ return e[1].uid === session.uid; });
+                if (key) fbDelete('/groups/' + groupId + '/members/' + key[0]);
+                fbPush('/groups/' + groupId + '/messages', { author:'System', emoji:'👋', text: session.name+' left.', ts: Date.now(), system: true }, function(){
+                  stopPoll(); showView('groups');
+                });
+              });
+            };
+          }
+        }
+        var msgs = g.messages ? Object.values(g.messages).sort(function(a,b){ return a.ts-b.ts; }) : [];
+        if (msgs.length === lastCount) return;
+        lastCount = msgs.length;
+        var el = document.getElementById('gcMsgs'); if (!el) return;
+        var atBottom = el.scrollHeight - el.scrollTop <= el.clientHeight + 60;
+        el.innerHTML = renderMessages(msgs, session.name);
+        if (atBottom) el.scrollTop = el.scrollHeight;
+      });
+    }
+    startPoll(pollGroupChat, 2000);
   }
 
   // ── INIT ──
