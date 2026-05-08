@@ -2955,6 +2955,7 @@
           toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
         });
       }
+      window.showToast = showToast;
 
       // =============================================
       // EXTRA GAMES
@@ -3459,6 +3460,17 @@
       });
     </script>
 
+
+    <script>
+      // Auth stubs - delegate to Firebase module functions once loaded
+      function doGoogleSignIn() { if (window.doGoogleSignIn) window.doGoogleSignIn(); }
+      function doLogin() { if (window.doLogin) window.doLogin(); }
+      function doSignupStep1() { if (window.doSignupStep1) window.doSignupStep1(); }
+      function doSetUsername() { if (window.doSetUsername) window.doSetUsername(); }
+      function doSaveProfile() { if (window.doSaveProfile) window.doSaveProfile(); }
+      function doLogout() { if (window.doLogout) window.doLogout(); }
+    </script>
+
     <!-- ── FIREBASE ── -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -3563,10 +3575,10 @@
           } else {
             window.closeAuth();
           }
-          showToast("Signed in with Google!");
+          window.showToast("Signed in with Google!");
         } catch (e) {
           if (e.code !== "auth/popup-closed-by-user") {
-            showToast(
+            window.showToast(
               "Google sign-in failed: " + (e.message || "Unknown error"),
               true,
             );
@@ -3650,7 +3662,7 @@
         const username = window._pendingUsername;
         const email = window._pendingEmail;
         if (!uid || !username) {
-          return showToast(
+          return window.showToast(
             "Session expired. Please try signing up again.",
             true,
           );
@@ -3689,7 +3701,7 @@
           } else {
             msg = e.message || msg;
           }
-          showToast("Error: " + msg, true);
+          window.showToast("Error: " + msg, true);
         }
       };
 
@@ -3708,7 +3720,7 @@
           btn.disabled = false;
           btn.textContent = "Log In";
           window.closeAuth();
-          showToast("Welcome back!");
+          window.showToast("Welcome back!");
         } catch (e) {
           btn.disabled = false;
           btn.textContent = "Log In";
@@ -3732,7 +3744,7 @@
         document.getElementById("friendsLoginPrompt").style.display = "block";
         document.getElementById("friendsLoggedIn").style.display = "none";
         document.getElementById("userDropdown")?.classList.remove("open");
-        showToast("Logged out.");
+        window.showToast("Logged out.");
       };
 
       // expose closeAuth to module scope
@@ -3900,21 +3912,21 @@
           }
           // Remove the incoming request
           await remove(ref(db, "friendRequests/" + currentUser.uid + "/" + fromUid));
-          showToast("✓ " + fromUsername + " added as friend!");
+          window.showToast("✓ " + fromUsername + " added as friend!");
           // Force refresh the friends list
           listenForFriends(currentUser.uid);
         } catch (e) {
           console.error("acceptRequest error:", e);
-          showToast("Error accepting request: " + (e.message || e), true);
+          window.showToast("Error accepting request: " + (e.message || e), true);
         }
       };
       window.declineRequest = async function (fromUid) {
         if (!currentUser) return;
         try {
           await remove(ref(db, "friendRequests/" + currentUser.uid + "/" + fromUid));
-          showToast("Request declined.");
+          window.showToast("Request declined.");
         } catch (e) {
-          showToast("Error: " + (e.message || e), true);
+          window.showToast("Error: " + (e.message || e), true);
         }
       };
 
