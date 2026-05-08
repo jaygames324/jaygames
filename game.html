@@ -616,67 +616,13 @@
 
     <script src="games.js"></script>
     <script>
-      // ─── Extra games (same as index.html) ──────────────────────────────
-      const extraGames = [
-        {
-          id: "skibidi-runner",
-          title: "Skibidi Runner",
-          src: "https://html5.gamemonetize.co/mh08lk78gtrvf2nfp2kbvqj9n1xl8voi/",
-          img: "https://img.gamemonetize.com/mh08lk78gtrvf2nfp2kbvqj9n1xl8voi/512x384.jpg",
-          tags: ["brainrot", "action", "popular", "new"],
-        },
-        {
-          id: "rizz-clicker",
-          title: "Rizz Clicker",
-          src: "https://html5.gamemonetize.co/m4a1m90ajt2q62i7lzavxhkgkjzltsci/",
-          img: "https://img.gamemonetize.com/m4a1m90ajt2q62i7lzavxhkgkjzltsci/512x384.jpg",
-          tags: ["brainrot", "puzzle", "new"],
-        },
-        {
-          id: "ohio-escape",
-          title: "Only in Ohio Escape",
-          src: "https://html5.gamemonetize.co/ue6pv9frylen459ec8g3z8zwk21hs265/",
-          img: "https://img.gamemonetize.com/ue6pv9frylen459ec8g3z8zwk21hs265/512x384.jpg",
-          tags: ["brainrot", "survival", "popular"],
-        },
-        {
-          id: "sigma-run",
-          title: "Sigma Run",
-          src: "https://html5.gamemonetize.co/00rc1qapvfanavoywyen9ns9bql6nvm4/",
-          img: "https://img.gamemonetize.com/00rc1qapvfanavoywyen9ns9bql6nvm4/512x384.jpg",
-          tags: ["brainrot", "action", "new"],
-        },
-        {
-          id: "blox-survival",
-          title: "Blox Survival",
-          src: "https://html5.gamemonetize.co/bevbu07wktcxyyg5hwz42yh36bg5maio/",
-          img: "https://img.gamemonetize.com/bevbu07wktcxyyg5hwz42yh36bg5maio/512x384.jpg",
-          tags: ["roblox", "survival", "popular", "3d"],
-        },
-        {
-          id: "mineblox",
-          title: "MineBlox Builder",
-          src: "https://html5.gamemonetize.co/n6rj5pu853j5z31exseip818vqhvk12r/",
-          img: "https://img.gamemonetize.com/n6rj5pu853j5z31exseip818vqhvk12r/512x384.jpg",
-          tags: ["roblox", "3d", "popular", "best"],
-        },
-        {
-          id: "obby-falls",
-          title: "Obby Falls",
-          src: "https://html5.gamemonetize.co/00rc1qapvfanavoywyen9ns9bql6nvm4/",
-          img: "https://img.gamemonetize.com/00rc1qapvfanavoywyen9ns9bql6nvm4/512x384.jpg",
-          tags: ["roblox", "adventure", "popular"],
-        },
-        {
-          id: "tycoon-island",
-          title: "Tycoon Island",
-          src: "https://html5.gamemonetize.co/jb0dcjocnv110l3a3tmmdxbnto6gwv8g/",
-          img: "https://img.gamemonetize.com/jb0dcjocnv110l3a3tmmdxbnto6gwv8g/512x384.jpg",
-          tags: ["roblox", "simulators", "new"],
-        },
-      ];
-
-      const allGames = [...(window.games || []), ...extraGames];
+      // Deduplicate games from games.js by id
+      const seen = new Set();
+      const deduped = (typeof games !== "undefined" ? games : []).filter(g => {
+        if (seen.has(g.id)) return false;
+        seen.add(g.id);
+        return true;
+      });
 
       // ─── Favourites ────────────────────────────────────────────────────
       let favourites = JSON.parse(localStorage.getItem("jg_favs") || "[]");
@@ -736,7 +682,7 @@
           return;
         }
 
-        const game = allGames.find((g) => g.id === id);
+        const game = deduped.find((g) => g.id === id);
         if (!game) {
           showNotFound();
           return;
@@ -785,7 +731,7 @@
         updateFavBtns();
 
         // "Play Next" sidebar
-        const others = allGames.filter((g) => g.id !== id);
+        const others = deduped.filter((g) => g.id !== id);
         const shuffled = others.sort(() => Math.random() - 0.5).slice(0, 12);
         const nextEl = document.getElementById("nextGames");
         nextEl.innerHTML = "";
