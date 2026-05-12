@@ -912,9 +912,64 @@
     setInterval(function(){pushAllToCloud(uid);},60000);
   }
 
+  // ── FIREBASE AUTH BRIDGE ──
+  // When Firebase is ready, auto-log into party system using the same account
+  function bridgeFirebaseAuth() {
+    // Poll for window.firebaseUser set by the main Firebase module
+    var attempts = 0;
+    var poll = setInterval(function () {
+      attempts++;
+      var fbUser = window.firebaseUser;
+      if (fbUser && fbUser.uid) {
+        clearInterval(poll);
+        // Check if already logged in with same uid
+        var existing = getSession();
+        if (existing && existing.uid === fbUser.uid) return;
+        // Auto-create a party session from the Firebase user
+        var displayName = fbUser.displayName || fbUser.username || 'Player';
+        var cleanName = displayName.replace(/[^a-zA-Z0-9\-_.]/g, '').slice(0, 20) || 'Player';
+        var emoji = EMOJIS[Math.abs(fbUser.uid.charCodeAt(0) + fbUser.uid.charCodeAt(1)) % EMOJIS.length];
+        // Check if user exists in party DB, create if not
+        fbGet('/users/' + fbUser.uid, function (user) {
+          if (!user) {
+            var userData = { name: cleanName, emoji: emoji, passwordHash: 'firebase', createdAt: Date.now() };
+            fbUpdate('/users/' + fbUser.uid, userData, function () {});
+          }
+          var name = (user && user.name) ? user.name : cleanName;
+          var emo = (user && user.emoji) ? user.emoji : emoji;
+          saveSession({ uid: fbUser.uid, name: name, emoji: emo, passwordHash: 'firebase' });
+          hookPageEvents();
+          syncLocalToAccount(fbUser.uid);
+          // Refresh badge and panel if open
+          refreshBadge();
+          var panel = document.getElementById('partyPanel');
+          if (panel && panel.style.display !== 'none') showView('lobby');
+        });
+      } else if (attempts > 40) {
+        // Firebase didn't log in after ~10s, clear any stale session
+        clearInterval(poll);
+      }
+    }, 250);
+
+    // Also watch for sign-out
+    var signedIn = false;
+    var watchSignOut = setInterval(function () {
+      var fbUser = window.firebaseUser;
+      if (fbUser && !signedIn) { signedIn = true; }
+      if (!fbUser && signedIn) {
+        signedIn = false;
+        clearSession();
+        stopPoll && stopPoll();
+        var panel = document.getElementById('partyPanel');
+        if (panel) { showView('login'); }
+      }
+    }, 1000);
+  }
+
   // ── INIT ──
   function init() {
     injectButton();
+    bridgeFirebaseAuth();
     if (loggedIn()) { hookPageEvents(); syncLocalToAccount(me().uid); }
   }
   if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
