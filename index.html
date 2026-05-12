@@ -88,20 +88,22 @@
         left: 0;
         right: 0;
         z-index: 200;
-        background: var(--nav-bg);
-        backdrop-filter: blur(20px);
+        background: rgba(8, 9, 13, 0.97);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
         border-bottom: 1px solid var(--border);
-        padding: 0 20px;
+        padding: 0 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 60px;
-        gap: 12px;
+        height: 58px;
+        gap: 10px;
       }
       .nav-left {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
+        flex-shrink: 0;
       }
       .hamburger {
         background: none;
@@ -129,28 +131,33 @@
       .nav-logo {
         display: flex;
         align-items: center;
-        gap: 9px;
+        gap: 8px;
         text-decoration: none;
       }
       .logo-icon {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
         background: linear-gradient(135deg, var(--jay), #ff3d00);
         border-radius: 9px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 18px;
-        box-shadow: 0 0 18px rgba(255, 107, 53, 0.4);
+        box-shadow: 0 0 16px rgba(255, 107, 53, 0.35);
         overflow: hidden;
+        flex-shrink: 0;
       }
       .logo-jey {
-        width: 36px;
-        border-radius: 4px;
+        width: 110%;
+        height: 110%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0;
+        mix-blend-mode: lighten;
       }
       .logo-text {
         font-weight: 900;
-        font-size: 20px;
+        font-size: 19px;
         letter-spacing: -0.5px;
         background: linear-gradient(135deg, var(--jay), var(--jay3));
         -webkit-background-clip: text;
@@ -159,18 +166,19 @@
       }
       .nav-search {
         flex: 1;
-        max-width: 380px;
+        max-width: 360px;
         display: flex;
         align-items: center;
         gap: 8px;
         background: var(--bg3);
         border: 1px solid var(--border);
         border-radius: 10px;
-        padding: 8px 14px;
-        transition: border-color 0.2s;
+        padding: 7px 13px;
+        transition: border-color 0.2s, box-shadow 0.2s;
       }
       .nav-search:focus-within {
         border-color: var(--jay);
+        box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
       }
       .nav-search input {
         background: none;
@@ -191,7 +199,8 @@
       .nav-right {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
+        flex-shrink: 0;
       }
       .nav-icon-btn {
         background: none;
@@ -199,8 +208,7 @@
         border-radius: 9px;
         color: var(--text2);
         cursor: pointer;
-        padding: 7px 10px;
-        font-size: 16px;
+        padding: 6px 10px;
         transition: all 0.2s;
         display: flex;
         align-items: center;
@@ -209,10 +217,12 @@
         font-family: "Outfit", sans-serif;
         font-size: 13px;
         font-weight: 600;
+        white-space: nowrap;
       }
       .nav-icon-btn:hover {
         border-color: var(--jay);
         color: var(--jay);
+        background: rgba(255, 107, 53, 0.06);
       }
       .nav-icon-btn.friends-btn {
         background: var(--neon2);
@@ -221,23 +231,27 @@
       }
       .nav-icon-btn.friends-btn:hover {
         background: rgba(0, 245, 212, 0.2);
+        border-color: rgba(0, 245, 212, 0.4);
       }
       .login-btn {
-        background: var(--jay);
+        background: linear-gradient(135deg, var(--jay), #ff3d00);
         border: none;
         border-radius: 9px;
         color: #fff;
         cursor: pointer;
-        padding: 7px 16px;
+        padding: 7px 18px;
         font-family: "Outfit", sans-serif;
         font-size: 13px;
         font-weight: 700;
         transition: all 0.2s;
         letter-spacing: 0.2px;
+        box-shadow: 0 2px 12px rgba(255, 107, 53, 0.25);
+        white-space: nowrap;
       }
       .login-btn:hover {
-        background: var(--jay3);
-        box-shadow: 0 0 16px rgba(255, 107, 53, 0.4);
+        opacity: 0.9;
+        box-shadow: 0 4px 20px rgba(255, 107, 53, 0.45);
+        transform: translateY(-1px);
       }
 
       /* ── USER DROPDOWN ── */
@@ -1793,13 +1807,32 @@
         .category-tiles {
           grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         }
-        .nav-right .friends-btn span {
+        .nav-right .friends-btn span,
+        .nav-right .nav-icon-btn.friends-btn {
+          display: none;
+        }
+        .logo-text {
           display: none;
         }
       }
       @media (max-width: 480px) {
+        nav {
+          padding: 0 10px;
+          gap: 8px;
+        }
         .nav-search {
-          max-width: 140px;
+          max-width: 160px;
+          padding: 6px 10px;
+        }
+        .nav-right {
+          gap: 4px;
+        }
+        .nav-icon-btn {
+          padding: 6px 8px;
+        }
+        .login-btn {
+          padding: 7px 12px;
+          font-size: 12px;
         }
         .category-tiles {
           grid-template-columns: repeat(2, 1fr);
@@ -2534,7 +2567,7 @@
           </button>
           <button
             class="social-btn facebook"
-            onclick="showToast('Facebook sign-in coming soon!')"
+            onclick="doFacebookSignIn()"
           >
             <svg class="si" viewBox="0 0 24 24" fill="#fff">
               <path
@@ -2545,7 +2578,7 @@
           </button>
           <button
             class="social-btn apple"
-            onclick="showToast('Apple sign-in coming soon!')"
+            onclick="doAppleSignIn()"
           >
             <svg class="si" viewBox="0 0 24 24" fill="#fff">
               <path
@@ -2987,7 +3020,10 @@
       const PAGE_SIZE = 40;
       let sidebarCollapsed = false;
       let currentModalGame = null;
-      let favourites = JSON.parse(localStorage.getItem("jg_favs") || "[]");
+      window.favourites = JSON.parse(localStorage.getItem("jg_favs") || "[]");
+      // Always read from window.favourites so Firebase sync works
+      var getFavs = () => window.favourites;
+      var favourites = window.favourites; // initial ref, kept for compat
 
       // ── INIT ──
       window.addEventListener("DOMContentLoaded", () => {
@@ -3037,7 +3073,7 @@
         el.innerHTML = list.map((g, i) => gameCardHTML(g, badge, i)).join("");
       }
       function gameCardHTML(g, showBadge = false, index = 0) {
-        const isFav = favourites.includes(g.id);
+        const isFav = window.favourites.includes(g.id);
         const badge = g.tags?.includes("new")
           ? '<span class="new-badge">NEW</span>'
           : g.tags?.includes("popular")
@@ -3176,7 +3212,7 @@
         document
           .querySelectorAll(".sidebar-item")
           .forEach((b) => b.classList.remove("active"));
-        const favGames = dedupedGames.filter((g) => favourites.includes(g.id));
+        const favGames = dedupedGames.filter((g) => window.favourites.includes(g.id));
         const grid = document.getElementById("favsGrid");
         const empty = document.getElementById("favsEmpty");
         if (!favGames.length) {
@@ -3194,30 +3230,32 @@
       function toggleFav(e, id) {
         e.preventDefault();
         e.stopPropagation();
-        const idx = favourites.indexOf(id);
-        if (idx === -1) favourites.push(id);
-        else favourites.splice(idx, 1);
-        localStorage.setItem("jg_favs", JSON.stringify(favourites));
+        const favs = window.favourites;
+        const idx = favs.indexOf(id);
+        if (idx === -1) favs.push(id);
+        else favs.splice(idx, 1);
+        localStorage.setItem("jg_favs", JSON.stringify(favs));
         document.querySelectorAll(".fav-btn").forEach((btn) => {
           if (
             btn.closest(".game-card")?.href?.includes(id) ||
             btn.onclick?.toString().includes(`'${id}'`)
           )
-            btn.classList.toggle("active", favourites.includes(id));
+            btn.classList.toggle("active", favs.includes(id));
         });
         if (currentModalGame === id) updateModalFavBtn();
       }
       function toggleModalFav() {
         if (!currentModalGame) return;
-        const idx = favourites.indexOf(currentModalGame);
-        if (idx === -1) favourites.push(currentModalGame);
-        else favourites.splice(idx, 1);
-        localStorage.setItem("jg_favs", JSON.stringify(favourites));
+        const favs = window.favourites;
+        const idx = favs.indexOf(currentModalGame);
+        if (idx === -1) favs.push(currentModalGame);
+        else favs.splice(idx, 1);
+        localStorage.setItem("jg_favs", JSON.stringify(favs));
         updateModalFavBtn();
       }
       function updateModalFavBtn() {
         const btn = document.getElementById("modalFavBtn");
-        const isFav = favourites.includes(currentModalGame);
+        const isFav = window.favourites.includes(currentModalGame);
         btn.classList.toggle("active", isFav);
         btn.innerHTML = isFav ? "❤️ Saved!" : "❤️ Favourite";
       }
@@ -3464,6 +3502,8 @@
     <script>
       // Auth stubs - delegate to Firebase module functions once loaded
       function doGoogleSignIn() { if (window.doGoogleSignIn) window.doGoogleSignIn(); }
+      function doFacebookSignIn() { if (window.doFacebookSignIn) window.doFacebookSignIn(); }
+      function doAppleSignIn() { if (window.doAppleSignIn) window.doAppleSignIn(); }
       function doLogin() { if (window.doLogin) window.doLogin(); }
       function doSignupStep1() { if (window.doSignupStep1) window.doSignupStep1(); }
       function doSetUsername() { if (window.doSetUsername) window.doSetUsername(); }
@@ -3480,6 +3520,8 @@
         signInWithEmailAndPassword,
         signInWithPopup,
         GoogleAuthProvider,
+        FacebookAuthProvider,
+        OAuthProvider,
         signOut,
         onAuthStateChanged,
       } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -3506,6 +3548,10 @@
       const auth = getAuth(app);
       const db = getDatabase(app);
       const googleProvider = new GoogleAuthProvider();
+      const facebookProvider = new FacebookAuthProvider();
+      const appleProvider = new OAuthProvider('apple.com');
+      appleProvider.addScope('email');
+      appleProvider.addScope('name');
       let currentUser = null;
       let presenceInterval = null;
 
@@ -3582,6 +3628,88 @@
               "Google sign-in failed: " + (e.message || "Unknown error"),
               true,
             );
+          }
+        }
+      };
+
+      // ── FACEBOOK SIGN-IN ──
+      window.doFacebookSignIn = async function () {
+        try {
+          const result = await signInWithPopup(auth, facebookProvider);
+          const user = result.user;
+          const snap = await get(ref(db, "users/" + user.uid));
+          if (!snap.exists()) {
+            const displayName = user.displayName || "Player";
+            let baseUsername = displayName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+            if (baseUsername.length < 6) baseUsername = baseUsername + "player";
+            if (baseUsername.length > 20) baseUsername = baseUsername.slice(0, 20);
+            let username = baseUsername;
+            let attempts = 0;
+            while (attempts < 5) {
+              const uSnap = await get(ref(db, "usernames/" + username));
+              if (!uSnap.exists()) break;
+              username = baseUsername.slice(0, 16) + Math.floor(Math.random() * 9999);
+              attempts++;
+            }
+            await set(ref(db, "users/" + user.uid), {
+              username,
+              usernameLower: username.toLowerCase(),
+              email: user.email || "",
+              createdAt: Date.now(),
+              favourites: {},
+              friends: {},
+              provider: "facebook",
+            });
+            await set(ref(db, "usernames/" + username.toLowerCase()), user.uid);
+            window.goToStep(4);
+          } else {
+            window.closeAuth();
+          }
+          window.showToast("Signed in with Facebook!");
+        } catch (e) {
+          if (e.code !== "auth/popup-closed-by-user") {
+            window.showToast("Facebook sign-in failed: " + (e.message || "Unknown error"), true);
+          }
+        }
+      };
+
+      // ── APPLE SIGN-IN ──
+      window.doAppleSignIn = async function () {
+        try {
+          const result = await signInWithPopup(auth, appleProvider);
+          const user = result.user;
+          const snap = await get(ref(db, "users/" + user.uid));
+          if (!snap.exists()) {
+            const displayName = user.displayName || "Player";
+            let baseUsername = displayName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+            if (baseUsername.length < 6) baseUsername = baseUsername + "player";
+            if (baseUsername.length > 20) baseUsername = baseUsername.slice(0, 20);
+            let username = baseUsername;
+            let attempts = 0;
+            while (attempts < 5) {
+              const uSnap = await get(ref(db, "usernames/" + username));
+              if (!uSnap.exists()) break;
+              username = baseUsername.slice(0, 16) + Math.floor(Math.random() * 9999);
+              attempts++;
+            }
+            await set(ref(db, "users/" + user.uid), {
+              username,
+              usernameLower: username.toLowerCase(),
+              email: user.email || "",
+              createdAt: Date.now(),
+              favourites: {},
+              friends: {},
+              provider: "apple",
+            });
+            await set(ref(db, "usernames/" + username.toLowerCase()), user.uid);
+            window.goToStep(4);
+          } else {
+            window.closeAuth();
+          }
+          window.showToast("Signed in with Apple!");
+        } catch (e) {
+          if (e.code !== "auth/popup-closed-by-user") {
+            window.showToast("Apple sign-in failed: " + (e.message || "Unknown error"), true);
           }
         }
       };
@@ -3739,6 +3867,7 @@
           }).catch(() => {});
         clearInterval(presenceInterval);
         await signOut(auth);
+        window.firebaseUser = null;
         document.getElementById("loginBtn").style.display = "block";
         document.getElementById("userMenuWrap").style.display = "none";
         document.getElementById("friendsLoginPrompt").style.display = "block";
@@ -3761,6 +3890,8 @@
           const profile = snap.val() || {};
           const username = profile.username || user.displayName || user.email;
           setLoggedInUI(username, user.email);
+          // Expose for party.js bridge
+          window.firebaseUser = { uid: user.uid, displayName: username, username, email: user.email };
 
           const localFavs = JSON.parse(localStorage.getItem("jg_favs") || "[]");
           const fbFavs = profile.favourites
